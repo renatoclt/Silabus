@@ -1,0 +1,9 @@
+﻿body{
+    font-family: Verdana;
+}
+
+header{
+    height: 200px;
+    font-size: 20pt;
+    padding-left: 10px;
+}
