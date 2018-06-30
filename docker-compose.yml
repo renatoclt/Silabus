@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  silabus:
+    image: silabus
+    build:
+      context: .\Silabus
+      dockerfile: Dockerfile

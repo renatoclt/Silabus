@@ -1,9 +1,10 @@
-﻿body{
-    font-family: Verdana;
+﻿p {
+    color: red;
+    font-family: courier;
+    font-size: 160%;
+    background: border-box;
 }
+p{
+    font-family: cursive;
 
-header{
-    height: 200px;
-    font-size: 20pt;
-    padding-left: 10px;
 }
