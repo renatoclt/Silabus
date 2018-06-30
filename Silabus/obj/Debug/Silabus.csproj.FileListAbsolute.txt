@@ -95,3 +95,4 @@ C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.csproj.CoreCompileInp
 C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.csproj.CopyComplete
 C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.dll
 C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.pdb
+C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.csprojResolveAssemblyReference.cache

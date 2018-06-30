@@ -1,0 +1,111 @@
+﻿html, body {
+    margin: 0;
+    font-size: 20px;
+    
+}
+.header-main {
+    overflow: auto;
+    background: #7abb3b;
+    width: 100%;
+}
+.header-menu {
+    width:100%;
+    background: #426e17;
+    overflow: auto;
+}
+.left-img {
+    float: left;
+    width: 183px;
+    height: 67px;
+}
+.right-img {
+    float: right;
+    width: 67px;
+    height: 67px;
+}
+.menu {
+    float: left;
+    width: 10%;
+    height: 100%;
+}
+.menu-item {
+    width:100%;
+    float:left;
+}
+.cuerpo{
+    float:left;
+    width: 75%;
+    height: 100%;
+    overflow: auto;
+}
+
+.accordion {
+    float: left;
+    background-color: #f2fde8;
+    color: #808080;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.active, .accordion:hover {
+    background-color: #bad3a3;
+    color: black;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.pie-divicion{
+    float: right;
+}
+
+.editar {
+    float: right;
+    width: 5%;
+    height: 5%;
+}
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+
+.titulo2{
+    text-align: center;
+}
+
+
+
+/*#left {
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    outline: 1px solid;
+    background: red;
+}
+
+#right {
+    width: 80%;
+    height: auto;
+    outline: 1px solid;
+    position: absolute;
+    right: 0;
+    background: blue;
+}*/

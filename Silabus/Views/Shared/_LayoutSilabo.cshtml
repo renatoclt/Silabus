@@ -4,27 +4,28 @@
     <meta name="viewport" content="width=device-width" />
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    <link href="~/Styles/General.css" rel="stylesheet" />
+    @Styles.Render("~/Styles/Estilos.css")
 </head>
 <body>
-    <div>
-        <div>
-            <div>
-                <a>
-                    <img src="~/Img/logoUcsm.png" width="183" height="67" alt="ucsm">
-                </a>
-                <a>
-                    <img src="~/Img/person.png" width="67" height="67" alt="ucsm">
-                </a>
-            </div>
-        </div>
+    <div class="header-main">
+        <img src="~/Img/logoUcsm.png" class="left-img">
+        <img src="~/Img/person.png" class="right-img">
     </div>
-    <hr />
-    <p>
-        fasd
-    </p>
-    <section>
+    <div class="header-menu">
+        <p></p>
+    </div>
+    <div class="menu" style="width:25%">
+        <h3 class="w3-bar-item">Menu</h3>
+        <a href="#" class="menu-item">Link 1</a>
+        <a href="#" class="menu-item">Link 2</a>
+        <a href="#" class="menu-item">Link 3</a>
+    </div>
+    <div class="cuerpo">
         @RenderBody()
-    </section>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/accordion.js")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

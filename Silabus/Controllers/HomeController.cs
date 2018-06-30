@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Silabus.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,6 +30,10 @@ namespace Silabus.Controllers
 
         public ActionResult SilaboPrueba()
         {
+            Divicion[] input = { new Divicion("IDENTIFICACIÓN ACADEMICA ", 0, DateTime.Today , null),
+                                 new Divicion("SUMILLA",1, DateTime.Today, "nombre Docente")};
+            List<Divicion> diviciones = new List<Divicion>(input);
+            ViewBag.Diviciones = diviciones;
             return View();
         }
     }

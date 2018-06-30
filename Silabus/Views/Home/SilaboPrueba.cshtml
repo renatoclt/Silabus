@@ -4,5 +4,33 @@
     Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
 }
 
-<h2>SilaboPrueba</h2>
+<h2 class="titulo2">Silabo del Curso</h2>
+
+
+@foreach (var divicion in ViewBag.diviciones)
+{
+    <button class="accordion">@divicion.Titulo</button>
+    if (@divicion.Estado == 1)
+    {
+        <div><img src="~/Img/Pencil.png" class="editar" /> </div>
+    }
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    if (@divicion.Estado == 1)
+    {
+        <div class="pie-divicion"> <span>@divicion.FechaModificacion </span><span>@divicion.Docente </span>  </div>
+    }
+}
+
+@*<button class="accordion">Section 2</button>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+
+    <button class="accordion">Section 3</button>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>*@
+
 
