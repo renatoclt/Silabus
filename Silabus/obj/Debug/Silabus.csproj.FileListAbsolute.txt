@@ -91,7 +91,6 @@ C:\Users\HP\source\repos\Silabus\Silabus\bin\es\System.Web.Razor.resources.dll
 C:\Users\HP\source\repos\Silabus\Silabus\bin\es\System.Web.WebPages.resources.dll
 C:\Users\HP\source\repos\Silabus\Silabus\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\HP\source\repos\Silabus\Silabus\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.csprojResolveAssemblyReference.cache
 C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.csproj.CoreCompileInputs.cache
 C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.csproj.CopyComplete
 C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.dll
