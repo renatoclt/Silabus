@@ -144,11 +144,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SilaboController.cs" />
     <Compile Include="Environments\Constants.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Competencia.cs" />
+    <Compile Include="Models\CompetenciaCurso.cs" />
     <Compile Include="Models\Divicion.cs" />
+    <Compile Include="Models\Fase.cs" />
+    <Compile Include="Models\IdentificacionAcademicaModel.cs" />
+    <Compile Include="Models\Sumilla.cs" />
+    <Compile Include="Models\Unidad.cs" />
+    <Compile Include="Models\UnidadCurso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +166,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\ESCUDO.png" />
+    <Content Include="Img\hand down.png" />
+    <Content Include="Img\hand-up.png" />
     <Content Include="Img\logoUcsm.png" />
     <Content Include="Img\Pencil.png" />
     <Content Include="Img\person.png" />
+    <Content Include="Img\trash.png" />
     <Content Include="Scripts\accordion.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -182,7 +194,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Styles\Estilos.css" />
+    <Content Include="Styles\Estilos.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -199,6 +213,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutSilabo.cshtml" />
     <Content Include="Views\Home\SilaboPrueba.cshtml" />
+    <Content Include="Views\Silabo\Silabo.cshtml" />
+    <Content Include="Views\Silabo\IdentificacionAcademica.cshtml" />
+    <Content Include="Views\Silabo\Sumilla.cshtml" />
+    <Content Include="Views\Silabo\Competencia.cshtml" />
+    <Content Include="Views\Silabo\Unidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

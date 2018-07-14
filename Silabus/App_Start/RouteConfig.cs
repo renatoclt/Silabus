@@ -16,8 +16,9 @@ namespace Silabus
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "SilaboPrueba", id = UrlParameter.Optional }
+                defaults: new { controller = "Silabo", action = "Silabo", id = UrlParameter.Optional }
             );
+            
         }
     }
 }

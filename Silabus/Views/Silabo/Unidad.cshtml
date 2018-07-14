@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Unidad";
+    Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
+}
+
+@if (ViewBag.Unidad.Estado == 0)
+{
+    <table class="tablaBorderUnidad">
+        <thead>
+            <tr>
+                <th class="tituloRow">Unidad</th>
+                <th class="tituloRow">Sub-Unidad</th>
+                <th class="tituloRow">Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var unidad in ViewBag.Unidad.Unidades)
+            {
+                <tr>
+                    <td>@unidad.Id</td>
+                    <td>@unidad.SubUnidad</td>
+                    <td>@unidad.Descripcion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <table class="tablaBorderUnidad">
+        <thead>
+            <tr>
+                <th class="tituloRow">Unidad</th>
+                <th class="tituloRow">Sub-Unidad</th>
+                <th class="tituloRow">Descripción</th>
+                <th class="tituloRow">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var unidad in ViewBag.Unidad.Unidades)
+        {
+            <tr>
+                <td>@unidad.Id</td>
+                <td>@unidad.SubUnidad</td>
+                <td>@unidad.Descripcion</td>
+                <td>
+                    <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("Unidad", "Silabo",new { accion = 1 })'")'">
+                        <span class="glyphicon glyphicon-hand-up"></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm" onclick="UnidadDown()">
+                        <span class="glyphicon glyphicon-hand-down"></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm" onclick="UnidadTrash()">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+}
