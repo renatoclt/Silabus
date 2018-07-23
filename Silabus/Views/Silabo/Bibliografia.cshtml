@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Bibliografia";
+    Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
+}
+
+<table class="tablaBorderUnidad">
+    <thead>
+        <tr>
+            <th class="tituloRow">Autor</th>
+            <th class="tituloRow">Nombre</th>
+            <th class="tituloRow">Editoral</th>
+            <th class="tituloRow">Lugar de publicación</th>
+            <th class="tituloRow">Año de publicación</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var libro in ViewBag.Bibliografia.Libros)
+        {
+            <tr>
+                <td>@libro.Autor</td>
+                <td>@libro.Nombre</td>
+                <td>@libro.Editorial</td>
+                <td>@libro.LugarPublicacion</td>
+                <td>@libro.AnioPublicacion</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

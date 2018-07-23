@@ -29,7 +29,6 @@ namespace Silabus.Models
 
         public void SortList(Unidad unidadTem)
         {
-            
             Unidades.Sort(delegate (UnidadCurso a, UnidadCurso b)
             {
                 int xdiff = a.Id.CompareTo(b.Id);

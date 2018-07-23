@@ -149,11 +149,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bibliografia.cs" />
     <Compile Include="Models\Competencia.cs" />
     <Compile Include="Models\CompetenciaCurso.cs" />
     <Compile Include="Models\Divicion.cs" />
     <Compile Include="Models\Fase.cs" />
     <Compile Include="Models\IdentificacionAcademicaModel.cs" />
+    <Compile Include="Models\Libros.cs" />
     <Compile Include="Models\Sumilla.cs" />
     <Compile Include="Models\Unidad.cs" />
     <Compile Include="Models\UnidadCurso.cs" />
@@ -218,6 +220,7 @@
     <Content Include="Views\Silabo\Sumilla.cshtml" />
     <Content Include="Views\Silabo\Competencia.cshtml" />
     <Content Include="Views\Silabo\Unidad.cshtml" />
+    <Content Include="Views\Silabo\Bibliografia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

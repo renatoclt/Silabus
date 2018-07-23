@@ -72,5 +72,13 @@ namespace Silabus.Controllers
             ViewBag.Unidad = unidades;
             return View();
         }
+        public ActionResult Bibliografia(int accion = 0, Unidad unidadTem = null)
+        {
+            List<Libros> libros = new List<Libros>();
+            libros.Add(new Libros("Pepito", "libro algebra", "planeta", "2018", "Peru"));
+            Bibliografia bibliografia = new Bibliografia(0, libros);
+            ViewBag.Bibliografia = bibliografia;
+            return View();
+        }
     }
 }
