@@ -8,7 +8,7 @@ namespace Silabus.Models
     public class Bibliografia
     {
         private int estado;
-        private List<Libros> libros;
+        private List<Libros> libros;    
 
         public Bibliografia(int estado, List<Libros> libros)
         {
