@@ -10,7 +10,6 @@ namespace Silabus.Models
         private int estado;
         private List<UnidadCurso> unidades;
 
-
         public Unidad()
         {
             estado = 0;
@@ -25,6 +24,7 @@ namespace Silabus.Models
 
         
         public int Estado { get => estado; set => estado = value; }
+
         public List<UnidadCurso> Unidades { get => unidades; set => unidades = value; }
 
         public void SortList(Unidad unidadTem)

@@ -97,3 +97,7 @@ C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.dll
 C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.pdb
 C:\Users\HP\source\repos\Silabus\Silabus\obj\Debug\Silabus.csprojResolveAssemblyReference.cache
 C:\Users\HP\source\repos\Silabus\Silabus\bin\Styles\Estilos.css
+C:\Users\HP\source\repos\Silabus\Silabus\bin\EntityFramework.dll
+C:\Users\HP\source\repos\Silabus\Silabus\bin\EntityFramework.SqlServer.dll
+C:\Users\HP\source\repos\Silabus\Silabus\bin\EntityFramework.xml
+C:\Users\HP\source\repos\Silabus\Silabus\bin\EntityFramework.SqlServer.xml

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,22 +8,16 @@ namespace Silabus.Models
 {
     public class Divicion
     {
-        private String titulo;
-        private int estado;
-        private DateTime fechaModificacion;
-        private String docente;
+        public int Id { get; set; }
+        
+        public String Titulo { get; set; }
+        public int Estado { get; set; }
+        public DateTime FechaModificacion { get; set; }
+        public String Docente { get; set; }
 
-        public Divicion(string _titulo, int _estado, DateTime _fechaModificacion, String _docente)
+        public Divicion()
         {
-            titulo = _titulo;
-            estado = _estado;
-            fechaModificacion = _fechaModificacion;
-            docente = _docente;
+            
         }
-
-        public string Titulo { get => titulo; set => titulo = value; }
-        public int Estado { get => estado; set => estado = value; }
-        public DateTime FechaModificacion { get => fechaModificacion; set => fechaModificacion = value; }
-        public string Docente { get => docente; set => docente = value; }
     }
 }

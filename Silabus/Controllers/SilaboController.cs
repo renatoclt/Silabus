@@ -13,15 +13,15 @@ namespace Silabus.Controllers
         // GET: Silabo
         public ActionResult Silabo()
         {
-            Divicion[] input = { new Divicion("IDENTIFICACIÓN ACADEMICA ", 0, DateTime.Today , null),
-                                 new Divicion("SUMILLA",1, DateTime.Today, "nombre Docente"),
-                                 new Divicion("COMPETENCIAS DE LA ASIGNATURA QUE APOYAN AL EPERFIL DE EGRESO ",0, DateTime.Today, "nombre Docente"),
-                                 new Divicion("CONTENIDOS BASICOS POR UNIDADES DE APRENDIZAJE",0, DateTime.Today, "nombre Docente"),
-                                 new Divicion("EVALUACION DE COMPETENCIAS ADQUIRIDAS",1, DateTime.Today, "nombre Docente"),
-                                 new Divicion("BIBLIOGRAFIA",1, DateTime.Today, "nombre Docente"),};
-            List<Divicion> diviciones = new List<Divicion>(input);
-            ViewBag.Diviciones = diviciones;
-            return View();
+            //Divicion[] input = { new Divicion("IDENTIFICACIÓN ACADEMICA ", 0, DateTime.Today , null),
+            //                     new Divicion("SUMILLA",1, DateTime.Today, "nombre Docente"),
+            //                     new Divicion("COMPETENCIAS DE LA ASIGNATURA QUE APOYAN AL EPERFIL DE EGRESO ",0, DateTime.Today, "nombre Docente"),
+            //                     new Divicion("CONTENIDOS BASICOS POR UNIDADES DE APRENDIZAJE",0, DateTime.Today, "nombre Docente"),
+            //                     new Divicion("EVALUACION DE COMPETENCIAS ADQUIRIDAS",1, DateTime.Today, "nombre Docente"),
+            //                     new Divicion("BIBLIOGRAFIA",1, DateTime.Today, "nombre Docente"),};
+            //List<Divicion> diviciones = new List<Divicion>(input);
+            //return View(diviciones);
+            return null;
         }
 
 
@@ -64,7 +64,7 @@ namespace Silabus.Controllers
             unidadesCurso.Add(new UnidadCurso(2, 0, "Estudio del Trabajo "));
             unidadesCurso.Add(new UnidadCurso(2, 3, "Estudio del Trabajo 3"));
             unidadesCurso.Add(new UnidadCurso(2, 2, "Estudio del Trabajo 4"));
-            Unidad unidades = new Unidad(1, unidadesCurso);
+            Unidad unidades = new Unidad(0, unidadesCurso);
             if (accion == 1)
             {
                 unidades.SortList(unidadTem);

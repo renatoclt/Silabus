@@ -123,7 +123,7 @@
 }
 
 
-td.container {
+.td.container {
     height: 20px;
 }
 
@@ -228,6 +228,11 @@ td.container {
 .tablaBorderUnidad th {
     border: 1px solid black;
     text-align: center;
+}
+
+.editar-div {
+    float: right ;
+    display: block;
 }
 
 /*#left {
