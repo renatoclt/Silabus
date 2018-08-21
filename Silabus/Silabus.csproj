@@ -232,6 +232,7 @@
     <Content Include="Views\Silabo\Unidad.cshtml" />
     <Content Include="Views\Silabo\Bibliografia.cshtml" />
     <Content Include="Views\SilaboDivicion\Index.cshtml" />
+    <Content Include="Views\SilaboDivicion\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

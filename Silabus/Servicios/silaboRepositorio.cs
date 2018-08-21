@@ -16,6 +16,34 @@ namespace Silabus.Servicios
             }
         }
 
+        internal void EditarDivicionCancel(int id)
+        {
+            using (var db = new SilaboContext())
+            {
+                Divicion divicion = db.diviciones.Find(id);
+                divicion.Estado = 1;
+                db.SaveChanges();
+            }
+        }
 
+        internal void EditarDivicion(int id)
+        {
+            using (var db = new SilaboContext())
+            {
+                Divicion divicion = db.diviciones.Find(id);
+                divicion.Estado = 3;
+                db.SaveChanges();
+            }
+        }
+
+        internal void EditarDivicionOk(int id)
+        {
+            using (var db = new SilaboContext())
+            {
+                Divicion divicion = db.diviciones.Find(id);
+                divicion.Estado = 1;
+                db.SaveChanges();
+            }
+        }
     }
 }
