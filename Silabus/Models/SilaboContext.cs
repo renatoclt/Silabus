@@ -12,6 +12,17 @@ namespace Silabus.Models
         {
 
         }
-        public DbSet<Divicion> diviciones { get; set; }
+        public DbSet<Divicion> Diviciones { get; set; }
+        public DbSet<IdentificacionAcademicaModel> IdentificacionAcademicas { get; set; }
+        public DbSet<Facultad> Facultades { get; set; }
+        public DbSet<Escuela> Escuela { get; set; }
+        public DbSet<PlanEstudio> PlanEstudios { get; set; }
+        public DbSet<Asignaturas> Asignaturas { get; set; }
+        public DbSet<Silabo> Silabo { get; set; }
+        public DbSet<PlanFuncionamiento> PlanFuncionamientos { get; set; }
+        public DbSet<Docente> Docentes { get; set; }
+        public DbSet<TipoDocente> TipoDocentes { get; set; }
+        public DbSet<SilaboDocente> SilaboDocentes { get; set; }
+
     }
 }

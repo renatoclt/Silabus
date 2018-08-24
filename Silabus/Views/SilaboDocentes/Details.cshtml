@@ -1,0 +1,66 @@
+﻿@model Silabus.Models.SilaboDocente
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>SilaboDocente</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Docente.Codidgo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Docente.Codidgo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Silabo.Sumilla)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Silabo.Sumilla)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaModificacion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaModificacion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaCreacion)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

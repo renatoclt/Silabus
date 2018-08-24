@@ -15,82 +15,32 @@ namespace Silabus.Controllers
             _repo = new SilaboRepositorio();
         }
         // GET: SilaboDivicion
-        public ActionResult Index()
+        public ActionResult Index(int id=1)
         {
             var model = _repo.ObtenerDiviciones();
             return View(model);
         }
 
-        // GET: SilaboDivicion/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: SilaboDivicion/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: SilaboDivicion/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: SilaboDivicion/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            _repo.EditarDivicion(id);
+            return RedirectToAction("Index"); ;
         }
 
-        // POST: SilaboDivicion/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        // GET: SilaboDivicion/Edit/5
+        public ActionResult EditOk(int id)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _repo.EditarDivicionOk(id);
+            return RedirectToAction("Index"); ;
         }
 
-        // GET: SilaboDivicion/Delete/5
-        public ActionResult Delete(int id)
+        // GET: SilaboDivicion/Edit/5
+        public ActionResult EditCancel(int id)
         {
-            return View();
-        }
-
-        // POST: SilaboDivicion/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _repo.EditarDivicionCancel(id);
+            return RedirectToAction("Index"); ;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Silabus.Models
 {
     public class IdentificacionAcademicaModel
     {
+        public int Id { get; set; }
         private string escuela;
         private string facultad;
         private int credito;
