@@ -158,6 +158,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AsignaturaCompetencia.cs" />
     <Compile Include="Models\Asignaturas.cs" />
     <Compile Include="Models\Bibliografia.cs" />
     <Compile Include="Models\Competencia.cs" />
@@ -171,8 +172,10 @@
     <Compile Include="Models\Libros.cs" />
     <Compile Include="Models\PlanEstudio.cs" />
     <Compile Include="Models\PlanFuncionamiento.cs" />
+    <Compile Include="Models\SilaboCompetencia.cs" />
     <Compile Include="Models\SilaboContext.cs" />
     <Compile Include="Models\Silabo.cs" />
+    <Compile Include="Models\SilaboDivicion.cs" />
     <Compile Include="Models\SilaboDocente.cs" />
     <Compile Include="Models\Sumilla.cs" />
     <Compile Include="Models\TipoDocente.cs" />
@@ -249,6 +252,8 @@
     <Content Include="Views\SilaboDocentes\Details.cshtml" />
     <Content Include="Views\SilaboDocentes\Edit.cshtml" />
     <Content Include="Views\SilaboDocentes\Index.cshtml" />
+    <Content Include="Views\SilaboDivicion\_sumilla.cshtml" />
+    <Content Include="Views\SilaboDivicion\_competencias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

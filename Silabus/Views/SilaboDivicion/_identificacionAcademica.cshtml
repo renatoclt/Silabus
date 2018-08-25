@@ -1,4 +1,4 @@
-﻿
+﻿@model Silabus.Models.SilaboDivicion
 <table class="tablaBorderRow">
     <tbody>
         <tr>
@@ -11,16 +11,15 @@
         </tr>
     </tbody>
 </table>
-
-@*<table class="tablaBorderContorno">
+<table class="tablaBorderContorno">
     <tbody>
         <tr>
-            <td><span class="titulo">FACULTAD:</span></td>
-            <td><span class="respuesta">@ViewBag.IdentificacionAcademica.Facultad</span></td>
+            <td><label class="titulo">FACULTAD:</label></td>
+            <td><label class="respuesta">@Html.DisplayFor(model => model.Silabo.Asignaturas.PlanEstudio.Escuela.Facultads.Nombre)</label></td>
         </tr>
         <tr>
             <td><span class="titulo">ESCUELA:</span></td>
-            <td><span class="respuesta">@ViewBag.IdentificacionAcademica.Escuela</span></td>
+            <td><span class="respuesta">@Html.DisplayFor(model => model.Silabo.Asignaturas.PlanEstudio.Escuela.Nombre)</span></td>
         </tr>
     </tbody>
 </table>
@@ -37,14 +36,15 @@
             <td colspan="9" class="divicion">1. IDENTIFICACIÓN ACADÉMICA </td>
         </tr>
         <tr>
-            <td colspan="8" class="sinRowSpan">Nombre de la Asignatura: </td>
+            <td colspan="8" class="sinRowSpan">Nombre de la Asignatura: @Html.DisplayFor(model => model.Silabo.Asignaturas.Nombre) </td>
+
             <td rowspan="3" class="rowSpan"> El desarrollo de las actividades académicas se distribuye en tres fases de seis semanas cada una.</td>
         </tr>
         <tr>
-            <td colspan="8" class="sinRowSpan">Código de la Asignatura:</td>
+            <td colspan="8" class="sinRowSpan">Código de la Asignatura: @Html.DisplayFor(model => model.Silabo.Asignaturas.Codigo) </td>
         </tr>
         <tr>
-            <td colspan="8" class="sinRowSpanF">Semestre Académico en que se desarrolla</td>
+            <td colspan="8" class="sinRowSpanF">Semestre Académico en que se desarrolla: @Html.DisplayFor(model => model.Silabo.Asignaturas.Semestre) </td>
         </tr>
         <tr>
             <td colspan="8" class="divicionDos">1.2.-Peso Académico de la Asignatura.</td>
@@ -71,15 +71,15 @@
             <td>Jefe de Prácticas</td>
         </tr>
         <tr class="tablaCreditosRespuesta">
-            <td>@ViewBag.IdentificacionAcademica.Credito</td>
-            <td>@ViewBag.IdentificacionAcademica.HorasSemanalesTeorica</td>
-            <td>@ViewBag.IdentificacionAcademica.HorasSemanalesPracticaAula</td>
-            <td>@ViewBag.IdentificacionAcademica.HorasSemanalesPracticaJefe</td>
-            <td>@ViewBag.IdentificacionAcademica.HorasSemanalesPracticaVirtual</td>
-            <td>@ViewBag.IdentificacionAcademica.HorasSemestralesTeorica</td>
-            <td>@ViewBag.IdentificacionAcademica.HorasSemestralesPractica</td>
-            <td>@ViewBag.IdentificacionAcademica.HorasSemestralesVirtuales</td>
+            <td>@Html.DisplayFor(model => model.Silabo.Asignaturas.Creditos)</td>
+            <td>@Html.DisplayFor(model => model.Silabo.Asignaturas.HorasSemanalesTeoricas)</td>
+            <td>@Html.DisplayFor(model => model.Silabo.Asignaturas.HorasSemanalesPracticaAula)</td>
+            <td>@Html.DisplayFor(model => model.Silabo.Asignaturas.HorasSemanalesPracticaJefe)</td>
+            <td>@Html.DisplayFor(model => model.Silabo.Asignaturas.HorasSemanalesVirtuales)</td>
+            <td>@Html.DisplayFor(model => model.Silabo.Asignaturas.HorasSemestralesTeorica)</td>
+            <td>@Html.DisplayFor(model => model.Silabo.Asignaturas.HorasSemestralesPractica)</td>
+            <td>@Html.DisplayFor(model => model.Silabo.Asignaturas.HorasSemestralesVirtuales)</td>
         </tr>
     </tbody>
-</table>*@
+</table>
 

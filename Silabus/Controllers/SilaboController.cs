@@ -41,18 +41,18 @@ namespace Silabus.Controllers
 
         public ActionResult Competencia()
         {
-            List<Fase> fases = new List<Fase>();
-            fases.Add(new Fase(1, "Fase I"));
-            fases.Add(new Fase(2, "Fase II"));
-            fases.Add(new Fase(3, "Fase III"));
-            fases.Add(new Fase(0, "Ninguna"));
-            ViewBag.Fases = fases;
-            List<CompetenciaCurso> competencias = new List<CompetenciaCurso>();
-            competencias.Add(new CompetenciaCurso(1, "competencia 1", 1));
-            competencias.Add(new CompetenciaCurso(2, "competencia 2", 2));
-            Competencia competencia = new Competencia(0, competencias );
+            //List<Fase> fases = new List<Fase>();
+            //fases.Add(new Fase(1, "Fase I"));
+            //fases.Add(new Fase(2, "Fase II"));
+            //fases.Add(new Fase(3, "Fase III"));
+            //fases.Add(new Fase(0, "Ninguna"));
+            //ViewBag.Fases = fases;
+            //List<CompetenciaCurso> competencias = new List<CompetenciaCurso>();
+            //competencias.Add(new CompetenciaCurso(1, "competencia 1", 1));
+            //competencias.Add(new CompetenciaCurso(2, "competencia 2", 2));
+            ////Competencia competencia = new Competencia(0, competencias );
 
-            ViewBag.Competencia = competencia;
+            //ViewBag.Competencia = competencia;
             return View();
         }
         public ActionResult Unidad(int accion = 0, Unidad unidadTem = null)

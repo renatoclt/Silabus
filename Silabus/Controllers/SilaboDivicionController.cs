@@ -17,7 +17,7 @@ namespace Silabus.Controllers
         // GET: SilaboDivicion
         public ActionResult Index(int id=1)
         {
-            var model = _repo.ObtenerDiviciones();
+            var model = _repo.ObtenerDiviciones(id);
             return View(model);
         }
 

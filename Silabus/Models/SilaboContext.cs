@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
 namespace Silabus.Models
 {
-    public class SilaboContext :DbContext
+    public class SilaboContext : DbContext
     {
         public SilaboContext() : base("SilaboDBContext")
         {
@@ -23,6 +24,12 @@ namespace Silabus.Models
         public DbSet<Docente> Docentes { get; set; }
         public DbSet<TipoDocente> TipoDocentes { get; set; }
         public DbSet<SilaboDocente> SilaboDocentes { get; set; }
+        public DbSet<SilaboDivicion> SilaboDivicions { get; set; }
+        public DbSet<Competencia> Competencias { get; set; }
+        public DbSet<AsignaturaCompetencia> AsignaturaCompetencias { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
 
+        }
     }
 }

@@ -1,0 +1,11 @@
+﻿
+@model Silabus.Models.SilaboDivicion
+<!DOCTYPE html>
+@if (Model.Divicion.Estado == 1)
+{
+    <label class="text">@Html.DisplayNameFor(model => model.Silabo.Sumilla)</label>
+}
+else
+{
+    <textarea class="text">@Html.DisplayNameFor(model => model.Silabo.Sumilla)</textarea>
+}

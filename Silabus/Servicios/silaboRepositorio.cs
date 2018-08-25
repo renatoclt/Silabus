@@ -1,6 +1,7 @@
 ﻿using Silabus.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -8,11 +9,13 @@ namespace Silabus.Servicios
 {
     public class SilaboRepositorio
     {
-        public List<Divicion> ObtenerDiviciones()
+        public List<SilaboDivicion> ObtenerDiviciones(int idSilabo)
         {
             using (var db = new SilaboContext())
             {
-                return db.Diviciones.ToList();
+                var silaboDivicions = db.SilaboDivicions.Where(s => s.Silabo.Id == idSilabo).Include(s => s.Divicion)
+                    .Include(s => s.Silabo.Asignaturas.PlanEstudio.Escuela.Facultads);
+                return silaboDivicions.ToList();
             }
         }
 
