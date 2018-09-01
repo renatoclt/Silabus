@@ -19,5 +19,13 @@ namespace Silabus.Models
         {
 
         }
+        public SilaboDivicion(string vista, int id, string sumilla)
+        {
+            this.Silabo = new Silabo();
+            this.Silabo.Id = id;
+            this.Silabo.Sumilla = sumilla;
+            this.Divicion = new Divicion();
+            this.Divicion.Vista = vista;
+        }
     }
 }

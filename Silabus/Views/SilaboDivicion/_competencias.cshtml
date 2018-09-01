@@ -17,14 +17,14 @@ else
     <ul>
         @foreach (var competencia in Model.Silabo.Asignaturas.AsignaturaCompetencias)
         {
-            <li>
-                @competencia.Competencia.Descripcion
-            @*<select>
-                @foreach (var fase in ViewBag.Fases)
-                {
-                    <option>@fase.Descripcion</option>
-                }
-            </select>*@
+        <li>
+            @competencia.Competencia.Descripcion
+            <select>
+            @foreach (var fase in Model.Silabo.Asignaturas.Fase)
+            {
+                <option>@fase.Nombre</option>
+            }
+            </select>
         </li>
     }
     </ul>

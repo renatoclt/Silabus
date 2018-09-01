@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 @if (Model.Divicion.Estado == 1)
 {
-    <label class="text">@Html.DisplayNameFor(model => model.Silabo.Sumilla)</label>
+    @Html.DisplayFor(model => model.Silabo.Sumilla)
 }
 else
 {
-    <textarea class="text">@Html.DisplayNameFor(model => model.Silabo.Sumilla)</textarea>
+    @Html.EditorFor(model => model.Silabo.Sumilla)
 }

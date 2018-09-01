@@ -26,10 +26,20 @@ namespace Silabus.Models
         public DbSet<SilaboDocente> SilaboDocentes { get; set; }
         public DbSet<SilaboDivicion> SilaboDivicions { get; set; }
         public DbSet<Competencia> Competencias { get; set; }
-        public DbSet<AsignaturaCompetencia> AsignaturaCompetencias { get; set; }
+        public DbSet<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
+        public DbSet<Fase> Fases { get; set; }
+        public DbSet<Unidad> Unidads { get; set; }
+        public DbSet<SilaboFase> SilabosFase { get; set; }
+        public DbSet<SilaboFaseUnidades> SilaboFaseUnidades { get; set; }
+        public DbSet<Saberes> Saberes { get; set; }
+        public DbSet<Evidencias>Evidencias { get; set; }
+        public DbSet<Criterios> Criterios { get; set; }
+        public DbSet<SilaboFasesSaberes> SilaboFasesSaberes { get; set; }
+        public DbSet<SilaboEvidencias> SilaboEvidencias { get; set; }
+        public DbSet<SilaboCriterios> SilaboCriterios { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
     }
 }

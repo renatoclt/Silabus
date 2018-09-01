@@ -7,16 +7,19 @@ namespace Silabus.Models
 {
     public class Fase
     { 
-        private int codigo;
-        private string descripcion;
-
-        public Fase(int codigo, string descripcion)
+        public int Id { get; set; }
+        public String Nombre { get; set; }
+        public String Orden { get; set; }
+        public int Estado { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
+        public String UsuarioCreacion { get; set; }
+        public String UsuarioModificacion { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaModificacion { get; set; }
+      
+        public Fase()
         {
-            this.codigo = codigo;
-            this.descripcion = descripcion;
         }
-
-        public int Codigo { get => codigo; set => codigo = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
     }
 }

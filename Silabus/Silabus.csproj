@@ -158,25 +158,33 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AsignaturaCompetencia.cs" />
+    <Compile Include="Models\AsignaturaCompetencias.cs" />
     <Compile Include="Models\Asignaturas.cs" />
     <Compile Include="Models\Bibliografia.cs" />
+    <Compile Include="Models\SilaboCriterios.cs" />
     <Compile Include="Models\Competencia.cs" />
     <Compile Include="Models\CompetenciaCurso.cs" />
+    <Compile Include="Models\Criterios.cs" />
     <Compile Include="Models\Divicion.cs" />
     <Compile Include="Models\Docente.cs" />
     <Compile Include="Models\Escuela.cs" />
+    <Compile Include="Models\Evidencias.cs" />
     <Compile Include="Models\Facultad.cs" />
     <Compile Include="Models\Fase.cs" />
     <Compile Include="Models\IdentificacionAcademicaModel.cs" />
     <Compile Include="Models\Libros.cs" />
     <Compile Include="Models\PlanEstudio.cs" />
     <Compile Include="Models\PlanFuncionamiento.cs" />
+    <Compile Include="Models\Saberes.cs" />
     <Compile Include="Models\SilaboCompetencia.cs" />
     <Compile Include="Models\SilaboContext.cs" />
     <Compile Include="Models\Silabo.cs" />
     <Compile Include="Models\SilaboDivicion.cs" />
     <Compile Include="Models\SilaboDocente.cs" />
+    <Compile Include="Models\SilaboEvidencias.cs" />
+    <Compile Include="Models\SilaboFase.cs" />
+    <Compile Include="Models\SilaboFasesSaberes.cs" />
+    <Compile Include="Models\SilaboFaseUnidades.cs" />
     <Compile Include="Models\Sumilla.cs" />
     <Compile Include="Models\TipoDocente.cs" />
     <Compile Include="Models\Unidad.cs" />
@@ -254,6 +262,8 @@
     <Content Include="Views\SilaboDocentes\Index.cshtml" />
     <Content Include="Views\SilaboDivicion\_sumilla.cshtml" />
     <Content Include="Views\SilaboDivicion\_competencias.cshtml" />
+    <Content Include="Views\SilaboDivicion\_unidad.cshtml" />
+    <Content Include="Views\SilaboDivicion\_evaluacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

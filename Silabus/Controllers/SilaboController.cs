@@ -57,19 +57,19 @@ namespace Silabus.Controllers
         }
         public ActionResult Unidad(int accion = 0, Unidad unidadTem = null)
         {
-            List<UnidadCurso> unidadesCurso = new List<UnidadCurso>();
-            unidadesCurso.Add(new UnidadCurso(1, 0, "Estudio del Trabajo "));
-            unidadesCurso.Add(new UnidadCurso(3, 1, "Estudio del Trabajo 1 "));
-            unidadesCurso.Add(new UnidadCurso(1, 2, "Estudio del Trabajo 2 "));
-            unidadesCurso.Add(new UnidadCurso(2, 0, "Estudio del Trabajo "));
-            unidadesCurso.Add(new UnidadCurso(2, 3, "Estudio del Trabajo 3"));
-            unidadesCurso.Add(new UnidadCurso(2, 2, "Estudio del Trabajo 4"));
-            Unidad unidades = new Unidad(0, unidadesCurso);
-            if (accion == 1)
-            {
-                unidades.SortList(unidadTem);
-            }
-            ViewBag.Unidad = unidades;
+            //List<UnidadCurso> unidadesCurso = new List<UnidadCurso>();
+            //unidadesCurso.Add(new UnidadCurso(1, 0, "Estudio del Trabajo "));
+            //unidadesCurso.Add(new UnidadCurso(3, 1, "Estudio del Trabajo 1 "));
+            //unidadesCurso.Add(new UnidadCurso(1, 2, "Estudio del Trabajo 2 "));
+            //unidadesCurso.Add(new UnidadCurso(2, 0, "Estudio del Trabajo "));
+            //unidadesCurso.Add(new UnidadCurso(2, 3, "Estudio del Trabajo 3"));
+            //unidadesCurso.Add(new UnidadCurso(2, 2, "Estudio del Trabajo 4"));
+            //Unidad unidades = new Unidad(0, unidadesCurso);
+            //if (accion == 1)
+            //{
+            //    unidades.SortList(unidadTem);
+            //}
+            //ViewBag.Unidad = unidades;
             return View();
         }
         public ActionResult Bibliografia(int accion = 0, Unidad unidadTem = null)

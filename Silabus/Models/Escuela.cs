@@ -10,7 +10,6 @@ namespace Silabus.Models
     {
         public int Id { get; set; }
         public String Nombre { get; set; }
-
         public int FacultadId { get; set; }
         [ForeignKey("FacultadId")]
         public virtual Facultad Facultads { get; set; }

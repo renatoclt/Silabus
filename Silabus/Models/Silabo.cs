@@ -19,7 +19,12 @@ namespace Silabus.Models
         public int Estado { get; set; }
         public DateTime FechaModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        private String UsuarioCreacion { get; set; }
-        private String UsuarioModificacion { get; set; }
+        public String UsuarioCreacion { get; set; }
+        public String UsuarioModificacion { get; set; }
+        public virtual ICollection<SilaboFase> SilaboFases { get; set; }
+        public Silabo()
+        {
+            SilaboFases = new HashSet<SilaboFase>();
+        }
     }
 }

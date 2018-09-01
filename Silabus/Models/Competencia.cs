@@ -20,8 +20,6 @@ namespace Silabus.Models
         public DateTime FechaModificacion { get; set; }
         public Competencia()
         {
-            
         }
-    
     }
 }

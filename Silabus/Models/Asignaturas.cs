@@ -20,7 +20,6 @@ namespace Silabus.Models
         public float HorasSemestralesPractica { get; set; }
         public float HorasSemestralesVirtuales { get; set; }
         public int Creditos { get; set; }
-        public virtual IEnumerable<AsignaturaCompetencia> AsignaturaCompetencias { get; set; }
         public int IdPlanEstudio { get; set; }
         [ForeignKey("IdPlanEstudio")]
         public virtual PlanEstudio PlanEstudio { get; set; }
@@ -29,9 +28,12 @@ namespace Silabus.Models
         public DateTime FechaCreacion { get; set; }
         private String UsuarioCreacion { get; set; }
         private String UsuarioModificacion { get; set; }
+        public virtual ICollection<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
+        public IEnumerable<Fase> Fase { get; set; }
+        public IEnumerable<Unidad> Unidads { get; set; }
         Asignaturas()
         {
-            AsignaturaCompetencias = new HashSet<AsignaturaCompetencia>();
+            AsignaturaCompetencias = new HashSet<AsignaturaCompetencias>();
         }
     }
 }

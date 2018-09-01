@@ -1,0 +1,64 @@
+﻿@model Silabus.Models.SilaboDivicion
+@if (Model.Divicion.Estado == 1)
+{
+    foreach (var fase in Model.Silabo.SilaboFases)
+    {
+        <div class="row text-center">
+            @Html.DisplayName(fase.Fase.Nombre)
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.Silabo.SilaboFases.Where(f => f.IdFases == fase.Id).First().Titulo, new { @class = "control-label col-md-2" })
+            @Html.DisplayName(fase.Titulo)
+        </div>
+    }
+
+    foreach (var fase in Model.Silabo.SilaboFases)
+    {
+        <div class="row text-center">
+            @Html.DisplayName(fase.Fase.Nombre)
+        </div>
+        foreach (var saber in fase.Saberes)
+        {
+            <div class="row" style="padding-left:20px;">
+                @Html.DisplayName(saber.Nombre)
+                @Html.DisplayFor(model => model.Silabo.SilaboFases.Where(f => f.IdFases == fase.Id).First().SilaboFasesSaberes.FirstOrDefault(s => s.IdSaberes == saber.Id).Descripcion)
+            </div>
+        }
+    }
+
+}
+else
+{
+    foreach (var fase in Model.Silabo.SilaboFases)
+    {
+        <div>
+            <label>@Html.DisplayName(fase.Fase.Nombre)</label>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Silabo.SilaboFases.Where(f => f.IdFases == fase.Id).First().Titulo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Silabo.SilaboFases.Where(f => f.IdFases == fase.Id).First().Titulo)
+                @Html.ValidationMessageFor(model => model.Silabo.SilaboFases.Where(f => f.IdFases == fase.Id).First().Titulo)
+            </div>
+        </div>
+    }
+
+    foreach (var fase in Model.Silabo.SilaboFases)
+    {
+        <div class="row text-center">
+            @Html.DisplayName(fase.Fase.Nombre)
+        </div>
+        foreach (var saber in fase.Saberes)
+        {
+        <div class="form-group">
+            <span class="control-label col-md-2"> @Html.DisplayName(saber.Nombre)</span>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Silabo.SilaboFases.Where(f => f.IdFases == fase.Id).First().SilaboFasesSaberes.FirstOrDefault(s => s.IdSaberes == saber.Id).Descripcion)
+                @Html.ValidationMessageFor(model => model.Silabo.SilaboFases.Where(f => f.IdFases == fase.Id).First().SilaboFasesSaberes.FirstOrDefault(s => s.IdSaberes == saber.Id).Descripcion)
+            </div>
+        </div>
+        }
+
+    }
+
+}

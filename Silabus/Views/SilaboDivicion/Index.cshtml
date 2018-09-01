@@ -1,48 +1,58 @@
-﻿@model IEnumerable<Silabus.Models.SilaboDivicion>
+﻿@model List<Silabus.Models.SilaboDivicion>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
 }
 
-@foreach (var item in Model)
+@*@using (Html.BeginForm("EditOk", "SilaboDivicion", FormMethod.Post)) {*@
+@for (int i = 0; i < Model.Count; i++)
 {
-    <button class="accordion">@Html.DisplayFor(modelItem => item.Divicion.Titulo)</button>
-    if (item.Divicion.Estado >= 1)
+    @Html.Hidden("SilaboDivicion.Index", @i)
+    <button class="accordion">@Html.DisplayFor(modelItem => Model[i].Divicion.Titulo)</button>
+    if (Model[i].Divicion.Estado >= 1)
     {
-        <div class="container-fluid">
-            <div class="row">
-                @if (item.Divicion.Estado == 1)
-                {
-                    <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("Edit", new { Id = item.Id })'">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                }
-                else
-                {
-                    <div>
-                        <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditOk", new { Id = item.Id })'">
-                            <span class="glyphicon glyphicon-ok"></span>
+        using (Html.BeginForm("EditOk", "SilaboDivicion", FormMethod.Post))
+        {
+            <div class="container-fluid">
+                <div class="row">
+                    @if (Model[i].Divicion.Estado == 1)
+                    {
+                        <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("Edit",
+                             new { id = Model[i].IdDivicion })'">
+                            <span class="glyphicon glyphicon-pencil"></span>
                         </button>
-                        <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel", new { Id = item.Id })'">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
+
+                    }
+                    else
+                    {
+                        <div>
+                            <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditOk",
+                                new { Id = Model[i].Id, idSilabo = Model[i].Silabo.Id , sumilla = Model[i].Silabo.Sumilla.ToString()})'">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                            <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel",
+                                new { id = Model[i].IdDivicion })'">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+                    }
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        @Html.Partial(Model[i].Divicion.Vista, Model[i])
                     </div>
-                }
+                </div>
             </div>
-             <div class="row">
-                 <div class="col-lg-12">
-                     @Html.Partial(item.Divicion.Vista, item)
-                 </div>
-                
-            </div>
-        </div>
+        }
     }
     else
     {
         <div class="panel">
-            @Html.Partial(item.Divicion.Vista, item)
+            @Html.Partial(Model[i].Divicion.Vista, Model[i])
         </div>
     }
 
 }
+@* } *@
