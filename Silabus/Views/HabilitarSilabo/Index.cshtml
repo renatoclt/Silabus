@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Silabus.Services.VisualizarSilabo>
+
+@{
+    ViewBag.Title = "HABILITAR SÍLABUS";
+    Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
+}
+
+<h2 style="text-align:center">FACULTAD DEL JEFE DE DEPARTAMENTO</h2>
+<h2 style="text-align:center">HABILITAR SÍLABUS</h2>
+
+@Html.Partial("_Filtros")
+
+<table class="table">
+    <tr>
+        <th> DOCENTE  </th>
+        <th> CURSO    </th>
+        <th> ESTADO   </th>
+        <th> ACCIONES   </th>
+    </tr>
+    @if (Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.nombreDocente     </td>
+                <td>@item.nombreCurso       </td>
+                <td>@item.estado            </td>
+                <td>@Html.ActionLink("", "Acciones", new { /* id=item.PrimaryKey */ }) |            </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+            </tr>
+        }
+    }
+
+
+</table>

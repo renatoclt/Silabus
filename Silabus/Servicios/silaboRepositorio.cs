@@ -12,10 +12,11 @@ namespace Silabus.Servicios
         {
             using (var db = new SilaboContext())
             {
-                return db.diviciones.ToList();
+                return db.Divicions.ToList();
             }
         }
 
+        
 
     }
 }
