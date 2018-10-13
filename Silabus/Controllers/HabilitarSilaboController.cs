@@ -24,6 +24,7 @@ namespace Silabus.Controllers
         {
             List<VisualizarSilabo> visualizarSilabos = new List<VisualizarSilabo>();
             ViewBag.ListaAnioSemestre = VisualizarSilabo.ListarAnioSemestre(DateTime.Now.Year);
+            ViewBag.Estado = VisualizarSilabo.ListarAnioSemestre(DateTime.Now.Year);
             return View(visualizarSilabos);
         }
         [HttpPost]

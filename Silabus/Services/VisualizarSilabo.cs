@@ -44,11 +44,12 @@ namespace Silabus.Services
                             join planEst in db.PlanEstudio on curso.IdPlanEstudio equals planEst.Id
                             join escuela in db.Escuela on planEst.IdEscuela equals escuela.Id
                             join estado in db.Estado on silabus.IdEstado equals estado.Id
-                            where docente.estado == estadoHabilitado && docente.IdTipoDocente == tipoDocente && docente.codigo.Contains(codigoDocente.ToUpper()) &&
-                                  //silabus.estado == estadoHabilitado &&
-                                  curso.estado == estadoHabilitado && curso.Nombres.Contains(nombreCurso.ToUpper()) && //curso.semestre.Equals(semes) &&
-                                  planEst.estado == estadoHabilitado && 
-                                  escuela.estado == estadoHabilitado && escuela.nombre.Contains(escuelaProfesional.ToUpper()) &&
+                            where docente.estado == estadoHabilitado && docente.IdTipoDocente == tipoDocente && (codigoDocente==""  || docente.codigo.Contains(codigoDocente.ToUpper())) &&
+                                  (docente.Nombres + " " + docente.apellidoPaterno + " " + docente.apellidoMaterno).ToUpper().Contains(nombreDocente.ToUpper()) &&
+                                  //silabus.estado == estadoHabilitado && 
+                                  curso.estado == estadoHabilitado && (nombreCurso == "" || curso.Nombres.Contains(nombreCurso.ToUpper())) && (semes == 0 || curso.semestre.Equals(semes)) &&
+                                  planEst.estado == estadoHabilitado &&
+                                  escuela.estado == estadoHabilitado && (escuelaProfesional == "" || escuela.nombre.Contains(escuelaProfesional.ToUpper())) &&
                                   estado.estado == estadoHabilitado
                             select new VisualizarSilabo
                             {

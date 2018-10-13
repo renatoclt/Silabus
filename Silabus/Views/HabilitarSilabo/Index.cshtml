@@ -25,16 +25,29 @@
             <tr>
                 <td>@item.nombreDocente     </td>
                 <td>@item.nombreCurso       </td>
-                <td>@item.estado            </td>
-                <td>@Html.ActionLink("", "Acciones", new { /* id=item.PrimaryKey */ }) |            </td>
-                @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>*@
+                <td>@item.estado </td>
+                <td>
+                    <input type="button" class="btn btn-default" id="Editar" value="Editar" onclick="mostrar()" >
+                    <input type="submit" class="btn btn-default" id="Guardar" value="Guardar" onclick="ocultar()" style="display:none"  />
+                    <input type= "button" class="btn btn-default" id="Cancelar" value="Cancelar" onclick="ocultar()" style="display:none">
+                </td>
             </tr>
         }
     }
 
 
 </table>
+
+<script type="text/javascript">
+    function mostrar() {
+        document.getElementById('Guardar').style.display = 'inline';
+        document.getElementById('Cancelar').style.display = 'inline';
+        document.getElementById('Editar').style.display = 'none';
+    }
+
+    function ocultar() {
+        document.getElementById('Guardar').style.display = 'none';
+        document.getElementById('Cancelar').style.display = 'none';
+        document.getElementById('Editar').style.display = 'block';
+    }
+</script>
