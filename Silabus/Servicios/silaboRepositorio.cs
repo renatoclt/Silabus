@@ -21,11 +21,23 @@ namespace Silabus.Servicios
             {
                 var silaboDivicions = db.SilaboDivicions.Where(s => s.Silabo.Id == idSilabo).Include(s => s.Divicion)
                     .Include(s => s.Silabo.Asignaturas.PlanEstudio.Escuela.Facultads)
+                    .Include(s => s.Silabo.SilaboFases)
                     .Include("Silabo.SilaboFases.Fase")
                     .Include("Silabo.SilaboFases.SilaboFasesSaberes")
+                    .Include("Silabo.SilaboFases.SilaboFaseUnidades")
+                    .Include("Silabo.Asignaturas.AsignaturaCompetencias")
                     .Include("Silabo.Asignaturas.AsignaturaCompetencias.Competencia");
-                return silaboDivicions.ToList();
+                var silDivi = silaboDivicions.ToList();
+                //List<SilaboDivicion> silabo = (from silDiv in db.SilaboDivicions
+                //                               //join asi in db.Asignaturas on silDiv.Silabo.IdAsignatura equals asi.i
+                //                               join asiComp in db.AsignaturaCompetencias on silDiv.Silabo.IdAsignatura equals asiComp.IdAsignatura
+                //                               where silDiv.IdSilabo.Equals(idSilabo)
+                //                               select  new SilaboDivicion
+                //                               {
 
+                //                               }).ToList();
+
+                return silDivi;
             }
         }
 
@@ -55,7 +67,23 @@ namespace Silabus.Servicios
             }
         }
 
+        public Divicion GetDivicion(int id)
+        {
+            using (var db = new SilaboContext())
+            {
+                return db.Diviciones.Where(d => d.Id == id).FirstOrDefault();
+
+            }
+        }
         
+        public Silabo GetSilabo(int id)
+        {
+            using (var db = new SilaboContext())
+            {
+                return db.Silabo.Where(s => s.Id == id).FirstOrDefault();
+
+            }
+        }
 
         internal void EditarDivicionCancel(int id)
         {

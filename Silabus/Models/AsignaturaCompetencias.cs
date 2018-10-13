@@ -19,7 +19,8 @@ namespace Silabus.Models
         public DateTime FechaModificacion { get; set; }
         public AsignaturaCompetencias()
         {
-
+            this.Competencia = new Competencia();
+            this.Asignaturas = new Asignaturas();
         }
     }
 }

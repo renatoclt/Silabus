@@ -15,5 +15,9 @@ namespace Silabus.Models
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
+        public Criterios()
+        {
+
+        }
     }
 }

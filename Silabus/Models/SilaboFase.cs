@@ -27,6 +27,7 @@ namespace Silabus.Models
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
         public virtual ICollection<SilaboFasesSaberes> SilaboFasesSaberes { get; set; }
+        public virtual ICollection<SilaboFaseUnidades> SilaboFaseUnidades { get; set; }
         public virtual IEnumerable<Saberes> Saberes { get; set; }
         public SilaboFase()
         {

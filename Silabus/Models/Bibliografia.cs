@@ -18,5 +18,9 @@ namespace Silabus.Models
 
         public int Estado { get => estado; set => estado = value; }
         public List<Libros> Libros { get => libros; set => libros = value; }
+        public Bibliografia()
+        {
+
+        }
     }
 }

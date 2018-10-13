@@ -26,5 +26,11 @@ namespace Silabus.Models
         {
             SilaboFases = new HashSet<SilaboFase>();
         }
+        public Silabo(int id, int idPlanFuncionamiento, string sumilla)
+        {
+            SilaboFases = new HashSet<SilaboFase>();
+            this.Asignaturas = new Asignaturas();
+            this.PlanFuncionamiento = new PlanFuncionamiento();
+        }
     }
 }

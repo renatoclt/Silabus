@@ -31,9 +31,8 @@ namespace Silabus.Models
         public virtual ICollection<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
         public IEnumerable<Fase> Fase { get; set; }
         public IEnumerable<Unidad> Unidads { get; set; }
-        Asignaturas()
+        public Asignaturas()
         {
-            AsignaturaCompetencias = new HashSet<AsignaturaCompetencias>();
         }
     }
 }
