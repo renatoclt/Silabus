@@ -16,5 +16,9 @@
         public int Id { get => id; set => id = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public int IdFase { get => idFase; set => idFase = value; }
+        public CompetenciaCurso()
+        {
+
+        }
     }
 }

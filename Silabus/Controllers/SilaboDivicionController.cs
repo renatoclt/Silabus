@@ -37,8 +37,6 @@ namespace Silabus.Controllers
             });
             return View(model);
         }
-
-        // GET: SilaboDivicion/Edit/5
         
         public ActionResult Edit(int id)
         {
@@ -46,15 +44,29 @@ namespace Silabus.Controllers
             return RedirectToAction("Index"); ;
         }
 
-        // GET: SilaboDivicion/Edit/5
-        //[HttpPost]
-        //public ActionResult EditOk(List<SilaboDivicion> silaboDivicion)
-        public ActionResult EditOk(int id, int idSilabo, string sumilla)
+        [HttpPost]
+        public ActionResult EditOk(SilaboDivicion silaboDivicion)
         {
-            _repo.EditarDivicionCancel(id);
+            //silaboDivicion.Divicion = _repo.GetDivicion(silaboDivicion.IdDivicion);
+            //silaboDivicion.Silabo = _repo.GetSilabo(silaboDivicion.IdSilabo);
+            //this.GuardarSilaboDivicion(silaboDivicion);
+            //_repo.EditarDivicionCancel(id);
+            _repo.EditarDivicionOk(silaboDivicion.IdDivicion);
             return RedirectToAction("Index"); ;
         }
 
+        //[HttpPost]
+        //public ActionResult EditOk()
+        //{
+
+        //    return RedirectToAction("Index"); ;
+        //}
+        //[HttpPost]
+        //public ActionResult EditOk(SilaboDivicion silaboDivicion)
+        //{
+
+        //    return RedirectToAction("Index"); ;
+        //}
         private bool GuardarSilaboDivicion(SilaboDivicion silaboDivicion)
         {
             switch (silaboDivicion.Divicion.Vista)

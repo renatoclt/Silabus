@@ -21,8 +21,11 @@ namespace Silabus.Servicios
             {
                 var silaboDivicions = db.SilaboDivicions.Where(s => s.Silabo.Id == idSilabo).Include(s => s.Divicion)
                     .Include(s => s.Silabo.Asignaturas.PlanEstudio.Escuela.Facultads)
+                    .Include(s => s.Silabo.SilaboFases)
                     .Include("Silabo.SilaboFases.Fase")
                     .Include("Silabo.SilaboFases.SilaboFasesSaberes")
+                    .Include("Silabo.SilaboFases.SilaboFaseUnidades")
+                    .Include("Silabo.Asignaturas.AsignaturaCompetencias")
                     .Include("Silabo.Asignaturas.AsignaturaCompetencias.Competencia");
                 return silaboDivicions.ToList();
             }
@@ -77,7 +80,23 @@ namespace Silabus.Servicios
             }
         }
 
+        public Divicion GetDivicion(int id)
+        {
+            using (var db = new SilaboContext())
+            {
+                return db.Diviciones.Where(d => d.Id == id).FirstOrDefault();
+
+            }
+        }
         
+        public Silabo GetSilabo(int id)
+        {
+            using (var db = new SilaboContext())
+            {
+                return db.Silabo.Where(s => s.Id == id).FirstOrDefault();
+
+            }
+        }
 
         internal void EditarDivicionCancel(int id)
         {

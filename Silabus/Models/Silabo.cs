@@ -34,5 +34,11 @@ namespace Silabus.Models
             SilaboDocentes = new HashSet<SilaboDocente>();
             SilaboDiviciones = new HashSet<SilaboDivicion>();
         }
+        public Silabo(int id, int idPlanFuncionamiento, string sumilla)
+        {
+            SilaboFases = new HashSet<SilaboFase>();
+            this.Asignaturas = new Asignaturas();
+            this.PlanFuncionamiento = new PlanFuncionamiento();
+        }
     }
 }

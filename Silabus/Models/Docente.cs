@@ -18,5 +18,9 @@ namespace Silabus.Models
         public DateTime FechaCreacion { get; set; }
         private String UsuarioCreacion { get; set; }
         private String UsuarioModificacion { get; set; }
+        public Docente()
+        {
+            this.TipoDocente = new TipoDocente();
+        }
     }
 }
