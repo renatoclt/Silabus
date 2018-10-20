@@ -13,6 +13,7 @@ namespace Silabus.Models
         [ForeignKey("IdSilabo")]
         public virtual Silabo Silabo { get; set; }
         public int IdDocente { get; set; }
+        public string Funcion { get; set; }
         [ForeignKey("IdDocente")]
         public virtual Docente Docente { get; set; }
         public int Estado { get; set; }

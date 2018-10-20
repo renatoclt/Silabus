@@ -22,6 +22,7 @@ namespace Silabus.Models
         public DbSet<Silabo> Silabo { get; set; }
         public DbSet<PlanFuncionamiento> PlanFuncionamientos { get; set; }
         public DbSet<Docente> Docentes { get; set; }
+        public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<TipoDocente> TipoDocentes { get; set; }
         public DbSet<SilaboDocente> SilaboDocentes { get; set; }
         public DbSet<SilaboDivicion> SilaboDivicions { get; set; }
@@ -37,6 +38,8 @@ namespace Silabus.Models
         public DbSet<SilaboFasesSaberes> SilaboFasesSaberes { get; set; }
         public DbSet<SilaboEvidencias> SilaboEvidencias { get; set; }
         public DbSet<SilaboCriterios> SilaboCriterios { get; set; }
+        public DbSet<Estrategias> Estrategias { get; set; }
+        public DbSet<SilaboEstrategias> SilaboEstrategias { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

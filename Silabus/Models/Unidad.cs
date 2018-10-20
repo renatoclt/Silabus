@@ -13,12 +13,16 @@ namespace Silabus.Models
         public int IdAsignatura { get; set; }
         [ForeignKey("IdAsignatura")]
         public virtual Asignaturas Asignaturas{ get; set; }
+        public virtual ICollection<SilaboFaseUnidades> SilaboFaseUnidades { get; set; }
         public int Estado { get; set; }
         public String UsuarioCreacion { get; set; }
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
-       
+        public Unidad()
+        {
+            SilaboFaseUnidades = new HashSet<SilaboFaseUnidades>();
+        }
         
        
         //public void SortList(Unidad unidadTem)

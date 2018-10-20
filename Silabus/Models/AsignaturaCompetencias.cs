@@ -13,6 +13,9 @@ namespace Silabus.Models
         public int IdAsignatura { get; set; }
         [ForeignKey("IdAsignatura")]
         public virtual Asignaturas Asignaturas { get; set; }
+        public int IdSilaboFase { get; set; }
+        [ForeignKey("IdSilaboFase")]
+        public virtual SilaboFase SilaboFase { get; set; }
         public String UsuarioCreacion { get; set; }
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }

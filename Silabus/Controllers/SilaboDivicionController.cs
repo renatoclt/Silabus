@@ -61,7 +61,7 @@ namespace Silabus.Controllers
             {
                 case sumilla:
                     {
-                        this._repo.GuardarSumilla(silaboDivicion.Silabo);
+                        this._repo.GuardarUnidades(silaboDivicion.Silabo);
                         return true;
                     }
                 default:

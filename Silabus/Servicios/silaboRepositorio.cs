@@ -25,8 +25,30 @@ namespace Silabus.Servicios
                     .Include("Silabo.SilaboFases.SilaboFasesSaberes")
                     .Include("Silabo.Asignaturas.AsignaturaCompetencias.Competencia");
                 return silaboDivicions.ToList();
-
             }
+        }
+
+        internal Silabo ObtenerSilabo(int id)
+        {
+            using (var db = new SilaboContext())
+            {
+                var silabo = db.Silabo.Where(s => s.Id == id)
+                    .Include(s => s.SilaboDiviciones.Select(sd => sd.Divicion))
+                    .Include(s => s.Asignaturas.PlanEstudio.Escuela.Facultads)
+                    .Include(s => s.Asignaturas.Departamento)
+                    .Include(s => s.Asignaturas.Unidads.Select(u => u.SilaboFaseUnidades))
+                    .Include(s => s.SilaboDocentes.Select(sd => sd.Docente.TipoDocente))
+                    .Include(s => s.Asignaturas.AsignaturaCompetencias.Select(a => a.Competencia))
+                    .Include(s => s.SilaboFases.Select(sf => sf.Fase))
+                    .Include(s => s.SilaboFases.Select(sf => sf.AsignaturaCompetencias.Select(ac => ac.Competencia)))
+                    .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.Saberes)))
+                    .Include(s => s.SilaboFases.Select(sf => sf.SilaboFaseUnidades.Select(sfu => sfu.Unidad)))
+                    .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboCriterios.Select(se => se.Criterios))))
+                    .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboEvidencias.Select(se => se.Evidencias))))
+                    .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboEstrategias.Select(se => se.Estrategia))));
+                return silabo.First();
+            }
+            
         }
 
         public List<Fase> ObtenerFases()
@@ -67,13 +89,56 @@ namespace Silabus.Servicios
             }
         }
 
-        internal void GuardarSumilla(Silabo silaboSave)
+        internal Silabo GuardarUnidades(Silabo silaboSave)
         {
             using (var db = new SilaboContext())
             {
-                var silabo = db.Silabo.Where(s => s.Id == silaboSave.Id).FirstOrDefault();
-                silabo.Sumilla = silaboSave.Sumilla;
-                db.SaveChanges();
+                var silabo = db.Silabo.SingleOrDefault(s => s.Id == silaboSave.Id);
+                if(silabo != null)
+                {
+                    db.SaveChanges();
+                }
+                return ObtenerSilabo(silabo.Id);
+            }
+        }
+
+        internal Silabo GuardarCompetencias(Silabo silaboSave)
+        {
+            using (var db = new SilaboContext())
+            {
+                var silabo = db.Silabo.SingleOrDefault(s => s.Id == silaboSave.Id);
+                if (silabo != null)
+                {
+                    db.SaveChanges();
+                }
+                return ObtenerSilabo(silabo.Id);
+            }
+        }
+
+        internal Silabo GuardarEvaluacion(Silabo silaboSave)
+        {
+            using (var db = new SilaboContext())
+            {
+                var silabo = db.Silabo.SingleOrDefault(s => s.Id == silaboSave.Id);
+                if (silabo != null)
+                {
+                    db.SaveChanges();
+                }
+                return ObtenerSilabo(silabo.Id);
+            }
+        }
+
+        internal Silabo GuardarSumilla(Silabo silaboSave)
+        {
+            using (var db = new SilaboContext())
+            {
+                var silabo = db.Silabo.SingleOrDefault(s => s.Id == silaboSave.Id);
+                if (silabo != null)
+                {
+                    silabo.Sumilla = silaboSave.Sumilla;
+                    db.SaveChanges();
+                }
+                return ObtenerSilabo(silabo.Id);
             }
         }
 

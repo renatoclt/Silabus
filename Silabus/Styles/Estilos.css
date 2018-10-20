@@ -235,6 +235,10 @@
     display: block;
 }
 
+
+table th {
+    vertical-align: middle !important;
+}
 /*#left {
     width: 20%;
     height: 100%;
