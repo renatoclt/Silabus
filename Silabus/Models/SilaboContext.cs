@@ -13,7 +13,6 @@ namespace Silabus.Models
         {
 
         }
-<<<<<<< HEAD
         public DbSet<Divicion> Diviciones { get; set; }
         public DbSet<IdentificacionAcademicaModel> IdentificacionAcademicas { get; set; }
         public DbSet<Facultad> Facultades { get; set; }
@@ -41,25 +40,16 @@ namespace Silabus.Models
         public DbSet<SilaboCriterios> SilaboCriterios { get; set; }
         public DbSet<Estrategias> Estrategias { get; set; }
         public DbSet<SilaboEstrategias> SilaboEstrategias { get; set; }
+        //public DbSet<Estado> Estado { get; set; }
+        //public DbSet<Parametricas> Parametricas { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
-=======
-        public DbSet<Divicion> Divicions { get; set; }
-        public DbSet<TipoDocentes> TipoDocentes { get; set; }
-        public DbSet<Docente> Docente { get; set; }
-        public DbSet<Facultad> Facultad { get; set; }
-        public DbSet<Escuela> Escuela { get; set; }
+        
         public DbSet<PlanFuncionamiento> PlanFuncionamiento { get; set; }
         public DbSet<PlanEstudio> PlanEstudio { get; set; }
-        public DbSet<Asignaturas> Asignaturas { get; set; }
-        public DbSet<Silabus> Silabus { get; set; }
         public DbSet<SilaboDocente> SilabusDocente { get; set; }
-        public DbSet<Estado> Estado { get; set; }
-        public DbSet<Parametricas> Parametricas { get; set; }
-
-
->>>>>>> master
+        
     }
 }

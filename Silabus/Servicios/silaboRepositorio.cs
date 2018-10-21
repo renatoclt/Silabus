@@ -75,7 +75,6 @@ namespace Silabus.Servicios
         {
             using (var db = new SilaboContext())
             {
-<<<<<<< HEAD
                 var saberes = db.Saberes.Where(s => s.Estado == this.estadoActivo).OrderBy(s => s.Orden);
                 return saberes.ToList();
             }
@@ -182,13 +181,5 @@ namespace Silabus.Servicios
                 db.SaveChanges();
             }
         }
-=======
-                return db.Divicions.ToList();
-            }
-        }
-
-        
-
->>>>>>> master
     }
 }
