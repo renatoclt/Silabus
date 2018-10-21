@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Silabus.Services.VisualizarSilabo>
+
+@{
+    ViewBag.Title = "HABILITAR SÍLABUS";
+    Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
+
+}
+
+<h2 style="text-align:center">FACULTAD DEL JEFE DE DEPARTAMENTO</h2>
+<h2 style="text-align:center">HABILITAR SÍLABUS</h2>
+
+@Html.Partial("_Filtros")
+
+<table class="table">
+    <tr>
+        <th> DOCENTE  </th>
+        <th> CURSO    </th>
+        <th> ESTADO   </th>
+        <th> ACCIONES   </th>
+    </tr>
+    @if (Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+
+    <tr>
+        <td>@item.nombreDocente     </td>
+        <td>@item.nombreCurso       </td>
+        <td>@Html.DropDownList("ListarEstado", (List<SelectListItem>)ViewBag.ListarEstado, new { @disabled = "disabled", @id = item.codigoEstado }) </td>
+        <td>
+            <input type="button" class="btn btn-default" id="Editar" value="Editar" onclick="mostrar()">
+            <input type="button" class="btn btn-default" id="Guardar" value="Guardar" onclick="ocultar(item.id)" style="display:none" />
+            <input type="button" class="btn btn-default" id="Cancelar" value="Cancelar" onclick="ocultar()" style="display:none">
+        </td>
+    </tr>
+        }
+    }
+
+
+</table>
+
+<script type="text/javascript">
+    function mostrar() {
+        document.getElementById('Guardar').style.display = 'inline';
+        document.getElementById('Cancelar').style.display = 'inline';
+        document.getElementById('Editar').style.display = 'none';
+    }
+
+    function ocultar(id) {
+        alert(fila);
+        document.getElementById('Guardar').style.display = 'none';
+        document.getElementById('Cancelar').style.display = 'none';
+        document.getElementById('Editar').style.display = 'block';
+
+        document.getElementById(id);
+    }
+</script>

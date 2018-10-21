@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
+=======
+using System.ComponentModel.DataAnnotations;
+>>>>>>> master
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -8,6 +12,7 @@ namespace Silabus.Models
 {
     public class PlanEstudio
     {
+<<<<<<< HEAD
         public int Id { get; set; }
         public int IdEscuela { get; set; }
         [ForeignKey("IdEscuela")]
@@ -20,5 +25,30 @@ namespace Silabus.Models
         public PlanEstudio()
         {
         }
+=======
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [ForeignKey("Escuela")]
+        public int IdEscuela { get; set; }
+        public Escuela Escuela { get; set; }
+
+        [Required]
+        public int estado { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public String usuarioCreacion { get; set; }
+
+        [Required]
+        public DateTime fechaCreacion { get; set; }
+
+        [MaxLength(50)]
+        public String usuarioModificacion { get; set; }
+
+        public DateTime? fechaModificacion { get; set; }
+
+
+>>>>>>> master
     }
 }

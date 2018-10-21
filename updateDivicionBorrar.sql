@@ -1,1 +1,0 @@
-﻿update Divicions set Estado = 2 where Id = 2 
