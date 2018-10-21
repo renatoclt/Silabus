@@ -21,26 +21,76 @@ namespace Silabus.Controllers
             return View(model);
         }
 
+        // GET: SilaboDivicion/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: SilaboDivicion/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: SilaboDivicion/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         // GET: SilaboDivicion/Edit/5
         public ActionResult Edit(int id)
         {
-            _repo.EditarDivicion(id);
-            return RedirectToAction("Index"); ;
+            return View();
         }
 
-        // GET: SilaboDivicion/Edit/5
-        public ActionResult EditOk(int id)
+        // POST: SilaboDivicion/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            _repo.EditarDivicionOk(id);
-            return RedirectToAction("Index"); ;
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: SilaboDivicion/Edit/5
-        public ActionResult EditCancel(int id)
+        // GET: SilaboDivicion/Delete/5
+        public ActionResult Delete(int id)
         {
-            _repo.EditarDivicionCancel(id);
-            return RedirectToAction("Index"); ;
+            return View();
+        }
+
+        // POST: SilaboDivicion/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

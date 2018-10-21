@@ -257,7 +257,6 @@
     <Content Include="Views\Silabo\Unidad.cshtml" />
     <Content Include="Views\Silabo\Bibliografia.cshtml" />
     <Content Include="Views\SilaboDivicion\Index.cshtml" />
-    <Content Include="Views\SilaboDivicion\Edit.cshtml" />
     <Content Include="Views\VisualizarSilabo\Index.cshtml" />
     <Content Include="Views\Shared\_Filtros.cshtml" />
     <Content Include="Views\HabilitarSilabo\Index.cshtml" />
