@@ -24,13 +24,14 @@ namespace Silabus.Controllers
         {
             List<VisualizarSilabo> visualizarSilabos = new List<VisualizarSilabo>();
             ViewBag.ListaAnioSemestre = VisualizarSilabo.ListarAnioSemestre(DateTime.Now.Year);
-            ViewBag.Estado = VisualizarSilabo.ListarAnioSemestre(DateTime.Now.Year);
+            ViewBag.ListarEstado = VisualizarSilabo.ListarEstado();
             return View(visualizarSilabos);
         }
         [HttpPost]
         public ActionResult Index(string FilEscuelaProfesional, string FilCodigoDocente, string FilDocente, string FilCurso, string ListaAnioSemestre)
         {
             ViewBag.ListaAnioSemestre = VisualizarSilabo.ListarAnioSemestre(DateTime.Now.Year);
+            ViewBag.ListarEstado = VisualizarSilabo.ListarEstado();
             var model = VisualizarSilabo.ObtenerInformacion(FilEscuelaProfesional, FilCodigoDocente, FilDocente, FilCurso, ListaAnioSemestre);
 
             /*VisualizarSilabo visualizarSilabo = new VisualizarSilabo();
