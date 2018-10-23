@@ -159,21 +159,15 @@
     <Compile Include="Controllers\ProgramaFormativoController.cs" />
     <Compile Include="Controllers\SilaboController.cs" />
     <Compile Include="Controllers\SilaboDivicionController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\SilaboDocentesController.cs" />
     <Compile Include="Controllers\SilabosController.cs" />
-=======
     <Compile Include="Controllers\VisualizarSilaboController.cs" />
->>>>>>> master
     <Compile Include="Environments\Constants.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\AsignaturaCompetencias.cs" />
-=======
->>>>>>> master
     <Compile Include="Models\Asignaturas.cs" />
     <Compile Include="Models\Bibliografia.cs" />
     <Compile Include="Models\Departamento.cs" />
@@ -185,16 +179,11 @@
     <Compile Include="Models\Divicion.cs" />
     <Compile Include="Models\Docente.cs" />
     <Compile Include="Models\Escuela.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\Evidencias.cs" />
-=======
-    <Compile Include="Models\Estado.cs" />
->>>>>>> master
     <Compile Include="Models\Facultad.cs" />
     <Compile Include="Models\Fase.cs" />
     <Compile Include="Models\IdentificacionAcademicaModel.cs" />
     <Compile Include="Models\Libros.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\PlanEstudio.cs" />
     <Compile Include="Models\PlanFuncionamiento.cs" />
     <Compile Include="Models\Saberes.cs" />
@@ -210,16 +199,6 @@
     <Compile Include="Models\SilaboFaseUnidades.cs" />
     <Compile Include="Models\Sumilla.cs" />
     <Compile Include="Models\TipoDocente.cs" />
-=======
-    <Compile Include="Models\Parametricas.cs" />
-    <Compile Include="Models\PlanEstudio.cs" />
-    <Compile Include="Models\PlanFuncionamiento.cs" />
-    <Compile Include="Models\SilaboContext.cs" />
-    <Compile Include="Models\SilaboDocente.cs" />
-    <Compile Include="Models\Silabus.cs" />
-    <Compile Include="Models\Sumilla.cs" />
-    <Compile Include="Models\TipoDocentes.cs" />
->>>>>>> master
     <Compile Include="Models\Unidad.cs" />
     <Compile Include="Models\UnidadCurso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -294,7 +273,6 @@
     <Content Include="Views\Silabo\Unidad.cshtml" />
     <Content Include="Views\Silabo\Bibliografia.cshtml" />
     <Content Include="Views\SilaboDivicion\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\SilaboDivicion\Edit.cshtml" />
     <Content Include="Views\SilaboDivicion\_identificacionAcademica.cshtml" />
     <Content Include="Views\SilaboDocentes\Create.cshtml" />
@@ -308,11 +286,9 @@
     <Content Include="Views\SilaboDivicion\_evaluacion.cshtml" />
     <Content Include="Views\ProgramaFormativo\ProgramaFormativo.cshtml" />
     <Content Include="Views\Silabos\Silabos.cshtml" />
-=======
     <Content Include="Views\VisualizarSilabo\Index.cshtml" />
     <Content Include="Views\Shared\_Filtros.cshtml" />
     <Content Include="Views\HabilitarSilabo\Index.cshtml" />
->>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

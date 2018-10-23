@@ -37,9 +37,7 @@ namespace Silabus.Controllers
             });
             return View(model);
         }
-<<<<<<< HEAD
-        
-=======
+
 
         // GET: SilaboDivicion/Details/5
         public ActionResult Details(int id)
@@ -70,13 +68,13 @@ namespace Silabus.Controllers
         }
 
         // GET: SilaboDivicion/Edit/5
->>>>>>> master
+
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-<<<<<<< HEAD
+
         [HttpPost]
         public ActionResult EditOk(SilaboDivicion silaboDivicion)
         {
@@ -115,8 +113,8 @@ namespace Silabus.Controllers
         }
 
         // GET: SilaboDivicion/Edit/5
-        public ActionResult EditCancel(int id)
-=======
+        //public ActionResult EditCancel(int id)
+
         // POST: SilaboDivicion/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
@@ -135,7 +133,6 @@ namespace Silabus.Controllers
 
         // GET: SilaboDivicion/Delete/5
         public ActionResult Delete(int id)
->>>>>>> master
         {
             return View();
         }

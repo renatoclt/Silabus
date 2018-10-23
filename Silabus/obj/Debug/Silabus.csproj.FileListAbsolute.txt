@@ -210,3 +210,7 @@ F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v2\Silabus\bin\es\System.Web.WebPage
 F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v2\Silabus\obj\Debug\Silabus.csproj.CopyComplete
 F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v2\Silabus\obj\Debug\Silabus.dll
 F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v2\Silabus\obj\Debug\Silabus.pdb
+F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v3\Silabus\Silabus\obj\Debug\Silabus.csprojAssemblyReference.cache
+F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v3\Silabus\Silabus\obj\Debug\Silabus.csproj.CoreCompileInputs.cache
+F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v3\Silabus\Silabus\obj\Debug\Silabus.dll
+F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v3\Silabus\Silabus\obj\Debug\Silabus.pdb

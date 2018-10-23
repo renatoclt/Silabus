@@ -1,13 +1,11 @@
-<<<<<<< HEAD
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-=======
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
->>>>>>> master
 using System.Linq;
 using System.Web;
 
@@ -15,7 +13,6 @@ namespace Silabus.Models
 {
     public class Facultad
     {
-<<<<<<< HEAD
         public int Id { get; set; }
         public String Nombre { get; set; }
         public int Estado { get; set; }
@@ -28,7 +25,7 @@ namespace Silabus.Models
         {
 
         }
-=======
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -52,6 +49,5 @@ namespace Silabus.Models
         public DateTime? fechaModificacion { get; set; }
 
 
->>>>>>> master
     }
 }
