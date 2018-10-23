@@ -1,12 +1,11 @@
 ﻿@model List<Silabus.Models.SilaboDivicion>
 
 @{
-    /**/
-
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
 }
 
+<<<<<<< HEAD
 @*@using (Html.BeginForm("EditOk", "SilaboDivicion", FormMethod.Post)) {*@
 @*@using (Html.BeginForm("EditOk", "SilaboDivicion", FormMethod.Post))
 {*@
@@ -64,3 +63,50 @@
     }
 
 @* } *@
+=======
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaModificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Docente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaModificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Docente)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+>>>>>>> master

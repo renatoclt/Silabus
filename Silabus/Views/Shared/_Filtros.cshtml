@@ -1,0 +1,29 @@
+﻿@model List<Silabus.Services.VisualizarSilabo>
+
+@using (Html.BeginForm())
+{
+    <div class="filtros">
+        <div class="panel-heading">
+            Filtros
+        </div>
+        <div class="panel-body">
+            <div class="form-inline">
+                @Html.Label("ESCUELA PROFESIONAL")
+                @Html.TextBox("FilEscuelaProfesional", "", new { @class = "form-control" })
+                @Html.Label("CÓDIGO DOCENTE")
+                @Html.TextBox("FilCodigoDocente", "", new { @class = "form-control" })
+                @Html.Label("DOCENTE")
+                @Html.TextBox("FilDocente", "", new { @class = "form-control" })
+                @Html.Label("CURSO")
+                @Html.TextBox("FilCurso", "", new { @class = "form-control" })
+                @Html.Label("AÑO-SEMESTRE")
+
+                @Html.DropDownList("ListaAnioSemestre", (List<SelectListItem>)ViewBag.ListaAnioSemestre)
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        </div>
+
+    </div>
+}
+
+
