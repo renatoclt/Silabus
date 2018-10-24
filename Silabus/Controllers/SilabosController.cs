@@ -18,51 +18,51 @@ namespace Silabus.Controllers
         }
         public ActionResult Silabos(int id = 1)
         {
-            Silabo silabo = _repo.ObtenerSilabo(id);
+            Silabos silabo = _repo.ObtenerSilabo(id);
             return View(silabo);
         }
 
-        public ActionResult Edit(int id, int idDivicion)
+        public ActionResult Edit(int id, int idDivision)
         {
-            _repo.EditarDivicion(idDivicion);
+            _repo.EditarDivision(idDivision);
             return RedirectToAction("Silabos", id); ;
         }
 
-        public ActionResult EditCancel(int id, int idDivicion)
+        public ActionResult EditCancel(int id, int idDivision)
         {
-            _repo.EditarDivicionCancel(idDivicion);
+            _repo.EditarDivisionCancel(idDivision);
             return RedirectToAction("Silabos", id); ;
         }
 
-        public ActionResult GuardarSumilla(Silabo silabo)
+        public ActionResult GuardarSumilla(Silabos silabo)
         {
             silabo = _repo.GuardarSumilla(silabo);
-            _repo.EditarDivicionCancel(silabo.SilaboDiviciones.Where(sd => sd.Divicion.Id.Equals(Constantes.IDSUMILLA)).FirstOrDefault().Divicion.Id);
+            _repo.EditarDivisionCancel(silabo.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Constantes.IDSUMILLA)).FirstOrDefault().Divisiones.Id);
             return RedirectToAction("Silabos", silabo.Id);
         }
-        public ActionResult GuardarCompetencias(Silabo silabo)
+        public ActionResult GuardarCompetencias(Silabos silabo)
         {
             silabo = _repo.GuardarCompetencias(silabo);
-            _repo.EditarDivicionCancel(silabo.SilaboDiviciones.Where(sd => sd.Divicion.Id.Equals(Constantes.IDCOMPETENCIAS)).FirstOrDefault().Divicion.Id);
+            _repo.EditarDivisionCancel(silabo.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Constantes.IDCOMPETENCIAS)).FirstOrDefault().Divisiones.Id);
             return RedirectToAction("Silabos", silabo.Id);
         }
 
-        public ActionResult GuardarUnidad(Silabo silabo)
+        public ActionResult GuardarUnidad(Silabos silabo)
         {
             silabo = _repo.GuardarUnidades(silabo);
-            _repo.EditarDivicionCancel(silabo.SilaboDiviciones.Where(sd => sd.Divicion.Id.Equals(Constantes.IDUNIDADES)).FirstOrDefault().Divicion.Id);
+            _repo.EditarDivisionCancel(silabo.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Id);
             return RedirectToAction("Silabos", silabo.Id);
         }
-        public ActionResult GuardarEvaluacion(Silabo silabo)
+        public ActionResult GuardarEvaluacion(Silabos silabo)
         {
             silabo = _repo.GuardarEvaluacion(silabo);
-            _repo.EditarDivicionCancel(silabo.SilaboDiviciones.Where(sd => sd.Divicion.Id.Equals(Constantes.IDEVALUACION)).FirstOrDefault().Divicion.Id);
+            _repo.EditarDivisionCancel(silabo.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Constantes.IDEVALUACION)).FirstOrDefault().Divisiones.Id);
             return RedirectToAction("Silabos", silabo.Id);
         }
 
-        public ActionResult CambiarFaseEvaluacion(Silabo silaboTem)
+        public ActionResult CambiarFaseEvaluacion(Silabos silaboTem)
         {
-            Silabo silabo = _repo.ObtenerSilabo(silaboTem.Id);
+            Silabos silabo = _repo.ObtenerSilabo(silaboTem.Id);
             silabo.SelectedSilaboFase = silaboTem.SelectedSilaboFase;
             return View("Silabos", silabo);
         }

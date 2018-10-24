@@ -5,12 +5,12 @@ using System.Web;
 
 namespace Silabus.Models
 {
-    public class Bibliografia
+    public class Bibliografiass
     {
         private int estado;
         private List<Libros> libros;    
 
-        public Bibliografia(int estado, List<Libros> libros)
+        public Bibliografiass(int estado, List<Libros> libros)
         {
             this.estado = estado;
             this.libros = libros;
@@ -18,7 +18,7 @@ namespace Silabus.Models
 
         public int Estado { get => estado; set => estado = value; }
         public List<Libros> Libros { get => libros; set => libros = value; }
-        public Bibliografia()
+        public Bibliografiass()
         {
 
         }

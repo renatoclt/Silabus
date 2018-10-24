@@ -35,9 +35,9 @@ namespace Silabus.Controllers
         //    var model = _repo.cargaArchivoCargaAcademicas();
         //    return View(model);
         //}
-        //public ActionResult CargaBibliografia()
+        //public ActionResult CargaBibliografiass()
         //{
-        //    var model = _repo.cargaArchivoBibliografias();
+        //    var model = _repo.cargaArchivoBibliografiass();
         //    return View(model);
         //}
 

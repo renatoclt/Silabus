@@ -1,4 +1,4 @@
-﻿@model Silabus.Models.SilaboDocente
+﻿@model Silabus.Models.SilaboDocentes
 
 @{
     Layout = null;
@@ -13,23 +13,23 @@
 </head>
 <body>
     <div>
-        <h4>SilaboDocente</h4>
+        <h4>SilaboDocentes</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Docente.Codidgo)
+                @Html.DisplayNameFor(model => model.Docentes.Codigo)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Docente.Codidgo)
+                @Html.DisplayFor(model => model.Docentes.Codigo)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.Silabo.Sumilla)
+                @Html.DisplayNameFor(model => model.Silabos.Sumilla)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Silabo.Sumilla)
+                @Html.DisplayFor(model => model.Silabos.Sumilla)
             </dd>
     
             <dt>

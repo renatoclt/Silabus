@@ -17,7 +17,7 @@ namespace Silabus.Controllers
         // GET: SilaboDocentes
         public ActionResult Index()
         {
-            var silaboDocentes = db.SilaboDocentes.Where(s => s.Docente.Id == 2).Include(s => s.Silabo);
+            var silaboDocentes = db.SilaboDocentes.Where(s => s.Docentes.Id == 2).Include(s => s.Silabos);
             return View(silaboDocentes.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace Silabus.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SilaboDocente silaboDocente = db.SilaboDocentes.Find(id);
+            SilaboDocentes silaboDocente = db.SilaboDocentes.Find(id);
             if (silaboDocente == null)
             {
                 return HttpNotFound();
@@ -40,7 +40,7 @@ namespace Silabus.Controllers
         public ActionResult Create()
         {
             ViewBag.IdDocente = new SelectList(db.Docentes, "Id", "Codidgo");
-            ViewBag.IdSilabo = new SelectList(db.Silabo, "Id", "Sumilla");
+            ViewBag.IdSilabo = new SelectList(db.Silabos, "Id", "Sumilla");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace Silabus.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IdSilabo,IdDocente,Estado,FechaModificacion,FechaCreacion")] SilaboDocente silaboDocente)
+        public ActionResult Create([Bind(Include = "Id,IdSilabo,IdDocente,Estado,FechaModificacion,FechaCreacion")] SilaboDocentes silaboDocente)
         {
             if (ModelState.IsValid)
             {
@@ -59,25 +59,25 @@ namespace Silabus.Controllers
             }
 
             ViewBag.IdDocente = new SelectList(db.Docentes, "Id", "Codidgo", silaboDocente.IdDocente);
-            ViewBag.IdSilabo = new SelectList(db.Silabo, "Id", "Sumilla", silaboDocente.IdSilabo);
+            ViewBag.IdSilabo = new SelectList(db.Silabos, "Id", "Sumilla", silaboDocente.IdSilabo);
             return View(silaboDocente);
         }
 
         // GET: SilaboDocentes/Edit/5
         public ActionResult Edit(int? idSilabo)
         {
-            return RedirectToAction("Index", "SilaboDivicion", new { id = idSilabo });
+            return RedirectToAction("Index", "SilaboDivisiones", new { id = idSilabo });
             //if (id == null)
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
-            //SilaboDocente silaboDocente = db.SilaboDocentes.Find(id);
+            //SilaboDocentes silaboDocente = db.SilaboDocentes.Find(id);
             //if (silaboDocente == null)
             //{
             //    return HttpNotFound();
             //}
             //ViewBag.IdDocente = new SelectList(db.Docentes, "Id", "Codidgo", silaboDocente.IdDocente);
-            //ViewBag.IdSilabo = new SelectList(db.Silabo, "Id", "Sumilla", silaboDocente.IdSilabo);
+            //ViewBag.IdSilabo = new SelectList(db.Silabos, "Id", "Sumilla", silaboDocente.IdSilabo);
             //return View(silaboDocente);
         }
 
@@ -86,7 +86,7 @@ namespace Silabus.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IdSilabo,IdDocente,Estado,FechaModificacion,FechaCreacion")] SilaboDocente silaboDocente)
+        public ActionResult Edit([Bind(Include = "Id,IdSilabo,IdDocente,Estado,FechaModificacion,FechaCreacion")] SilaboDocentes silaboDocente)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace Silabus.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdDocente = new SelectList(db.Docentes, "Id", "Codidgo", silaboDocente.IdDocente);
-            ViewBag.IdSilabo = new SelectList(db.Silabo, "Id", "Sumilla", silaboDocente.IdSilabo);
+            ViewBag.IdSilabo = new SelectList(db.Silabos, "Id", "Sumilla", silaboDocente.IdSilabo);
             return View(silaboDocente);
         }
 
@@ -106,7 +106,7 @@ namespace Silabus.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SilaboDocente silaboDocente = db.SilaboDocentes.Find(id);
+            SilaboDocentes silaboDocente = db.SilaboDocentes.Find(id);
             if (silaboDocente == null)
             {
                 return HttpNotFound();
@@ -119,7 +119,7 @@ namespace Silabus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SilaboDocente silaboDocente = db.SilaboDocentes.Find(id);
+            SilaboDocentes silaboDocente = db.SilaboDocentes.Find(id);
             db.SilaboDocentes.Remove(silaboDocente);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -7,19 +7,19 @@ using System.Web;
 
 namespace Silabus.Models
 {
-    public class SilaboDocente
+    public class SilaboDocentes
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int IdSilabo { get; set; }
         [ForeignKey("IdSilabo")]
-        public virtual Silabo Silabo { get; set; }
+        public virtual Silabos Silabos { get; set; }
         public int IdDocente { get; set; }
         [Required]
         [MaxLength(50)]
         public string Funcion { get; set; }
         [ForeignKey("IdDocente")]
-        public virtual Docente Docente { get; set; }
+        public virtual Docentes Docentes { get; set; }
         public int Estado { get; set; }
         public DateTime FechaModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }

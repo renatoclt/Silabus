@@ -13,7 +13,7 @@
 
 <table class="table">
     <tr>
-        <th> DOCENTE  </th>
+        <th> Docentes  </th>
         <th> CURSO    </th>
         <th> ESTADO   </th>
         <th> ACCIONES   </th>
@@ -24,7 +24,7 @@
         {
 
     <tr>
-        <td>@item.nombreDocente     </td>
+        <td>@item.nombreDocentes     </td>
         <td>@item.nombreCurso       </td>
         <td>@Html.DropDownList("ListarEstado", (List<SelectListItem>)ViewBag.ListarEstado, new { @disabled = "disabled", @id = item.codigoEstado }) </td>
         <td>

@@ -28,14 +28,14 @@ namespace Silabus.Controllers
 
         public ActionResult SilaboPrueba()
         {
-            //Divicion[] input = { new Divicion("IDENTIFICACIÓN ACADEMICA ", 0, DateTime.Today , null),
-            //                     new Divicion("SUMILLA",1, DateTime.Today, "nombre Docente"),
-            //                     new Divicion("COMPETENCIAS DE LA ASIGNATURA QUE APOYAN AL EPERFIL DE EGRESO ",0, DateTime.Today, "nombre Docente"),
-            //                     new Divicion("CONTENIDOS BASICOS POR UNIDADES DE APRENDIZAJE",0, DateTime.Today, "nombre Docente"),
-            //                     new Divicion("EVALUACION DE COMPETENCIAS ADQUIRIDAS",1, DateTime.Today, "nombre Docente"),
-            //                     new Divicion("BIBLIOGRAFIA",1, DateTime.Today, "nombre Docente"),};
-            //List<Divicion> diviciones = new List<Divicion>(input);
-            //ViewBag.Diviciones = diviciones;
+            //Divisiones[] input = { new Divisiones("IDENTIFICACIÓN ACADEMICA ", 0, DateTime.Today , null),
+            //                     new Divisiones("SUMILLA",1, DateTime.Today, "nombre Docentes"),
+            //                     new Divisiones("COMPETENCIAS DE LA ASIGNATURA QUE APOYAN AL EPERFIL DE EGRESO ",0, DateTime.Today, "nombre Docentes"),
+            //                     new Divisiones("CONTENIDOS BASICOS POR UNIDADES DE APRENDIZAJE",0, DateTime.Today, "nombre Docentes"),
+            //                     new Divisiones("EVALUACION DE COMPETENCIAS ADQUIRIDAS",1, DateTime.Today, "nombre Docentes"),
+            //                     new Divisiones("Bibliografias",1, DateTime.Today, "nombre Docentes"),};
+            //List<Divisiones> Divisiones = new List<Divisiones>(input);
+            //ViewBag.Divisiones = Divisiones;
             return View();
         }
     }

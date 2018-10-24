@@ -28,13 +28,13 @@ namespace Silabus.Controllers
             return View(visualizarSilabos);
         }
         [HttpPost]
-        public ActionResult Index(string FilEscuelaProfesional, string FilCodigoDocente, string FilDocente, string FilCurso, string ListaAnioSemestre)
+        public ActionResult Index(string FilEscuelaProfesional, string FilCodigoDocentes, string FilDocentes, string FilCurso, string ListaAnioSemestre)
         {
             ViewBag.ListaAnioSemestre = VisualizarSilabo.ListarAnioSemestre(DateTime.Now.Year);
-            var model = VisualizarSilabo.ObtenerInformacion(FilEscuelaProfesional, FilCodigoDocente, FilDocente, FilCurso, ListaAnioSemestre);
+            var model = VisualizarSilabo.ObtenerInformacion(FilEscuelaProfesional, FilCodigoDocentes, FilDocentes, FilCurso, ListaAnioSemestre);
 
             /*VisualizarSilabo visualizarSilabo = new VisualizarSilabo();
-            visualizarSilabo.VisualizarInformacion(escuelaProfesional, codigoDocente, nombreDocente, nombreCurso, añoSemestre);
+            visualizarSilabo.VisualizarInformacion(escuelaProfesional, codigoDocentes, nombreDocentes, nombreCurso, añoSemestre);
             return View(visualizarSilabo);*/
             return View(model);
         }

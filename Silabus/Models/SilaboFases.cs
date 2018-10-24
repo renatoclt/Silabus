@@ -7,15 +7,15 @@ using System.Web;
 
 namespace Silabus.Models
 {
-    public class SilaboFase
+    public class SilaboFases
     {
         public int Id { get; set; }
         public int IdFases { get; set; }
         [ForeignKey("IdFases")]
-        public virtual Fase Fase{ get; set; }
+        public virtual Fases Fases{ get; set; }
         public int IdSilabo { get; set; }
         [ForeignKey("IdSilabo")]
-        public virtual Silabo Silabo { get; set; }
+        public virtual Silabos Silabos { get; set; }
         [Display(Name = "Titulo de fase")]
         public string Titulo { get; set; }
         public int HoraFase { get; set; }
@@ -32,7 +32,7 @@ namespace Silabus.Models
         public virtual ICollection<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
         public virtual ICollection<SilaboFaseUnidades> SilaboFaseUnidades  { get; set; }
         public virtual IEnumerable<Saberes> Saberes { get; set; }
-        public SilaboFase()
+        public SilaboFases()
         {
             AsignaturaCompetencias = new HashSet<AsignaturaCompetencias>();
             SilaboFasesSaberes = new HashSet<SilaboFasesSaberes>();

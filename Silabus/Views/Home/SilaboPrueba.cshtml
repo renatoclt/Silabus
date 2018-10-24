@@ -4,13 +4,13 @@
     Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
 }
 
-<h2 class="titulo2">Silabo del Curso</h2>
+<h2 class="titulo2">Silabos del Curso</h2>
 
 
-@foreach (var divicion in ViewBag.diviciones)
+@foreach (var Divisiones in ViewBag.Divisiones)
 {
-    <button class="accordion">@divicion.Titulo</button>
-    if (@divicion.Estado == 1)
+    <button class="accordion">@Divisiones.Titulo</button>
+    if (@Divisiones.Estado == 1)
     {
         <div class="panel">
             <div col-md-8d-flex>
@@ -20,7 +20,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div>
             <div>
-                <div class="pie-divicion"> <span>@divicion.FechaModificacion </span><span>@divicion.Docente </span>  </div>
+                <div class="pie-Divisiones"> <span>@Divisiones.FechaModificacion </span><span>@Divisiones.Docentes </span>  </div>
             </div>
         </div>
     }

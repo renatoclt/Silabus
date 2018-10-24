@@ -11,10 +11,10 @@ namespace Silabus.Models
         public int Id { get; set; }
         public int IdSilaboFase { get; set; }
         [ForeignKey("IdSilaboFase")]
-        public virtual SilaboFase SilaboFase { get; set; }
+        public virtual SilaboFases SilaboFases { get; set; }
         public int IdSilaboUnidad { get; set; }
         [ForeignKey("IdSilaboUnidad")]
-        public virtual Unidad Unidad { get; set; }
+        public virtual Unidades Unidades { get; set; }
         public int UnidadI { get; set; }
         public int SubUnidad { get; set; }
         public int estado { get; set; }

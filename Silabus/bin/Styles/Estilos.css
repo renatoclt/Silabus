@@ -80,7 +80,7 @@
     content: "\2212";
 }
 
-.pie-divicion{
+.pie-Divisiones{
     float: right;
 }
 
@@ -162,7 +162,7 @@
     text-align: center;
 }
 
-.tablaBorderTd .divicion {
+.tablaBorderTd .Divisiones {
     border: 1px solid black;
     text-align: left;
     padding-left: 10%;
@@ -173,7 +173,7 @@
     border-left: 1px solid black;
 }
 
-.tablaBorderTd .divicionDos {
+.tablaBorderTd .DivisionDos {
     border: 1px solid black;
     text-align: left;
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Silabus.Models
 {
-    public class Fase
+    public class Fases
     { 
         public int Id { get; set; }
         public String Nombre { get; set; }
@@ -18,7 +18,7 @@ namespace Silabus.Models
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
       
-        public Fase()
+        public Fases()
         {
         }
     }

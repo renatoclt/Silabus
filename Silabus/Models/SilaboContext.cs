@@ -13,24 +13,23 @@ namespace Silabus.Models
         {
 
         }
-        public DbSet<Divicion> Diviciones { get; set; }
-        public DbSet<IdentificacionAcademicaModel> IdentificacionAcademicas { get; set; }
-        public DbSet<Facultad> Facultades { get; set; }
-        public DbSet<Escuela> Escuela { get; set; }
-        public DbSet<PlanEstudio> PlanEstudios { get; set; }
+        public DbSet<Divisiones> Divisiones { get; set; }
+        public DbSet<Facultades> Facultades { get; set; }
+        public DbSet<Escuelas> Escuelas { get; set; }
+        public DbSet<PlanEstudios> PlanEstudios { get; set; }
         public DbSet<Asignaturas> Asignaturas { get; set; }
-        public DbSet<Silabo> Silabo { get; set; }
-        public DbSet<PlanFuncionamiento> PlanFuncionamientos { get; set; }
-        public DbSet<Docente> Docentes { get; set; }
-        public DbSet<Departamento> Departamentos { get; set; }
-        public DbSet<TipoDocente> TipoDocentes { get; set; }
-        public DbSet<SilaboDocente> SilaboDocentes { get; set; }
-        public DbSet<SilaboDivicion> SilaboDivicions { get; set; }
+        public DbSet<Silabos> Silabos { get; set; }
+        public DbSet<PlanFuncionamientos> PlanFuncionamientos { get; set; }
+        public DbSet<Docentes> Docentes { get; set; }
+        public DbSet<Departamentos> Departamentos { get; set; }
+        public DbSet<TipoDocentes> TipoDocentes { get; set; }
+        public DbSet<SilaboDocentes> SilaboDocentes { get; set; }
+        public DbSet<SilaboDivisiones> SilaboDivisiones { get; set; }
         public DbSet<Competencia> Competencias { get; set; }
         public DbSet<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
-        public DbSet<Fase> Fases { get; set; }
-        public DbSet<Unidad> Unidads { get; set; }
-        public DbSet<SilaboFase> SilabosFase { get; set; }
+        public DbSet<Fases> Fases { get; set; }
+        public DbSet<Unidades> Unidades { get; set; }
+        public DbSet<SilaboFases> SilabosFases { get; set; }
         public DbSet<SilaboFaseUnidades> SilaboFaseUnidades { get; set; }
         public DbSet<Saberes> Saberes { get; set; }
         public DbSet<Evidencias>Evidencias { get; set; }
@@ -40,16 +39,17 @@ namespace Silabus.Models
         public DbSet<SilaboCriterios> SilaboCriterios { get; set; }
         public DbSet<Estrategias> Estrategias { get; set; }
         public DbSet<SilaboEstrategias> SilaboEstrategias { get; set; }
-        //public DbSet<Estado> Estado { get; set; }
-        //public DbSet<Parametricas> Parametricas { get; set; }
+        public DbSet<Estado> Estados { get; set; }
+        public DbSet<Parametricas> Parametricas { get; set; }
+        //public DbSet<PlanEstudios> PlanEstudios { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
         
-        public DbSet<PlanFuncionamiento> PlanFuncionamiento { get; set; }
-        public DbSet<PlanEstudio> PlanEstudio { get; set; }
-        public DbSet<SilaboDocente> SilabusDocente { get; set; }
+        //public DbSet<PlanFuncionamientos> PlanFuncionamientos { get; set; }
+        
+        //public DbSet<SilaboDocentes> SilaboDocentes { get; set; }
         
     }
 }

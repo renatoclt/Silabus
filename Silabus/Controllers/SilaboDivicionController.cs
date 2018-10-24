@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Silabus.Controllers
 {
-    public class SilaboDivicionController : Controller
+    public class SilaboDivisionController : Controller
     {
         private const string sumilla = "_sumilla";
         private const string competencia = "_competencia";
@@ -16,21 +16,21 @@ namespace Silabus.Controllers
         private const string evaluacion = "_competencia";
 
         private SilaboRepositorio _repo;
-        public SilaboDivicionController()
+        public SilaboDivisionController()
         {
             _repo = new SilaboRepositorio();
         }
-        // GET: SilaboDivicion
+        // GET: SilaboDivisiones
         public ActionResult Index(int id=1)
         {
-            List<SilaboDivicion> model = _repo.ObtenerDiviciones(id);
+            List<SilaboDivisiones> model = _repo.ObtenerDivisiones(id);
             var fase = _repo.ObtenerFases();
             var saberes = _repo.ObtenerSaberes();
-            model.ForEach(divicion =>
+            model.ForEach(Divisiones =>
             {
-                divicion.Silabo.Asignaturas.Fase = fase;
-                divicion.Silabo.Asignaturas.Unidads = _repo.ObtenerUnidades(divicion.Silabo.Asignaturas.Id);
-                foreach(var div in divicion.Silabo.SilaboFases)
+                Divisiones.Silabos.Asignaturas.Fases = fase;
+                Divisiones.Silabos.Asignaturas.Unidads = _repo.ObtenerUnidades(Divisiones.Silabos.Asignaturas.Id);
+                foreach(var div in Divisiones.Silabos.SilaboFases)
                 {
                     div.Saberes = saberes;
                 }
@@ -39,19 +39,19 @@ namespace Silabus.Controllers
         }
 
 
-        // GET: SilaboDivicion/Details/5
+        // GET: SilaboDivisiones/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: SilaboDivicion/Create
+        // GET: SilaboDivisiones/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: SilaboDivicion/Create
+        // POST: SilaboDivisiones/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -67,7 +67,7 @@ namespace Silabus.Controllers
             }
         }
 
-        // GET: SilaboDivicion/Edit/5
+        // GET: SilaboDivisiones/Edit/5
 
         public ActionResult Edit(int id)
         {
@@ -76,13 +76,13 @@ namespace Silabus.Controllers
 
 
         [HttpPost]
-        public ActionResult EditOk(SilaboDivicion silaboDivicion)
+        public ActionResult EditOk(SilaboDivisiones silaboDivision)
         {
-            //silaboDivicion.Divicion = _repo.GetDivicion(silaboDivicion.IdDivicion);
-            //silaboDivicion.Silabo = _repo.GetSilabo(silaboDivicion.IdSilabo);
-            //this.GuardarSilaboDivicion(silaboDivicion);
-            //_repo.EditarDivicionCancel(id);
-            _repo.EditarDivicionOk(silaboDivicion.IdDivicion);
+            //silaboDivision.Divisiones = _repo.GetDivision(silaboDivision.IdDivision);
+            //silaboDivision.Silabos = _repo.GetSilabo(silaboDivision.IdSilabo);
+            //this.GuardarSilaboDivision(silaboDivision);
+            //_repo.EditarDivisionCancel(id);
+            _repo.EditarDivisionOk(silaboDivision.IdDivision);
             return RedirectToAction("Index"); ;
         }
 
@@ -93,18 +93,18 @@ namespace Silabus.Controllers
         //    return RedirectToAction("Index"); ;
         //}
         //[HttpPost]
-        //public ActionResult EditOk(SilaboDivicion silaboDivicion)
+        //public ActionResult EditOk(SilaboDivisiones silaboDivision)
         //{
 
         //    return RedirectToAction("Index"); ;
         //}
-        private bool GuardarSilaboDivicion(SilaboDivicion silaboDivicion)
+        private bool GuardarSilaboDivision(SilaboDivisiones silaboDivision)
         {
-            switch (silaboDivicion.Divicion.Vista)
+            switch (silaboDivision.Divisiones.Vista)
             {
                 case sumilla:
                     {
-                        this._repo.GuardarUnidades(silaboDivicion.Silabo);
+                        this._repo.GuardarUnidades(silaboDivision.Silabos);
                         return true;
                     }
                 default:
@@ -112,10 +112,10 @@ namespace Silabus.Controllers
             }
         }
 
-        // GET: SilaboDivicion/Edit/5
+        // GET: SilaboDivisiones/Edit/5
         //public ActionResult EditCancel(int id)
 
-        // POST: SilaboDivicion/Edit/5
+        // POST: SilaboDivisiones/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -131,13 +131,13 @@ namespace Silabus.Controllers
             }
         }
 
-        // GET: SilaboDivicion/Delete/5
+        // GET: SilaboDivisiones/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: SilaboDivicion/Delete/5
+        // POST: SilaboDivisiones/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

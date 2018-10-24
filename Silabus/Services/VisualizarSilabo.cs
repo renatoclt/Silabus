@@ -45,29 +45,29 @@ namespace Silabus.Services
                                select se.Auxiliar02.Value;
                 semes = Int32.Parse(semestre.First().ToString());
 
-                var model = from sildoc in db.SilabusDocente
-                            join docente in db.Docente on sildoc.IdDocente equals docente.Id
-                            join silabus in db.Silabus on sildoc.IdSilabus equals silabus.Id
-                            join curso in db.Asignaturas on silabus.IdAsignaturas equals curso.Id
-                            join planEst in db.PlanEstudio on curso.IdPlanEstudio equals planEst.Id
-                            join escuela in db.Escuela on planEst.IdEscuela equals escuela.Id
-                            join estado in db.Estado on silabus.IdEstado equals estado.Id
-                            where docente.estado == (int)VariablesGlobales.estadoHabilitado && docente.IdTipoDocente == (int)VariablesGlobales.tipoDocente && (codigoDocente==""  || docente.codigo.Contains(codigoDocente.ToUpper())) &&
-                                  (docente.Nombres + " " + docente.apellidoPaterno + " " + docente.apellidoMaterno).ToUpper().Contains(nombreDocente.ToUpper()) &&
+                var model = from sildoc in db.SilaboDocentes
+                            join docente in db.Docentes on sildoc.IdDocente equals docente.Id
+                            join silabus in db.Silabos on sildoc.IdSilabo equals silabus.Id
+                            join curso in db.Asignaturas on silabus.IdAsignatura equals curso.Id
+                            join planEst in db.PlanEstudios on curso.IdPlanEstudio equals planEst.Id
+                            join escuela in db.Escuelas on planEst.IdEscuela equals escuela.Id
+                            join estado in db.Estados on silabus.IdEstado equals estado.Id
+                            where docente.Estado == (int)VariablesGlobales.estadoHabilitado && docente.IdTipoDocentes == (int)VariablesGlobales.tipoDocente && (codigoDocente==""  || docente.Codigo.Contains(codigoDocente.ToUpper())) &&
+                                  (docente.Nombres + " " + docente.ApellidoPaterno + " " + docente.ApellidoMaterno).ToUpper().Contains(nombreDocente.ToUpper()) &&
                                   //silabus.estado == estadoHabilitado && 
-                                  curso.estado == (int)VariablesGlobales.estadoHabilitado && (nombreCurso == "" || curso.Nombres.Contains(nombreCurso.ToUpper())) && (semes == 0 || curso.semestre.Equals(semes)) &&
-                                  planEst.estado == (int)VariablesGlobales.estadoHabilitado &&
-                                  escuela.estado == (int)VariablesGlobales.estadoHabilitado && (escuelaProfesional == "" || escuela.nombre.Contains(escuelaProfesional.ToUpper())) &&
+                                  curso.Estado == (int)VariablesGlobales.estadoHabilitado && (nombreCurso == "" || curso.Nombre.Contains(nombreCurso.ToUpper())) && (semes == 0 || curso.Semestre.Equals(semes)) &&
+                                  planEst.Estado == (int)VariablesGlobales.estadoHabilitado &&
+                                  escuela.Estado == (int)VariablesGlobales.estadoHabilitado && (escuelaProfesional == "" || escuela.Nombre.Contains(escuelaProfesional.ToUpper())) &&
                                   estado.estado == (int)VariablesGlobales.estadoHabilitado
                             select new VisualizarSilabo
                             {
                                 codigoEscuela = escuela.Id,
-                                escuelaProfesional = escuela.nombre,
+                                escuelaProfesional = escuela.Nombre,
                                 codigoCurso = curso.Id,
-                                nombreCurso = curso.Nombres,
+                                nombreCurso = curso.Nombre,
                                 codigoDocente = docente.Id,
-                                nombreDocente = docente.Nombres + " " + docente.apellidoPaterno + " " + docente.apellidoMaterno,
-                                semestre = curso.semestre,
+                                nombreDocente = docente.Nombres + " " + docente.ApellidoPaterno + " " + docente.ApellidoMaterno,
+                                semestre = curso.Semestre,
                                 codigoEstado = estado.Id,
                                 estado = estado.descripcion,
                             };
@@ -161,7 +161,7 @@ namespace Silabus.Services
             {
 
                 ListaEstado = new List<SelectListItem>();
-                var Estados = from estado in db.Estado
+                var Estados = from estado in db.Estados
                               where estado.estado == (int)VariablesGlobales.estadoHabilitado
                               select estado;
 

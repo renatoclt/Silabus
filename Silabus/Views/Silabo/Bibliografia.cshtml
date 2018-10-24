@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Bibliografia";
+    ViewBag.Title = "Bibliografias";
     Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
 }
 
@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var libro in ViewBag.Bibliografia.Libros)
+        @foreach (var libro in ViewBag.Bibliografias.Libros)
         {
             <tr>
                 <td>@libro.Autor</td>

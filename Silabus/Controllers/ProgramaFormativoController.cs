@@ -19,13 +19,13 @@ namespace Silabus.Controllers
 
         public ActionResult ProgramaFormativo(int id = 1)
         {
-            Silabo silabo = _repo.ObtenerSilabo(id);
+            Silabos silabo = _repo.ObtenerSilabo(id);
             return View(silabo);
         }
 
-        public ActionResult CambiarFase(Silabo silaboTem)
+        public ActionResult CambiarFase(Silabos silaboTem)
         {
-            Silabo silabo = _repo.ObtenerSilabo(silaboTem.Id);
+            Silabos silabo = _repo.ObtenerSilabo(silaboTem.Id);
             silabo.SelectedSilaboFase = silaboTem.SelectedSilaboFase;
             return View("ProgramaFormativo", silabo);
         }

@@ -1,10 +1,10 @@
-﻿@model Silabus.Models.SilaboDivicion
+﻿@model Silabus.Models.SilaboDivisiones
 
 
-@if (Model.Divicion.Estado == 1)
+@if (Model.Divisiones.Estado == 1)
 {
     <ul>
-        @foreach (var competencia in Model.Silabo.Asignaturas.AsignaturaCompetencias)
+        @foreach (var competencia in Model.Silabos.Asignaturas.AsignaturaCompetencias)
         {
             <li>@competencia.Competencia.Descripcion</li>
         }
@@ -15,12 +15,12 @@
 else
 {
     <ul>
-        @*@foreach (var competencia in Model.Silabo.Asignaturas.AsignaturaCompetencias)
+        @*@foreach (var competencia in Model.Silabos.Asignaturas.AsignaturaCompetencias)
         {
         <li>
             @competencia.Competencia.Descripcion
             <select>
-            @foreach (var fase in Model.Silabo.Asignaturas.Fase)
+            @foreach (var fase in Model.Silabos.Asignaturas.Fases)
             {
                 <option>@fase.Nombre</option>
             }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Silabus.Models.SilaboDocente>
+﻿@model IEnumerable<Silabus.Models.SilaboDocentes>
 
 @{
     Layout = null;
@@ -16,13 +16,13 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Silabo.Asignaturas.Codigo)
+                @Html.DisplayNameFor(model => model.Silabos.Asignaturas.Codigo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Silabo.Asignaturas.Nombre)
+                @Html.DisplayNameFor(model => model.Silabos.Asignaturas.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Silabo.Sumilla)
+                @Html.DisplayNameFor(model => model.Silabos.Sumilla)
             </th>
             <th></th>
         </tr>
@@ -30,16 +30,16 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Silabo.Asignaturas.Codigo)
+                @Html.DisplayFor(modelItem => item.Silabos.Asignaturas.Codigo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Silabo.Asignaturas.Nombre)
+                @Html.DisplayFor(modelItem => item.Silabos.Asignaturas.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Silabo.Sumilla)
+                @Html.DisplayFor(modelItem => item.Silabos.Sumilla)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id= item.Silabo.Id }) 
+                @Html.ActionLink("Edit", "Edit", new { id= item.Silabos.Id }) 
             </td>
         </tr>
     }

@@ -15,11 +15,11 @@ namespace Silabus.Models
         public virtual Asignaturas Asignaturas { get; set; }
         public int IdSilaboFase { get; set; }
         [ForeignKey("IdSilaboFase")]
-        public virtual SilaboFase SilaboFase { get; set; }
+        public virtual SilaboFases SilaboFases { get; set; }
         public String UsuarioCreacion { get; set; }
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public DateTime FechaModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
         public AsignaturaCompetencias()
         {
             this.Competencia = new Competencia();

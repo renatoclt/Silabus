@@ -11,7 +11,7 @@ namespace Silabus.Models
         public int Id { get; set; }
         public int IdEscuelas {get; set;}
         [ForeignKey("IdEscuelas")]
-        public virtual Escuela Escuela { get; set; }
+        public virtual Escuelas Escuelas { get; set; }
         public String Descripcion { get; set; }
         public String Estado { get; set; }
         public String UsuarioCreacion { get; set; }
@@ -20,7 +20,7 @@ namespace Silabus.Models
         public DateTime FechaModificacion { get; set; }
         public Competencia()
         {
-            this.Escuela = new Escuela();
+            this.Escuelas = new Escuelas();
         }
     }
 }

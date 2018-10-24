@@ -6,15 +6,15 @@ using System.Web;
 
 namespace Silabus.Models
 {
-    public class Divicion
+    public class Divisiones
     {
         public int Id { get; set; }
         public String Titulo { get; set; }
         public int Estado { get; set; }
         public DateTime FechaModificacion { get; set; }
-        public String Docente { get; set; }
+        public String Docentes { get; set; }
         public String Vista { get; set; }
-        public Divicion()
+        public Divisiones()
         {
         }
     }

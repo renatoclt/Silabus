@@ -1,4 +1,4 @@
-﻿@model List<Silabus.Models.SilaboDivicion>
+﻿@model List<Silabus.Models.SilaboDivisiones>
 
 @{
     ViewBag.Title = "Index";
@@ -6,22 +6,22 @@
 }
 
 <<<<<<< HEAD
-@*@using (Html.BeginForm("EditOk", "SilaboDivicion", FormMethod.Post)) {*@
-@*@using (Html.BeginForm("EditOk", "SilaboDivicion", FormMethod.Post))
+@*@using (Html.BeginForm("EditOk", "SilaboDivisiones", FormMethod.Post)) {*@
+@*@using (Html.BeginForm("EditOk", "SilaboDivisiones", FormMethod.Post))
 {*@
     @for (int i = 0; i < Model.Count; i++)
     {
-        @Html.Hidden("SilaboDivicion.Index", @i)
-        <button class="accordion">@Html.DisplayFor(modelItem => Model[i].Divicion.Titulo)</button>
-        if (Model[i].Divicion.Estado >= 1)
+        @Html.Hidden("SilaboDivisiones.Index", @i)
+        <button class="accordion">@Html.DisplayFor(modelItem => Model[i].Divisiones.Titulo)</button>
+        if (Model[i].Divisiones.Estado >= 1)
         {
-            @Html.HiddenFor(m => Model[i].Divicion.Vista);
+            @Html.HiddenFor(m => Model[i].Divisiones.Vista);
             <div class="container-fluid">
                 <div class="row">
-                    @if (Model[i].Divicion.Estado == 1)
+                    @if (Model[i].Divisiones.Estado == 1)
                     {
                         <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("Edit",
-                            new { id = Model[i].IdDivicion })'">
+                            new { id = Model[i].IdDivision })'">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
 
@@ -32,14 +32,14 @@
                             @*<button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditOk", Model[i])'">
                                 <span class="glyphicon glyphicon-ok"></span>
                             </button>*@
-                            @*<button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditOk", new { silaboDivicion = Model[i] })'">
+                            @*<button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditOk", new { silaboDivision = Model[i] })'">
                                 <span class="glyphicon glyphicon-ok"></span>
                             </button>*@
                             <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditOk",
-                                    new { Id = Model[i].Id, idSilabo = Model[i].Silabo.Id , sumilla = Model[i].Silabo.Sumilla.ToString()})'">
+                                    new { Id = Model[i].Id, idSilabo = Model[i].Silabos.Id , sumilla = Model[i].Silabos.Sumilla.ToString()})'">
                                     <span class="glyphicon glyphicon-ok"></span>
                                 </button>
-                            <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel",new { id = Model[i].IdDivicion })'">
+                            <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel",new { id = Model[i].IdDivision })'">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        @Html.Partial(Model[i].Divicion.Vista, Model[i])
+                        @Html.Partial(Model[i].Divisiones.Vista, Model[i])
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
         else
         {
             <div class="panel">
-                @Html.Partial(Model[i].Divicion.Vista, Model[i])
+                @Html.Partial(Model[i].Divisiones.Vista, Model[i])
             </div>
         }
     }
@@ -81,7 +81,7 @@
             @Html.DisplayNameFor(model => model.FechaModificacion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Docente)
+            @Html.DisplayNameFor(model => model.Docentes)
         </th>
         <th></th>
     </tr>
@@ -98,7 +98,7 @@
             @Html.DisplayFor(modelItem => item.FechaModificacion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Docente)
+            @Html.DisplayFor(modelItem => item.Docentes)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

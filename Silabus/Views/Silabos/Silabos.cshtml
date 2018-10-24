@@ -1,4 +1,4 @@
-﻿@model Silabus.Models.Silabo
+﻿@model Silabus.Models.Silabos
 
 @{
     ViewBag.Title = "Programa Formativo";
@@ -23,11 +23,11 @@
         <tbody>
             <tr>
                 <td><label class="titulo">FACULTAD:</label></td>
-                <td><label class="respuesta">@Html.DisplayFor(model => model.Asignaturas.PlanEstudio.Escuela.Facultads.Nombre)</label></td>
+                <td><label class="respuesta">@Html.DisplayFor(model => model.Asignaturas.PlanEstudios.Escuelas.Facultads.Nombre)</label></td>
             </tr>
             <tr>
                 <td><span class="titulo">ESCUELA:</span></td>
-                <td><span class="respuesta">@Html.DisplayFor(model => model.Asignaturas.PlanEstudio.Escuela.Nombre)</span></td>
+                <td><span class="respuesta">@Html.DisplayFor(model => model.Asignaturas.PlanEstudios.Escuelas.Nombre)</span></td>
             </tr>
         </tbody>
     </table>
@@ -41,7 +41,7 @@
                 <td colspan="9" class="tituloRow">SÍLABO DE ASIGNATURA </td>
             </tr>
             <tr>
-                <td colspan="9" class="divicion">1. IDENTIFICACIÓN ACADÉMICA </td>
+                <td colspan="9" class="Divisiones">1. IDENTIFICACIÓN ACADÉMICA </td>
             </tr>
             <tr>
                 <td colspan="8" class="sinRowSpan">Nombre de la Asignatura: @Html.DisplayFor(model => model.Asignaturas.Nombre) </td>
@@ -55,7 +55,7 @@
                 <td colspan="8" class="sinRowSpanF">Semestre Académico en que se desarrolla: @Html.DisplayFor(model => model.Asignaturas.Semestre) </td>
             </tr>
             <tr>
-                <td colspan="8" class="divicionDos">1.2.-Peso Académico de la Asignatura.</td>
+                <td colspan="8" class="DivisionDos">1.2.-Peso Académico de la Asignatura.</td>
                 <td rowspan="5" class="rowSpan">
                     Cada semestre académico comprende dieciocho  semanas.
                     (Resolución Nº 3535-CU07)
@@ -93,10 +93,10 @@
 </div>
 <button class="accordion">SUMILLA</button>
 <div class="container-fluid">
-    @if (Model.SilaboDiviciones.Where(sd => sd.Divicion.Id.Equals(Silabus.utils.Constantes.IDSUMILLA)).FirstOrDefault().Divicion.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
+    @if (Model.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Silabus.utils.Constantes.IDSUMILLA)).FirstOrDefault().Divisiones.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
     {
         <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("Edit",new {id = Model.Id ,
-                idDivicion = Model.SilaboDiviciones.Where(sd => sd.IdDivicion.Equals(Silabus.utils.Constantes.IDSUMILLA)).FirstOrDefault().Divicion.Id})'">
+                idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDSUMILLA)).FirstOrDefault().Divisiones.Id})'">
             <span class="glyphicon glyphicon-pencil"></span>
         </button>
         <div>
@@ -112,7 +112,7 @@
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
                 <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel",
-                                new { id = Model.Id , idDivicion = Model.SilaboDiviciones.Where(sd => sd.IdDivicion.Equals(Silabus.utils.Constantes.IDSUMILLA)).FirstOrDefault().Divicion.Id})'">
+                                new { id = Model.Id , idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDSUMILLA)).FirstOrDefault().Divisiones.Id})'">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
@@ -125,10 +125,10 @@
 </div>
 <button class="accordion">COMPETENCIAS DE LA ASIGNATURA QUE APOYAN AL PERFIL DE EGRESO  </button>
 <div class="container-fluid">
-    @if (Model.SilaboDiviciones.Where(sd => sd.Divicion.Id.Equals(Silabus.utils.Constantes.IDCOMPETENCIAS)).FirstOrDefault().Divicion.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
+    @if (Model.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Silabus.utils.Constantes.IDCOMPETENCIAS)).FirstOrDefault().Divisiones.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
     {
         <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("Edit",new {id = Model.Id ,
-                idDivicion = Model.SilaboDiviciones.Where(sd => sd.IdDivicion.Equals(Silabus.utils.Constantes.IDCOMPETENCIAS)).FirstOrDefault().Divicion.Id})'">
+                idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDCOMPETENCIAS)).FirstOrDefault().Divisiones.Id})'">
             <span class="glyphicon glyphicon-pencil"></span>
         </button>
         <div>
@@ -156,7 +156,7 @@
                                     {
                                         if (asignaturaCompetencia.Competencia.Id.Equals(element.IdCompetencia))
                                         {
-                                            @Html.DisplayFor(m => m.SilaboFases.Where(f => f.Equals(fase)).FirstOrDefault().Fase.Nombre)
+                                            @Html.DisplayFor(m => m.SilaboFases.Where(f => f.Equals(fase)).FirstOrDefault().Fases.Nombre)
                                             <br />
                                         }
                                     }
@@ -179,7 +179,7 @@
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
                 <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel",
-                                new { id = Model.Id , idDivicion = Model.SilaboDiviciones.Where(sd => sd.IdDivicion.Equals(Silabus.utils.Constantes.IDCOMPETENCIAS)).FirstOrDefault().Divicion.Id})'">
+                                new { id = Model.Id , idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDCOMPETENCIAS)).FirstOrDefault().Divisiones.Id})'">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
@@ -209,13 +209,13 @@
                                             if (asignaturaCompetencia.Competencia.Id.Equals(element.IdCompetencia))
                                             {
 
-                                                @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fase.Nombre") as SelectList, "Seleccione Fase")
+                                                @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre") as SelectList, "Seleccione Fases")
                                                 <br />
                                             }
                                         }
 
                                     }
-                                    @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fase.Nombre"), "Seleccione Fase");
+                                    @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre"), "Seleccione Fases");
                                 </td>
                             </tr>
                         }
@@ -228,19 +228,19 @@
 <button class="accordion"> CONTENIDOS BÁSICOS POR UNIDADES DE APRENDIZAJE </button>
 <div class="container-fluid">
     <div class="container-fluid">
-    @if (Model.SilaboDiviciones.Where(sd => sd.Divicion.Id.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divicion.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
+    @if (Model.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
     {
         <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("Edit",new {id = Model.Id ,
-                idDivicion = Model.SilaboDiviciones.Where(sd => sd.IdDivicion.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divicion.Id})'">
+                idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Id})'">
             <span class="glyphicon glyphicon-pencil"></span>
         </button>
         <table class="table table-bordered" >
             <thead>
                 <tr>
-                    <th class="tituloRow">Unidad</th>
-                    <th class="tituloRow">Sub-Unidad</th>
+                    <th class="tituloRow">Unidades</th>
+                    <th class="tituloRow">Sub-Unidades</th>
                     <th class="tituloRow">Descripción</th>
-                    <th class="tituloRow">Fase</th>
+                    <th class="tituloRow">Fases</th>
                 </tr>
             </thead>
             <tbody>
@@ -250,7 +250,7 @@
                     <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().UnidadI)</td>
                     <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SubUnidad)</td>
                     <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().Nombre)</td>
-                    <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SilaboFase.Fase.Nombre)</td>
+                    <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SilaboFases.Fases.Nombre)</td>
                 </tr>
               }  
                 </tbody>
@@ -266,17 +266,17 @@
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
                 <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel",
-                                new { id = Model.Id , idDivicion = Model.SilaboDiviciones.Where(sd => sd.IdDivicion.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divicion.Id})'">
+                                new { id = Model.Id , idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Id})'">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
             <table class="table table-bordered" >
             <thead>
                 <tr>
-                    <th class="tituloRow">Unidad</th>
-                    <th class="tituloRow">Sub-Unidad</th>
+                    <th class="tituloRow">Unidades</th>
+                    <th class="tituloRow">Sub-Unidades</th>
                     <th class="tituloRow">Descripción</th>
-                    <th class="tituloRow">Fase</th>
+                    <th class="tituloRow">Fases</th>
                     <th class="tituloRow">Acción</th>
                 </tr>
             </thead>
@@ -288,9 +288,9 @@
                     </td>
                     <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SubUnidad)</td>
                     <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().Nombre)</td>
-                    <td> @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fase.Nombre") as SelectList, "Seleccione Fase")</td>
+                    <td> @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre") as SelectList, "Seleccione Fases")</td>
                     <td>
-                        <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadSubir", "Silabo",new { accion = 1 })'" )'">
+                        <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadSubir", "Silabos",new { accion = 1 })'" )'">
                             <span class="glyphicon glyphicon-hand-up"></span>
                         </button>
                         <button type="button" class="btn btn-default btn-sm" onclick="UnidadDown()">
@@ -311,35 +311,35 @@
 </div>
 <button class="accordion">EVALUACIÓN DE COMPETENCIAS ADQUIRIDAS  </button>
 <div class="container-fluid">
-    @if (Model.SilaboDiviciones.Where(sd => sd.Divicion.Id.Equals(Silabus.utils.Constantes.IDEVALUACION)).FirstOrDefault().Divicion.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
+    @if (Model.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Silabus.utils.Constantes.IDEVALUACION)).FirstOrDefault().Divisiones.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
      {
         <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("Edit",new {id = Model.Id ,
-                idDivicion = Model.SilaboDiviciones.Where(sd => sd.IdDivicion.Equals(Silabus.utils.Constantes.IDEVALUACION)).FirstOrDefault().Divicion.Id})'">
+                idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDEVALUACION)).FirstOrDefault().Divisiones.Id})'">
             <span class="glyphicon glyphicon-pencil"></span>
         </button>
         <div>
             @using (Html.BeginForm("CambiarFaseEvaluacion", "Silabos", FormMethod.Post))
             {
-                 @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fase.Nombre"), "Seleccione Fase", new { @onchange = "this.form.submit()" })
+                 @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre"), "Seleccione Fases", new { @onchange = "this.form.submit()" })
                 @Html.HiddenFor(m => m.Id)
             }
-            @if (Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault() != null)
+            @if (Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault() != null)
             {
                 <div class="form-group">
                     <label>Titulo</label> <br /> 
-                    @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id == model.SelectedSilaboFase).FirstOrDefault().Titulo)
+                    @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id == model.SelectedSilaboFase).FirstOrDefault().Titulo)
                 </div>
                 <div class="form-group">
                     <label>Saber Conceptual</label><br />
-                    @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERCONCEPTUAL)).FirstOrDefault().Descripcion)
+                    @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERCONCEPTUAL)).FirstOrDefault().Descripcion)
                 </div>
                 <div class="form-group">
                     <label>Saber Procedimental</label><br />
-                    @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERPROCEDIMENTAL)).FirstOrDefault().Descripcion)
+                    @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERPROCEDIMENTAL)).FirstOrDefault().Descripcion)
                 </div>
                 <div class="form-group">
                     <label>Saber actitudinal</label><br />
-                    @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERACTITUDINAL)).FirstOrDefault().Descripcion)
+                    @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERACTITUDINAL)).FirstOrDefault().Descripcion)
                 </div>
                 <div class="form-group">
                     <label>Estrategias</label>
@@ -351,13 +351,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
+                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
                             {
-                                foreach(var estrategias in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias)
+                                foreach(var estrategias in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias)
                                 {
                                 <tr>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias.Where(se => se.Equals(estrategias)).FirstOrDefault().Estrategia.Nombre)</td>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias.Where(se => se.Equals(estrategias)).FirstOrDefault().Estrategia.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
                                 </tr>
                                 }
                             }
@@ -375,13 +375,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
+                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
                             {
-                                foreach(var evidencias in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias)
+                                foreach(var evidencias in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias)
                                 {
                                 <tr>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias.Where(se => se.Equals(evidencias)).FirstOrDefault().Evidencias.Nombre)</td>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias.Where(se => se.Equals(evidencias)).FirstOrDefault().Evidencias.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
                                 </tr>
                                 }
                             }
@@ -400,15 +400,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                             @foreach (var element in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
+                             @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
                             {
-                                foreach(var criterios in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios)
+                                foreach(var criterios in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios)
                                 {
                                 <tr>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios.Where(se => se.Equals(criterios)).FirstOrDefault().Criterios.Nombre)</td>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorTeorico)</td>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorPractico)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios.Where(se => se.Equals(criterios)).FirstOrDefault().Criterios.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorTeorico)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorPractico)</td>
                                 </tr>
                                 }
                             }
@@ -427,33 +427,33 @@
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
                 <button class="col-md-offset-11 btn btn-default btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel",
-                                new { id = Model.Id , idDivicion = Model.SilaboDiviciones.Where(sd => sd.IdDivicion.Equals(Silabus.utils.Constantes.IDEVALUACION)).FirstOrDefault().Divicion.Id})'">
+                                new { id = Model.Id , idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDEVALUACION)).FirstOrDefault().Divisiones.Id})'">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
             <div>
             @using (Html.BeginForm("CambiarFaseEvaluacion", "Silabos", FormMethod.Post))
             {
-                 @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fase.Nombre"), "Seleccione Fase", new { @onchange = "this.form.submit()" })
+                 @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre"), "Seleccione Fases", new { @onchange = "this.form.submit()" })
                 @Html.HiddenFor(m => m.Id)
             }
-            @if (Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault() != null)
+            @if (Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault() != null)
             {
                 <div class="form-group">
                     <label>Titulo</label> <br /> 
-                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fase.Id == model.SelectedSilaboFase).FirstOrDefault().Titulo)
+                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id == model.SelectedSilaboFase).FirstOrDefault().Titulo)
                 </div>
                 <div class="form-group">
                     <label>Saber Conceptual</label><br />
-                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERCONCEPTUAL)).FirstOrDefault().Descripcion)
+                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERCONCEPTUAL)).FirstOrDefault().Descripcion)
                 </div>
                 <div class="form-group">
                     <label>Saber Procedimental</label><br />
-                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERPROCEDIMENTAL)).FirstOrDefault().Descripcion)
+                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERPROCEDIMENTAL)).FirstOrDefault().Descripcion)
                 </div>
                 <div class="form-group">
                     <label>Saber actitudinal</label><br />
-                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERACTITUDINAL)).FirstOrDefault().Descripcion)
+                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERACTITUDINAL)).FirstOrDefault().Descripcion)
                 </div>
                 <div class="form-group">
                     <label>Estrategias</label>
@@ -465,13 +465,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
+                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
                             {
-                                foreach(var estrategias in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias)
+                                foreach(var estrategias in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias)
                                 {
                                 <tr>
-                                    <td>@Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias.Where(se => se.Equals(estrategias)).FirstOrDefault().Estrategia.Nombre)</td>
-                                    <td>@Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
+                                    <td>@Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias.Where(se => se.Equals(estrategias)).FirstOrDefault().Estrategia.Nombre)</td>
+                                    <td>@Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
                                 </tr>
                                 }
                             }
@@ -489,13 +489,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
+                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
                             {
-                                foreach(var evidencias in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias)
+                                foreach(var evidencias in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias)
                                 {
                                 <tr>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias.Where(se => se.Equals(evidencias)).FirstOrDefault().Evidencias.Nombre)</td>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias.Where(se => se.Equals(evidencias)).FirstOrDefault().Evidencias.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
                                 </tr>
                                 }
                             }
@@ -514,15 +514,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                             @foreach (var element in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
+                             @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
                             {
-                                foreach(var criterios in Model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios)
+                                foreach(var criterios in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios)
                                 {
                                 <tr>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios.Where(se => se.Equals(criterios)).FirstOrDefault().Criterios.Nombre)</td>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorTeorico)</td>
-                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fase.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorPractico)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios.Where(se => se.Equals(criterios)).FirstOrDefault().Criterios.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().Saberes.Nombre)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorTeorico)</td>
+                                    <td>@Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorPractico)</td>
                                 </tr>
                                 }
                             }

@@ -10,42 +10,28 @@ namespace Silabus.Controllers
 {
     public class SilaboController : Controller
     {
-        // GET: Silabo
-        public ActionResult Silabo()
+        // GET: Silabos
+        public ActionResult Silabos()
         {
-            //Divicion[] input = { new Divicion("IDENTIFICACIÓN ACADEMICA ", 0, DateTime.Today , null),
-            //                     new Divicion("SUMILLA",1, DateTime.Today, "nombre Docente"),
-            //                     new Divicion("COMPETENCIAS DE LA ASIGNATURA QUE APOYAN AL EPERFIL DE EGRESO ",0, DateTime.Today, "nombre Docente"),
-            //                     new Divicion("CONTENIDOS BASICOS POR UNIDADES DE APRENDIZAJE",0, DateTime.Today, "nombre Docente"),
-            //                     new Divicion("EVALUACION DE COMPETENCIAS ADQUIRIDAS",1, DateTime.Today, "nombre Docente"),
-            //                     new Divicion("BIBLIOGRAFIA",1, DateTime.Today, "nombre Docente"),};
-            //List<Divicion> diviciones = new List<Divicion>(input);
-            //return View(diviciones);
+            //Divisiones[] input = { new Divisiones("IDENTIFICACIÓN ACADEMICA ", 0, DateTime.Today , null),
+            //                     new Divisiones("SUMILLA",1, DateTime.Today, "nombre Docentes"),
+            //                     new Divisiones("COMPETENCIAS DE LA ASIGNATURA QUE APOYAN AL EPERFIL DE EGRESO ",0, DateTime.Today, "nombre Docentes"),
+            //                     new Divisiones("CONTENIDOS BASICOS POR UNIDADES DE APRENDIZAJE",0, DateTime.Today, "nombre Docentes"),
+            //                     new Divisiones("EVALUACION DE COMPETENCIAS ADQUIRIDAS",1, DateTime.Today, "nombre Docentes"),
+            //                     new Divisiones("Bibliografias",1, DateTime.Today, "nombre Docentes"),};
+            //List<Divisiones> Divisiones = new List<Divisiones>(input);
+            //return View(Divisiones);
             return null;
         }
 
 
-        public ActionResult IdentificacionAcademica()
-        {
-            IdentificacionAcademicaModel identificacionAcademica = new IdentificacionAcademicaModel("CIENCIAS E INGENIERIAS FISICAS Y FORMALES", "INGENIERIA INDUSTRIAL",4,2,2,2,0,36,72,0);
-            ViewBag.IdentificacionAcademica = identificacionAcademica;
-            return View();
-        }
-
-        public ActionResult Sumilla()
-        {
-            Sumilla sumilla = new Sumilla("texto de la sumilla", 0);
-            ViewBag.Sumilla = sumilla;
-            return View();
-        }
-
         public ActionResult Competencia()
         {
-            //List<Fase> fases = new List<Fase>();
-            //fases.Add(new Fase(1, "Fase I"));
-            //fases.Add(new Fase(2, "Fase II"));
-            //fases.Add(new Fase(3, "Fase III"));
-            //fases.Add(new Fase(0, "Ninguna"));
+            //List<Fases> fases = new List<Fases>();
+            //fases.Add(new Fases(1, "Fases I"));
+            //fases.Add(new Fases(2, "Fases II"));
+            //fases.Add(new Fases(3, "Fases III"));
+            //fases.Add(new Fases(0, "Ninguna"));
             //ViewBag.Fases = fases;
             //List<CompetenciaCurso> competencias = new List<CompetenciaCurso>();
             //competencias.Add(new CompetenciaCurso(1, "competencia 1", 1));
@@ -55,7 +41,7 @@ namespace Silabus.Controllers
             //ViewBag.Competencia = competencia;
             return View();
         }
-        public ActionResult Unidad(int accion = 0, Unidad unidadTem = null)
+        public ActionResult Unidades(int accion = 0, Unidades unidadTem = null)
         {
             //List<UnidadCurso> unidadesCurso = new List<UnidadCurso>();
             //unidadesCurso.Add(new UnidadCurso(1, 0, "Estudio del Trabajo "));
@@ -64,20 +50,20 @@ namespace Silabus.Controllers
             //unidadesCurso.Add(new UnidadCurso(2, 0, "Estudio del Trabajo "));
             //unidadesCurso.Add(new UnidadCurso(2, 3, "Estudio del Trabajo 3"));
             //unidadesCurso.Add(new UnidadCurso(2, 2, "Estudio del Trabajo 4"));
-            //Unidad unidades = new Unidad(0, unidadesCurso);
+            //Unidades unidades = new Unidades(0, unidadesCurso);
             //if (accion == 1)
             //{
             //    unidades.SortList(unidadTem);
             //}
-            //ViewBag.Unidad = unidades;
+            //ViewBag.Unidades = unidades;
             return View();
         }
-        public ActionResult Bibliografia(int accion = 0, Unidad unidadTem = null)
+        public ActionResult Bibliografias(int accion = 0, Unidades unidadTem = null)
         {
             List<Libros> libros = new List<Libros>();
             libros.Add(new Libros("Pepito", "libro algebra", "planeta", "2018", "Peru"));
-            Bibliografia bibliografia = new Bibliografia(0, libros);
-            ViewBag.Bibliografia = bibliografia;
+            Bibliografiass Bibliografias = new Bibliografiass(0, libros);
+            ViewBag.Bibliografias = Bibliografias;
             return View();
         }
     }

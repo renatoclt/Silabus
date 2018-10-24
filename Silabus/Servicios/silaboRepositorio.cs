@@ -15,37 +15,37 @@ namespace Silabus.Servicios
             this.estadoActivo = 1;
         }
 
-        public List<SilaboDivicion> ObtenerDiviciones(int idSilabo)
+        public List<SilaboDivisiones> ObtenerDivisiones(int idSilabo)
         {
             using (var db = new SilaboContext())
             {
-                var silaboDivicions = db.SilaboDivicions.Where(s => s.Silabo.Id == idSilabo).Include(s => s.Divicion)
-                    .Include(s => s.Silabo.Asignaturas.PlanEstudio.Escuela.Facultads)
-                    .Include(s => s.Silabo.SilaboFases)
-                    .Include("Silabo.SilaboFases.Fase")
-                    .Include("Silabo.SilaboFases.SilaboFasesSaberes")
-                    .Include("Silabo.SilaboFases.SilaboFaseUnidades")
-                    .Include("Silabo.Asignaturas.AsignaturaCompetencias")
-                    .Include("Silabo.Asignaturas.AsignaturaCompetencias.Competencia");
-                return silaboDivicions.ToList();
+                var silaboDivisions = db.SilaboDivisiones.Where(s => s.Silabos.Id == idSilabo).Include(s => s.Divisiones)
+                    .Include(s => s.Silabos.Asignaturas.PlanEstudios.Escuelas.Facultads)
+                    .Include(s => s.Silabos.SilaboFases)
+                    .Include("Silabos.SilaboFases.Fases")
+                    .Include("Silabos.SilaboFases.SilaboFasesSaberes")
+                    .Include("Silabos.SilaboFases.SilaboFaseUnidades")
+                    .Include("Silabos.Asignaturas.AsignaturaCompetencias")
+                    .Include("Silabos.Asignaturas.AsignaturaCompetencias.Competencia");
+                return silaboDivisions.ToList();
             }
         }
 
-        internal Silabo ObtenerSilabo(int id)
+        internal Silabos ObtenerSilabo(int id)
         {
             using (var db = new SilaboContext())
             {
-                var silabo = db.Silabo.Where(s => s.Id == id)
-                    .Include(s => s.SilaboDiviciones.Select(sd => sd.Divicion))
-                    .Include(s => s.Asignaturas.PlanEstudio.Escuela.Facultads)
-                    .Include(s => s.Asignaturas.Departamento)
+                var silabo = db.Silabos.Where(s => s.Id == id)
+                    .Include(s => s.SilaboDivisiones.Select(sd => sd.Divisiones))
+                    .Include(s => s.Asignaturas.PlanEstudios.Escuelas.Facultads)
+                    .Include(s => s.Asignaturas.Departamentos)
                     .Include(s => s.Asignaturas.Unidads.Select(u => u.SilaboFaseUnidades))
-                    .Include(s => s.SilaboDocentes.Select(sd => sd.Docente.TipoDocente))
+                    .Include(s => s.SilaboDocentes.Select(sd => sd.Docentes.TipoDocentes))
                     .Include(s => s.Asignaturas.AsignaturaCompetencias.Select(a => a.Competencia))
-                    .Include(s => s.SilaboFases.Select(sf => sf.Fase))
+                    .Include(s => s.SilaboFases.Select(sf => sf.Fases))
                     .Include(s => s.SilaboFases.Select(sf => sf.AsignaturaCompetencias.Select(ac => ac.Competencia)))
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.Saberes)))
-                    .Include(s => s.SilaboFases.Select(sf => sf.SilaboFaseUnidades.Select(sfu => sfu.Unidad)))
+                    .Include(s => s.SilaboFases.Select(sf => sf.SilaboFaseUnidades.Select(sfu => sfu.Unidades)))
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboCriterios.Select(se => se.Criterios))))
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboEvidencias.Select(se => se.Evidencias))))
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboEstrategias.Select(se => se.Estrategia))));
@@ -54,7 +54,7 @@ namespace Silabus.Servicios
             
         }
 
-        public List<Fase> ObtenerFases()
+        public List<Fases> ObtenerFases()
         {
            using (var db = new SilaboContext())
             {
@@ -63,11 +63,11 @@ namespace Silabus.Servicios
             }
         }
 
-        public List<Unidad> ObtenerUnidades(int id)
+        public List<Unidades> ObtenerUnidades(int id)
         {
             using (var db = new SilaboContext())
             {
-                var unidades = db.Unidads.Where(u => u.Estado == this.estadoActivo).Where(u=> u.IdAsignatura == id);
+                var unidades = db.Unidades.Where(u => u.Estado == this.estadoActivo).Where(u=> u.IdAsignatura == id);
                 return unidades.ToList();
             }
         }
@@ -80,39 +80,39 @@ namespace Silabus.Servicios
             }
         }
 
-        public Divicion GetDivicion(int id)
+        public Divisiones GetDivision(int id)
         {
             using (var db = new SilaboContext())
             {
-                return db.Diviciones.Where(d => d.Id == id).FirstOrDefault();
+                return db.Divisiones.Where(d => d.Id == id).FirstOrDefault();
 
             }
         }
         
-        public Silabo GetSilabo(int id)
+        public Silabos GetSilabo(int id)
         {
             using (var db = new SilaboContext())
             {
-                return db.Silabo.Where(s => s.Id == id).FirstOrDefault();
+                return db.Silabos.Where(s => s.Id == id).FirstOrDefault();
 
             }
         }
 
-        internal void EditarDivicionCancel(int id)
+        internal void EditarDivisionCancel(int id)
         {
             using (var db = new SilaboContext())
             {
-                Divicion divicion = db.Diviciones.Find(id);
-                divicion.Estado = 1;
+                Divisiones Divisiones = db.Divisiones.Find(id);
+                Divisiones.Estado = 1;
                 db.SaveChanges();
             }
         }
 
-        internal Silabo GuardarUnidades(Silabo silaboSave)
+        internal Silabos GuardarUnidades(Silabos silaboSave)
         {
             using (var db = new SilaboContext())
             {
-                var silabo = db.Silabo.SingleOrDefault(s => s.Id == silaboSave.Id);
+                var silabo = db.Silabos.SingleOrDefault(s => s.Id == silaboSave.Id);
                 if(silabo != null)
                 {
                     db.SaveChanges();
@@ -121,11 +121,11 @@ namespace Silabus.Servicios
             }
         }
 
-        internal Silabo GuardarCompetencias(Silabo silaboSave)
+        internal Silabos GuardarCompetencias(Silabos silaboSave)
         {
             using (var db = new SilaboContext())
             {
-                var silabo = db.Silabo.SingleOrDefault(s => s.Id == silaboSave.Id);
+                var silabo = db.Silabos.SingleOrDefault(s => s.Id == silaboSave.Id);
                 if (silabo != null)
                 {
                     db.SaveChanges();
@@ -134,11 +134,11 @@ namespace Silabus.Servicios
             }
         }
 
-        internal Silabo GuardarEvaluacion(Silabo silaboSave)
+        internal Silabos GuardarEvaluacion(Silabos silaboSave)
         {
             using (var db = new SilaboContext())
             {
-                var silabo = db.Silabo.SingleOrDefault(s => s.Id == silaboSave.Id);
+                var silabo = db.Silabos.SingleOrDefault(s => s.Id == silaboSave.Id);
                 if (silabo != null)
                 {
                     db.SaveChanges();
@@ -147,11 +147,11 @@ namespace Silabus.Servicios
             }
         }
 
-        internal Silabo GuardarSumilla(Silabo silaboSave)
+        internal Silabos GuardarSumilla(Silabos silaboSave)
         {
             using (var db = new SilaboContext())
             {
-                var silabo = db.Silabo.SingleOrDefault(s => s.Id == silaboSave.Id);
+                var silabo = db.Silabos.SingleOrDefault(s => s.Id == silaboSave.Id);
                 if (silabo != null)
                 {
                     silabo.Sumilla = silaboSave.Sumilla;
@@ -161,23 +161,23 @@ namespace Silabus.Servicios
             }
         }
 
-        internal void EditarDivicion(int id)
+        internal void EditarDivision(int id)
         {
             using (var db = new SilaboContext())
             {
-                Divicion divicion = db.Diviciones.Find(id);
-                divicion.Estado = 3;
+                Divisiones Divisiones = db.Divisiones.Find(id);
+                Divisiones.Estado = 3;
                 db.SaveChanges();
             }
         }
 
-        internal void EditarDivicionOk(int id)
+        internal void EditarDivisionOk(int id)
         {
             using (var db = new SilaboContext())
             {
-                Divicion divicion = db.Diviciones.Find(id);
-                if(divicion != null)
-                    divicion.Estado = 1;
+                Divisiones Divisiones = db.Divisiones.Find(id);
+                if(Divisiones != null)
+                    Divisiones.Estado = 1;
                 db.SaveChanges();
             }
         }

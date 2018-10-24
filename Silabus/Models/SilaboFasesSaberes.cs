@@ -15,7 +15,7 @@ namespace Silabus.Models
         public virtual Saberes Saberes { get; set; }
         public int IdSilaboFase { get; set; }
         [ForeignKey("IdSilaboFase")]
-        public virtual SilaboFase SilaboFase { get; set; }
+        public virtual SilaboFases SilaboFases { get; set; }
         public int ValorTeorico { get; set; }
         public int ValorPractico { get; set; }
         public String Estado { get; set; }

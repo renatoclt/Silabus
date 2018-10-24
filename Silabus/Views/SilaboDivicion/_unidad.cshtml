@@ -1,20 +1,20 @@
 ﻿
 
-@model Silabus.Models.SilaboDivicion
+@model Silabus.Models.SilaboDivisiones
 <!DOCTYPE html>
-@if (Model.Divicion.Estado == 1)
+@if (Model.Divisiones.Estado == 1)
 {
     <table class="tablaBorderUnidad">
         <thead>
             <tr>
-                <th class="tituloRow">Unidad</th>
-                <th class="tituloRow">Sub-Unidad</th>
+                <th class="tituloRow">Unidades</th>
+                <th class="tituloRow">Sub-Unidades</th>
                 <th class="tituloRow">Descripción</th>
-                <th class="tituloRow">Fase</th>
+                <th class="tituloRow">Fases</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var unidad in Model.Silabo.Asignaturas.Unidads)
+            @foreach (var unidad in Model.Silabos.Asignaturas.Unidads)
             {
             <tr>
                 <td></td>
@@ -31,28 +31,28 @@ else
     <table class="tablaBorderUnidad">
         <thead>
             <tr>
-                <th class="tituloRow">Unidad</th>
-                <th class="tituloRow">Sub-Unidad</th>
+                <th class="tituloRow">Unidades</th>
+                <th class="tituloRow">Sub-Unidades</th>
                 <th class="tituloRow">Descripción</th>
-                <th class="tituloRow">Fase</th>
+                <th class="tituloRow">Fases</th>
                 <th class="tituloRow">Acción</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var unidad in Model.Silabo.Asignaturas.Unidads)
+            @foreach (var unidad in Model.Silabos.Asignaturas.Unidads)
             {
             <tr>
                 <td>id</td>
                 <td>subId</td>
                 <td>@unidad.Nombre</td>
                 <td><select>
-                @foreach (var fase in Model.Silabo.Asignaturas.Fase)
+                @foreach (var fase in Model.Silabos.Asignaturas.Fases)
                 {
                     <option>@fase.Nombre</option>
                 }
                 </select></td>
                 <td>
-                    <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("Unidad", "Silabo",new { accion = 1 })'" )'">
+                    <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("Unidades", "Silabos",new { accion = 1 })'" )'">
                         <span class="glyphicon glyphicon-hand-up"></span>
                     </button>
                     <button type="button" class="btn btn-default btn-sm" onclick="UnidadDown()">

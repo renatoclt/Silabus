@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Silabus.Models
 {
-    public class Unidad
+    public class Unidades
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -19,13 +19,13 @@ namespace Silabus.Models
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
-        public Unidad()
+        public Unidades()
         {
             SilaboFaseUnidades = new HashSet<SilaboFaseUnidades>();
         }
         
        
-        //public void SortList(Unidad unidadTem)
+        //public void SortList(Unidades unidadTem)
         //{
         //    Unidades.Sort(delegate (UnidadCurso a, UnidadCurso b)
         //    {

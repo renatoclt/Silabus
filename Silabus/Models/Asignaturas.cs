@@ -8,7 +8,6 @@ using System.Web;
 
 namespace Silabus.Models
 {
-<<<<<<< HEAD
     public class Asignaturas
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -42,10 +41,10 @@ namespace Silabus.Models
         [Required]
         public int IdPlanEstudio { get; set; }
         [ForeignKey("IdPlanEstudio")]
-        public virtual PlanEstudio PlanEstudio { get; set; }
+        public virtual PlanEstudios PlanEstudios { get; set; }
         public int IdDepartamento { get; set; }
         [ForeignKey("IdDepartamento")]
-        public virtual Departamento Departamento { get; set; }
+        public virtual Departamentos Departamentos { get; set; }
         public int Estado { get; set; }
         public DateTime? FechaModificacion { get; set; }
         [Required]
@@ -56,12 +55,12 @@ namespace Silabus.Models
         [MaxLength(50)]
         private String UsuarioModificacion { get; set; }
         public virtual ICollection<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
-        public IEnumerable<Fase> Fase { get; set; }
-        public ICollection<Unidad> Unidads { get; set; }
-        Asignaturas()
+        public IEnumerable<Fases> Fases { get; set; }
+        public ICollection<Unidades> Unidads { get; set; }
+        public Asignaturas()
         {
             AsignaturaCompetencias = new HashSet<AsignaturaCompetencias>();
-            Unidads = new HashSet<Unidad>();
+            Unidads = new HashSet<Unidades>();
      
         }
     }
