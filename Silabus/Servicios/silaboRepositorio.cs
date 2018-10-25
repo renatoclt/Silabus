@@ -49,7 +49,7 @@ namespace Silabus.Servicios
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboCriterios.Select(se => se.Criterios))))
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboEvidencias.Select(se => se.Evidencias))))
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboEstrategias.Select(se => se.Estrategia))));
-                return silabo.First();
+                return silabo.FirstOrDefault();
             }
             
         }

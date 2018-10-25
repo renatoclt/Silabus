@@ -9,7 +9,6 @@ namespace Silabus.Models
     {
         public int Id { get; set; }
         public String Nombre { get; set; }
-        public String Orden { get; set; }
         public String Estado { get; set; }
         public String UsuarioCreacion { get; set; }
         public String UsuarioModificacion { get; set; }

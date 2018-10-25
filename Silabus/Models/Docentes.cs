@@ -35,9 +35,11 @@ namespace Silabus.Models
         public int Estado { get; set; }
         public DateTime? FechaModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        private String UsuarioCreacion { get; set; }
+        [Required]
         [MaxLength(50)]
-        private String UsuarioModificacion { get; set; }
+        public String UsuarioCreacion { get; set; }
+        [MaxLength(50)]
+        public String UsuarioModificacion { get; set; }
         public Docentes()
         {
             //this.TipoDocentes = new TipoDocentes();

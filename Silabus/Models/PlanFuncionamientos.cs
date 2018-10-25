@@ -21,9 +21,9 @@ namespace Silabus.Models
         public DateTime FechaCreacion { get; set; }
         [Required]
         [MaxLength(50)]
-        private String UsuarioCreacion { get; set; }
+        public String UsuarioCreacion { get; set; }
         [MaxLength(50)]
-        private String UsuarioModificacion { get; set; }
+        public String UsuarioModificacion { get; set; }
         public PlanFuncionamientos()
         {
             

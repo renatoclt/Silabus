@@ -21,7 +21,7 @@ namespace Silabus.Models
         [MaxLength(50)]
         public String Codigo { get; set; }
         [Required]
-        public int Semestre { get; set; }
+        public String Semestre { get; set; }
         [Required]
         public float HorasSemanalesTeoricas { get; set; }
         [Required]
@@ -51,9 +51,9 @@ namespace Silabus.Models
         public DateTime FechaCreacion { get; set; }
         [Required]
         [MaxLength(50)]
-        private String UsuarioCreacion { get; set; }
+        public String UsuarioCreacion { get; set; }
         [MaxLength(50)]
-        private String UsuarioModificacion { get; set; }
+        public String UsuarioModificacion { get; set; }
         public virtual ICollection<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
         public IEnumerable<Fases> Fases { get; set; }
         public ICollection<Unidades> Unidads { get; set; }

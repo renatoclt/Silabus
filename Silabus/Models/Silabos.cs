@@ -23,11 +23,11 @@ namespace Silabus.Models
         public Estado Estado { get; set; }
         public int EstadoAuditoria { get; set; }
         public int AnioAcademico { get; set; }
-        public DateTime FechaModificacion { get; set; }
+        public DateTime ? FechaModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
         public String UsuarioCreacion { get; set; }
         public String UsuarioModificacion { get; set; }
-        public int SelectedSilaboFase { get; set; }
+        public int ? SelectedSilaboFase { get; set; }
         public virtual ICollection<SilaboFases> SilaboFases { get; set; }
         public virtual ICollection<SilaboDocentes> SilaboDocentes { get; set; }
         public virtual ICollection<SilaboDivisiones> SilaboDivisiones { get; set; }

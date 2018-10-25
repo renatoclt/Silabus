@@ -23,12 +23,11 @@ namespace Silabus.Models
         public DateTime? FechaModificacion { get; set; }
         [Required]
         public DateTime FechaCreacion { get; set; }
-
         [Required]
         [MaxLength(50)]
-        private String UsuarioCreacion { get; set; }
+        public String UsuarioCreacion { get; set; }
         [MaxLength(50)]
-        private String UsuarioModificacion { get; set; }
+        public String UsuarioModificacion { get; set; }
         public virtual IEnumerable<Escuelas> Escuelas { get; set; }
         public Facultades()
         {

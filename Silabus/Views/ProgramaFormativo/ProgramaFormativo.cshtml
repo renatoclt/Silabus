@@ -40,12 +40,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var element in Model.SilaboDocentess) {
+                @foreach (var element in Model.SilaboDocentes) {
                 <tr>
-                    <td>@Html.DisplayFor(model => model.SilaboDocentess.Where(s => s.Equals(element)).First().Docentes.Codidgo)</td>
-                    <td>@Html.DisplayFor(model => model.SilaboDocentess.Where(s => s.Equals(element)).First().Docentes.Nombres)</td>
-                    <td>@Html.DisplayFor(model => model.SilaboDocentess.Where(s => s.Equals(element)).First().Funcion)</td>
-                    <td>@Html.DisplayFor(model => model.SilaboDocentess.Where(s => s.Equals(element)).First().Docentes.TipoDocentes.Descripcion)</td>
+                    <td>@Html.DisplayFor(model => model.SilaboDocentes.Where(s => s.Equals(element)).First().Docentes.Codigo)</td>
+                    <td>@Html.DisplayFor(model => model.SilaboDocentes.Where(s => s.Equals(element)).First().Docentes.Nombres)</td>
+                    <td>@Html.DisplayFor(model => model.SilaboDocentes.Where(s => s.Equals(element)).First().Funcion)</td>
+                    <td>@Html.DisplayFor(model => model.SilaboDocentes.Where(s => s.Equals(element)).First().Docentes.TipoDocentes.Descripcion)</td>
                 </tr>
                 }
             </tbody>

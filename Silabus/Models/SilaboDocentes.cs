@@ -18,6 +18,9 @@ namespace Silabus.Models
         [Required]
         [MaxLength(50)]
         public string Funcion { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Categoria { get; set; }
         [ForeignKey("IdDocente")]
         public virtual Docentes Docentes { get; set; }
         public int Estado { get; set; }

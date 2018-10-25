@@ -52,7 +52,7 @@ namespace Silabus.Services
                             join planEst in db.PlanEstudios on curso.IdPlanEstudio equals planEst.Id
                             join escuela in db.Escuelas on planEst.IdEscuela equals escuela.Id
                             join estado in db.Estados on silabus.IdEstado equals estado.Id
-                            where docente.Estado == (int)VariablesGlobales.estadoHabilitado && docente.IdTipoDocentes == (int)VariablesGlobales.tipoDocente && (codigoDocente==""  || docente.Codigo.Contains(codigoDocente.ToUpper())) &&
+                            where docente.Estado == (int)VariablesGlobales.estadoHabilitado && docente.IdTipoDocentes == (int)VariablesGlobales.tipoDocente && (codigoDocente == "" || docente.Codigo.Contains(codigoDocente.ToUpper())) &&
                                   (docente.Nombres + " " + docente.ApellidoPaterno + " " + docente.ApellidoMaterno).ToUpper().Contains(nombreDocente.ToUpper()) &&
                                   //silabus.estado == estadoHabilitado && 
                                   curso.Estado == (int)VariablesGlobales.estadoHabilitado && (nombreCurso == "" || curso.Nombre.Contains(nombreCurso.ToUpper())) && (semes == 0 || curso.Semestre.Equals(semes)) &&
@@ -67,7 +67,9 @@ namespace Silabus.Services
                                 nombreCurso = curso.Nombre,
                                 codigoDocente = docente.Id,
                                 nombreDocente = docente.Nombres + " " + docente.ApellidoPaterno + " " + docente.ApellidoMaterno,
-                                semestre = curso.Semestre,
+                                //TODO cambie el tipo de semestre a varchar
+                                //semestre = curso.Semestre,
+                                semestre = 0,
                                 codigoEstado = estado.Id,
                                 estado = estado.descripcion,
                             };

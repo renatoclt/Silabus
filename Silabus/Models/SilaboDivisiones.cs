@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -15,17 +16,17 @@ namespace Silabus.Models
         public int IdDivision { get; set; }
         [ForeignKey("IdDivision")]
         public virtual Divisiones Divisiones { get; set; }
-        //public SilaboDivisiones()
-        //{
-                
-        //}
-        //public SilaboDivisiones(string vista, int id, string sumilla)
-        //{
-        //    this.Silabos = new Silabos();
-        //    this.Silabos.Id = id;
-        //    this.Silabos.Sumilla = sumilla;
-        //    this.Divisiones = new Divisiones();
-        //    this.Divisiones.Vista = vista;
-        //}
+        public int ? IdDocente { get; set; }
+        [ForeignKey("IdDocente")]
+        public virtual Docentes Docentes { get; set; }
+        public int Estado { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+        [Required]
+        public DateTime FechaCreacion { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public String UsuarioCreacion { get; set; }
+        [MaxLength(50)]
+        public String UsuarioModificacion { get; set; }
     }
 }
