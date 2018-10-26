@@ -1,9 +1,16 @@
 ﻿@model Silabus.Models.Silabos
-
 @{
     ViewBag.Title = "Programa Formativo";
     Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
 }
+
+<div class="col-md-12">
+    <div class="col-md-1"></div>
+    <h1 class="text-center col-md-10">Programa Formativo</h1>
+    <button class="btn btn-info col-md-1 align-middle margin-top-1" onclick="location.href='@Url.Action("Silabos","Silabos", new { Id = Model.Id })'">
+        Silabo <span class="glyphicon glyphicon-arrow-right"></span>
+    </button>
+</div>
 
 <button class="accordion">IDENTIFICACIÓN ACADÉMICA </button>
 <div class="container-fluid">
