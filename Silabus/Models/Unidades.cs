@@ -18,21 +18,10 @@ namespace Silabus.Models
         public String UsuarioCreacion { get; set; }
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public DateTime FechaModificacion { get; set; }
+        public DateTime ? FechaModificacion { get; set; }
         public Unidades()
         {
             SilaboFaseUnidades = new HashSet<SilaboFaseUnidades>();
         }
-        
-       
-        //public void SortList(Unidades unidadTem)
-        //{
-        //    Unidades.Sort(delegate (UnidadCurso a, UnidadCurso b)
-        //    {
-        //        int xdiff = a.Id.CompareTo(b.Id);
-        //        if (xdiff != 0) return xdiff;
-        //        else return a.SubUnidad.CompareTo(b.SubUnidad);
-        //    });
-        //}
     }
 }

@@ -13,7 +13,7 @@ namespace Silabus.Controllers
     {
         // GET: Silaboes
         private SilaboRepositorio _repo;
-        
+
         public SilabosController()
         {
             _repo = new SilaboRepositorio();
@@ -22,6 +22,7 @@ namespace Silabus.Controllers
         {
             Silabos silabo = _repo.ObtenerSilabo(id);
             this.CompetenciaBag(silabo);
+            this.UnidadBag(silabo);
             return View(silabo);
         }
 
@@ -43,6 +44,35 @@ namespace Silabus.Controllers
             });
             ViewBag.AsignaturasCompetencia = asignaturaCompetenciasTem.ToList();
             Session["AsignaturasCompetencia"] = ViewBag.AsignaturasCompetencia;
+        }
+
+        private void UnidadBag(Silabos silabo)
+        {
+            ICollection<SilaboFases> silaboFases = new HashSet<SilaboFases>();
+            ICollection<SilaboFaseUnidades> silaboFaseUnidades = new HashSet<SilaboFaseUnidades>();
+            if (Session["Unidades"] == null)
+            {
+                silaboFases = silabo.SilaboFases;
+                silaboFases.ToList().ForEach(silaboFase =>
+                {
+                    silabo.SilaboFases.Where(sf => sf.Equals(silaboFase)).FirstOrDefault().SilaboFaseUnidades.ToList().ForEach(silaboFaseUnidad =>
+                    {
+                        silaboFaseUnidades.Add(silaboFaseUnidad);
+                    });
+                });
+                silabo.Asignaturas.Unidads.ToList().ForEach( unidad =>
+                {
+                    if(silaboFaseUnidades.Count == 0 || silaboFaseUnidades.Where(sfu => sfu.Unidades.Id.Equals(unidad.Id)).FirstOrDefault().Equals(null))
+                    {
+                        SilaboFaseUnidades silaboFaseUnidadesTem = new SilaboFaseUnidades
+                        {
+                            Unidades = unidad,
+                        };
+                        silaboFaseUnidades.Add(silaboFaseUnidadesTem);
+                    }
+                });
+            }
+            ViewBag.Unidades = silaboFaseUnidades.ToList();
         }
 
         public ActionResult GetProduct(SelectListItem fd, string afd)
@@ -91,7 +121,7 @@ namespace Silabus.Controllers
             return RedirectToAction("Silabos", "Silabos", id);
         }
 
-        public ActionResult CambiarFaseCompetencia(int id, int idAsignaturaCompetencia, int ? idFase)
+        public ActionResult CambiarFaseCompetencia(int id, int idAsignaturaCompetencia, int? idFase)
         {
             ICollection<AsignaturaCompetencias> asignaturaCompetenciasTemp = (ICollection<AsignaturaCompetencias>)Session["AsignaturasCompetencia"];
             asignaturaCompetenciasTemp.Where(ac => ac.Id.Equals(idAsignaturaCompetencia)).FirstOrDefault().IdSilaboFase = idFase;

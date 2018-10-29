@@ -262,13 +262,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var unidad in Model.Asignaturas.Unidads)
+                    @foreach (var unidad in (List<Silabus.Models.SilaboFaseUnidades>)ViewBag.Unidades)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().UnidadI)</td>
-                            <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SubUnidad)</td>
-                            <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().Nombre)</td>
-                            <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SilaboFases.Fases.Nombre)</td>
+                            <td>@Html.Display(unidad.NroUnidad.ToString())</td>
+                            <td>@Html.Display(unidad.NroSubUnidad.ToString())</td>
+                            <td>@Html.Display(unidad.Unidades.Nombre)</td>
+                            @if( unidad.SilaboFases == null)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                <td>@Html.Display(unidad.SilaboFases.Fases.Nombre)</td>
+                            }
                         </tr>
                     }
                 </tbody>
@@ -305,9 +312,9 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().UnidadI)
+                                    @Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().NroUnidad)
                                 </td>
-                                <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SubUnidad)</td>
+                                <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().NroSubUnidad)</td>
                                 <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().Nombre)</td>
                                 <td> @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre") as SelectList, "Seleccione Fases")</td>
                                 <td>

@@ -15,14 +15,14 @@ namespace Silabus.Models
         public int IdSilaboUnidad { get; set; }
         [ForeignKey("IdSilaboUnidad")]
         public virtual Unidades Unidades { get; set; }
-        public int UnidadI { get; set; }
-        public int SubUnidad { get; set; }
-        public int estado { get; set; }
+        public int NroUnidad { get; set; }
+        public int NroSubUnidad { get; set; }
+        public int Estado { get; set; }
         public String UsuarioCreacion { get; set; }
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public DateTime FechaModificacion { get; set; }
-        SilaboFaseUnidades()
+        public DateTime ? FechaModificacion { get; set; }
+        public SilaboFaseUnidades()
         {
 
         }
