@@ -145,9 +145,9 @@
                 <span class="glyphicon glyphicon-pencil"></span>
             </button>
         </div>
-        
+
         <div>
-            <table class="table table-bordered">
+            <table class="table table-bordered margin-top-1">
                 <thead>
                     <tr>
                         <th>Competencias</th>
@@ -161,19 +161,16 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(m => m.Asignaturas.AsignaturaCompetencias.Where(ac => ac.Competencia.Id.Equals(element.IdCompetencia))
-                                    .FirstOrDefault().Competencia.Descripcion)
+                                @Html.DisplayFor(m => m.Asignaturas.AsignaturaCompetencias.Where(ac => ac.Competencia.Id.Equals(element.IdCompetencia)).FirstOrDefault().Competencia.Descripcion)
                             </td>
                             <td>
-                                @foreach (var fase in Model.SilaboFases)
+                                @foreach (var asignaturaCompetencia in Model.Asignaturas.AsignaturaCompetencias)
                                 {
-                                    foreach (var asignaturaCompetencia in fase.AsignaturaCompetencias)
+                                    if (asignaturaCompetencia.IdCompetencia.Equals(element.IdCompetencia) && asignaturaCompetencia.IdSilaboFase != null)
                                     {
-                                        if (asignaturaCompetencia.Competencia.Id.Equals(element.IdCompetencia))
-                                        {
-                                            @Html.DisplayFor(m => m.SilaboFases.Where(f => f.Equals(fase)).FirstOrDefault().Fases.Nombre)
+                                            @Html.DisplayFor(m => m.Asignaturas.AsignaturaCompetencias.Where(ac => ac.Id.Equals(asignaturaCompetencia.Id))
+                                                            .FirstOrDefault().SilaboFases.Fases.Nombre)
                                             <br />
-                                        }
                                     }
 
                                 }
@@ -201,7 +198,7 @@
                 </div>
             </div>
             <div>
-                <table class="table table-bordered">
+                <table class="table table-bordered margin-top-1">
                     <thead>
                         <tr>
                             <th>Competencias</th>
@@ -216,23 +213,24 @@
                             <tr>
                                 <td>
                                     @Html.DisplayFor(m => m.Asignaturas.AsignaturaCompetencias.Where(ac => ac.Competencia.Id.Equals(element.IdCompetencia))
-                                        .FirstOrDefault().Competencia.Descripcion)
+                                                  .FirstOrDefault().Competencia.Descripcion)
                                 </td>
                                 <td>
-                                    @foreach (var fase in Model.SilaboFases)
+                                    @foreach (var asignaturaCompetencia in (List<Silabus.Models.AsignaturaCompetencias>)ViewBag.AsignaturasCompetencia)
                                     {
-                                        foreach (var asignaturaCompetencia in fase.AsignaturaCompetencias)
+
+                                        if (asignaturaCompetencia.IdCompetencia.Equals(element.IdCompetencia) && asignaturaCompetencia.IdSilaboFase != null)
                                         {
-                                            if (asignaturaCompetencia.Competencia.Id.Equals(element.IdCompetencia))
-                                            {
-
-                                                @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre") as SelectList, "Seleccione Fases")
-                                                <br />
-                                            }
-                                        }
-
+                               
+                                @Html.DropDownList("asignaturaCompetencia.Fases.value", (IEnumerable<SelectListItem>)asignaturaCompetencia.Fases, "Seleccione una fase", new { onchange = "cambiarFaseCompetencia(" + Model.Id + "," + asignaturaCompetencia.Id + ",this.value)", htmlAttributes = new { @class = "form-control margin-top-1" } })
+                                <br class="margin-top-1" />
                                     }
-                                    @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre"), "Seleccione Fases");
+                                    }
+                                    @Html.DropDownListFor(model => model.PlanFuncionamientos.Fases, new SelectList(Model.PlanFuncionamientos.Fases, "Id", "Nombre") as SelectList, "Seleccione una fase", new
+                                    {
+                                        onchange = "agregarFaseCompetencia(" + Model.Id + "," + Model.Asignaturas.AsignaturaCompetencias.Where(ac => ac.Competencia.Id.Equals(element.IdCompetencia)).FirstOrDefault().IdAsignatura + ",this.value ," + element.IdCompetencia + ")"
+                                    })
+                                    <br />
                                 </td>
                             </tr>
                         }
@@ -246,90 +244,90 @@
 <div class="container-fluid">
     <div class="container-fluid">
         @if (Model.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
-         {
-        <div class="col-md-offset-11 padding-top-5">
-            <button class="col-md-offset-2  btn btn-info btn-sm" type="button" onclick="location.href='@Url.Action("Edit",new {id = Model.Id ,
+        {
+            <div class="col-md-offset-11 padding-top-5">
+                <button class="col-md-offset-2  btn btn-info btn-sm" type="button" onclick="location.href='@Url.Action("Edit",new {id = Model.Id ,
                 idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Id})'">
-                <span class="glyphicon glyphicon-pencil"></span>
-            </button>
-        </div>
-       
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th class="tituloRow">Unidades</th>
-                    <th class="tituloRow">Sub-Unidades</th>
-                    <th class="tituloRow">Descripción</th>
-                    <th class="tituloRow">Fases</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var unidad in Model.Asignaturas.Unidads)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().UnidadI)</td>
-                    <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SubUnidad)</td>
-                    <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().Nombre)</td>
-                    <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SilaboFases.Fases.Nombre)</td>
-                </tr>
-         }
-            </tbody>
-        </table>
-}
-else
-{
-    using (Html.BeginForm("GuardarUnidad", "Silabos", FormMethod.Post))
-    {
-        @Html.HiddenFor(m => m.Id);
-        <div class="col-md-offset-11 padding-top-5">
-            <div class="row">
-                <button class="col-md-offset-2  btn btn-success btn-sm" type="submit">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </button>
-                <button class="col-md-offset-2 btn btn-danger btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel",
-                                    new { id = Model.Id , idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Id})'">
-                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="glyphicon glyphicon-pencil"></span>
                 </button>
             </div>
-        </div>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th class="tituloRow">Unidades</th>
-                <th class="tituloRow">Sub-Unidades</th>
-                <th class="tituloRow">Descripción</th>
-                <th class="tituloRow">Fases</th>
-                <th class="tituloRow">Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var unidad in Model.Asignaturas.Unidads)
-        {
-            <tr>
-                <td>
-                    @Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().UnidadI)
-            </td>
-            <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SubUnidad)</td>
-            <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().Nombre)</td>
-            <td> @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre") as SelectList, "Seleccione Fases")</td>
-            <td>
-                <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadSubir", "Silabos",new { accion = 1 })'" )'">
-                    <span class="glyphicon glyphicon-hand-up"></span>
-                </button>
-                <button type="button" class="btn btn-default btn-sm" onclick="UnidadDown()">
-                    <span class="glyphicon glyphicon-hand-down"></span>
-                </button>
-                <button type="button" class="btn btn-default btn-sm" onclick="UnidadTrash()">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </button>
 
-            </td>
-        </tr>
-}
-        </tbody>
-    </table>
-}
-}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="tituloRow">Unidades</th>
+                        <th class="tituloRow">Sub-Unidades</th>
+                        <th class="tituloRow">Descripción</th>
+                        <th class="tituloRow">Fases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var unidad in Model.Asignaturas.Unidads)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().UnidadI)</td>
+                            <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SubUnidad)</td>
+                            <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().Nombre)</td>
+                            <td>@Html.DisplayFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SilaboFases.Fases.Nombre)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            using (Html.BeginForm("GuardarUnidad", "Silabos", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => m.Id);
+                <div class="col-md-offset-11 padding-top-5">
+                    <div class="row">
+                        <button class="col-md-offset-2  btn btn-success btn-sm" type="submit">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                        <button class="col-md-offset-2 btn btn-danger btn-sm" type="button" onclick="location.href='@Url.Action("EditCancel",
+                                    new { id = Model.Id , idDivision = Model.SilaboDivisiones.Where(sd => sd.IdDivision.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Id})'">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="tituloRow">Unidades</th>
+                            <th class="tituloRow">Sub-Unidades</th>
+                            <th class="tituloRow">Descripción</th>
+                            <th class="tituloRow">Fases</th>
+                            <th class="tituloRow">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var unidad in Model.Asignaturas.Unidads)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().UnidadI)
+                                </td>
+                                <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().SubUnidad)</td>
+                                <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().Nombre)</td>
+                                <td> @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre") as SelectList, "Seleccione Fases")</td>
+                                <td>
+                                    <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadSubir", "Silabos",new { accion = 1 })'" )'">
+                                        <span class="glyphicon glyphicon-hand-up"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm" onclick="UnidadDown()">
+                                        <span class="glyphicon glyphicon-hand-down"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm" onclick="UnidadTrash()">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
     </div>
 </div>
 <button class="accordion">EVALUACIÓN DE COMPETENCIAS ADQUIRIDAS  </button>
@@ -562,6 +560,39 @@ else
     }
 </div>
 @*<button class="accordion">BIBLIOGRAFÍA </button>
-<div class="container-fluid">
-    f
-</div>*@
+    <div class="container-fluid">
+        f
+    </div>*@
+
+
+@section Scripts{
+    <script>
+        function cambiarFaseCompetencia(id, idAsignaturaCompetencia, idFase) {
+
+            $.post("@Url.Action("CambiarFaseCompetencia", "Silabos")", { id: id, idAsignaturaCompetencia: idAsignaturaCompetencia, idFase: idFase } ,function(data){
+
+            });
+        }
+        function agregarFaseCompetencia(id, idAsignatura, idFase, idCompetencia) {
+            var link = '@Url.Action("AgregarFaseCompetencias", "Silabos")';
+            $.ajax({
+                type: 'post',
+                url: link,
+                data: {
+                    id: id,
+                    idAsignatura: idAsignatura,
+                    idFase: idFase,
+                    idCompetencia: idCompetencia
+                },
+                success: function (data) {
+                    window.location.reload(true); 
+                },
+                error: function () {
+                    alert('error happened');
+                }
+            }); 
+        }
+        
+    </script>
+}
+

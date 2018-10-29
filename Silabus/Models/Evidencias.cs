@@ -9,10 +9,10 @@ namespace Silabus.Models
     {
         public int Id { get; set; }
         public String Nombre { get; set; }
-        public String Estado { get; set; }
+        public int Estado { get; set; }
         public String UsuarioCreacion { get; set; }
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public DateTime FechaModificacion { get; set; }
+        public DateTime ? FechaModificacion { get; set; }
     }
 }

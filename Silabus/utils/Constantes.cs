@@ -15,5 +15,8 @@ namespace Silabus.utils
         public static int IDUNIDADES = 4;
         public static int IDEVALUACION = 5;
         public static int EDITABLE = 1;
+        public static int ESTADOHABILITADO = 1;
+        public static int ESTADODESHABILITADO = 0;
+
     }
 }

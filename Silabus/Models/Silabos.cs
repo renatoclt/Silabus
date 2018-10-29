@@ -10,7 +10,7 @@ namespace Silabus.Models
     public class Silabos
     {
         public int Id { get; set; }
-        public int IdPlanFuncionamiento { get; set; }
+        public int ? IdPlanFuncionamiento { get; set; }
         [ForeignKey("IdPlanFuncionamiento")]
         public virtual PlanFuncionamientos PlanFuncionamientos { get; set; }
         public int IdAsignatura { get; set; }
@@ -38,12 +38,6 @@ namespace Silabus.Models
             SilaboFases = new HashSet<SilaboFases>();
             SilaboDocentes = new HashSet<SilaboDocentes>();
             SilaboDivisiones = new HashSet<SilaboDivisiones>();
-        }
-        public Silabos(int id, int idPlanFuncionamiento, string sumilla)
-        {
-            SilaboFases = new HashSet<SilaboFases>();
-            this.Asignaturas = new Asignaturas();
-            this.PlanFuncionamientos = new PlanFuncionamientos();
         }
     }
 }

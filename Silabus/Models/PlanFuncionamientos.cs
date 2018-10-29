@@ -24,6 +24,7 @@ namespace Silabus.Models
         public String UsuarioCreacion { get; set; }
         [MaxLength(50)]
         public String UsuarioModificacion { get; set; }
+        public virtual ICollection<Fases> Fases { get; set; }
         public PlanFuncionamientos()
         {
             

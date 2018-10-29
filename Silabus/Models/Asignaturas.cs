@@ -12,11 +12,9 @@ namespace Silabus.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         [Required]
         [MaxLength(100)]
         public String Nombre { get; set; }
-
         [Required]
         [MaxLength(50)]
         public String Codigo { get; set; }
@@ -55,8 +53,7 @@ namespace Silabus.Models
         [MaxLength(50)]
         public String UsuarioModificacion { get; set; }
         public virtual ICollection<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
-        public IEnumerable<Fases> Fases { get; set; }
-        public ICollection<Unidades> Unidads { get; set; }
+        public virtual ICollection<Unidades> Unidads { get; set; }
         public Asignaturas()
         {
             AsignaturaCompetencias = new HashSet<AsignaturaCompetencias>();

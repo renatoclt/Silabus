@@ -6,12 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Silabus.utils;
+
 namespace Silabus.Controllers
 {
     public class SilabosController : Controller
     {
         // GET: Silaboes
         private SilaboRepositorio _repo;
+        
         public SilabosController()
         {
             _repo = new SilaboRepositorio();
@@ -19,7 +21,33 @@ namespace Silabus.Controllers
         public ActionResult Silabos(int id = 1)
         {
             Silabos silabo = _repo.ObtenerSilabo(id);
+            this.CompetenciaBag(silabo);
             return View(silabo);
+        }
+
+        private void CompetenciaBag(Silabos silabo)
+        {
+            ICollection<AsignaturaCompetencias> asignaturaCompetenciasTem;
+            if (Session["AsignaturasCompetencia"] == null)
+            {
+                asignaturaCompetenciasTem = silabo.Asignaturas.AsignaturaCompetencias;
+            }
+            else
+            {
+                asignaturaCompetenciasTem = (ICollection<AsignaturaCompetencias>)Session["AsignaturasCompetencia"];
+                Console.WriteLine(asignaturaCompetenciasTem);
+            }
+            asignaturaCompetenciasTem.ToList().ForEach(asignaturaCompetencias =>
+            {
+                asignaturaCompetencias.Fases = new SelectList(silabo.PlanFuncionamientos.Fases, "Id", "Nombre", asignaturaCompetencias.IdSilaboFase);
+            });
+            ViewBag.AsignaturasCompetencia = asignaturaCompetenciasTem.ToList();
+            Session["AsignaturasCompetencia"] = ViewBag.AsignaturasCompetencia;
+        }
+
+        public ActionResult GetProduct(SelectListItem fd, string afd)
+        {
+            return RedirectToAction("Silabos", 1);
         }
 
         public ActionResult Edit(int id, int idDivision)
@@ -31,7 +59,8 @@ namespace Silabus.Controllers
         public ActionResult EditCancel(int id, int idDivision)
         {
             _repo.EditarDivisionCancel(idDivision);
-            return RedirectToAction("Silabos", id); ;
+            Session["AsignaturasCompetencia"] = null;
+            return RedirectToAction("Silabos", id);
         }
 
         public ActionResult GuardarSumilla(Silabos silabo)
@@ -42,10 +71,35 @@ namespace Silabus.Controllers
         }
         public ActionResult GuardarCompetencias(Silabos silabo)
         {
-            silabo = _repo.GuardarCompetencias(silabo);
+            silabo = _repo.GuardarCompetencias(silabo, (ICollection<AsignaturaCompetencias>)Session["AsignaturasCompetencia"]);
             _repo.EditarDivisionCancel(silabo.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Constantes.IDCOMPETENCIAS)).FirstOrDefault().Divisiones.Id);
+            Session["AsignaturasCompetencia"] = null;
             return RedirectToAction("Silabos", silabo.Id);
         }
+
+        [HttpPost]
+        public ActionResult AgregarFaseCompetencias(int id, int idAsignatura, int idFase, int idCompetencia)
+        {
+            AsignaturaCompetencias tempAsignaturaCompetencias = new AsignaturaCompetencias
+            {
+                IdAsignatura = idAsignatura,
+                IdSilaboFase = idFase,
+                IdCompetencia = idCompetencia
+            };
+            ICollection<AsignaturaCompetencias> asignaturaCompetenciasTemp = (ICollection<AsignaturaCompetencias>)Session["AsignaturasCompetencia"];
+            asignaturaCompetenciasTemp.Add(tempAsignaturaCompetencias);
+            return RedirectToAction("Silabos", "Silabos", id);
+        }
+
+        public ActionResult CambiarFaseCompetencia(int id, int idAsignaturaCompetencia, int ? idFase)
+        {
+            ICollection<AsignaturaCompetencias> asignaturaCompetenciasTemp = (ICollection<AsignaturaCompetencias>)Session["AsignaturasCompetencia"];
+            asignaturaCompetenciasTemp.Where(ac => ac.Id.Equals(idAsignaturaCompetencia)).FirstOrDefault().IdSilaboFase = idFase;
+            ViewBag.AsignaturasCompetencia = ViewBag.AsignaturasCompetencia;
+            return RedirectToAction("Silabos", id);
+        }
+
+
 
         public ActionResult GuardarUnidad(Silabos silabo)
         {
@@ -66,6 +120,10 @@ namespace Silabus.Controllers
             silabo.SelectedSilaboFase = silaboTem.SelectedSilaboFase;
             return View("Silabos", silabo);
         }
+
+
+
+
 
     }
 }

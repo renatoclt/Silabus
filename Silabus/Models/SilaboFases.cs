@@ -18,16 +18,16 @@ namespace Silabus.Models
         public virtual Silabos Silabos { get; set; }
         [Display(Name = "Titulo de fase")]
         public string Titulo { get; set; }
-        public int HoraFase { get; set; }
+        public int ? HoraFase { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MMMM/yyyy}")]
-        public DateTime FechaInicio { get; set; }
+        public DateTime ? FechaInicio { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MMMM/yyyy}")]
-        public DateTime FechaFin { get; set; }
-        public String Estado { get; set; }
+        public DateTime ? FechaFin { get; set; }
+        public int Estado { get; set; }
         public String UsuarioCreacion { get; set; }
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public DateTime FechaModificacion { get; set; }
+        public DateTime ? FechaModificacion { get; set; }
         public virtual ICollection<SilaboFasesSaberes> SilaboFasesSaberes { get; set; }
         public virtual ICollection<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
         public virtual ICollection<SilaboFaseUnidades> SilaboFaseUnidades  { get; set; }

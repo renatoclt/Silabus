@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -42,7 +41,6 @@ namespace Silabus.Models
         public String UsuarioModificacion { get; set; }
         public Docentes()
         {
-            //this.TipoDocentes = new TipoDocentes();
 
         }
     }
