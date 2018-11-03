@@ -71,7 +71,7 @@ namespace Silabus.Services
                                 //semestre = curso.Semestre,
                                 semestre = 0,
                                 codigoEstado = estado.Id,
-                                estado = estado.descripcion,
+                                estado = estado.Descripcion,
                             };
 
                 List<VisualizarSilabo> visualizarSilabos = new List<VisualizarSilabo>();
@@ -172,7 +172,7 @@ namespace Silabus.Services
                     ListaEstado.Add(new SelectListItem()
                     {
                         Value = estado.Id.ToString(),
-                        Text  = estado.descripcion
+                        Text  = estado.Descripcion
                     });
                 }
                 return ListaEstado;

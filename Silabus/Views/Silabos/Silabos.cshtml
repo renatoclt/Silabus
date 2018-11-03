@@ -252,7 +252,7 @@
                 </button>
             </div>
 
-            <table class="table table-bordered">
+            <table class="table table-bordered margin-top-1">
                 <thead>
                     <tr>
                         <th class="tituloRow">Unidades</th>
@@ -265,16 +265,16 @@
                     @foreach (var unidad in (List<Silabus.Models.SilaboFaseUnidades>)ViewBag.Unidades)
                     {
                         <tr>
-                            <td>@Html.Display(unidad.NroUnidad.ToString())</td>
-                            <td>@Html.Display(unidad.NroSubUnidad.ToString())</td>
-                            <td>@Html.Display(unidad.Unidades.Nombre)</td>
+                            <td>@unidad.NroUnidad</td>
+                            <td>@unidad.NroSubUnidad</td>
+                            <td>@unidad.Unidades.Nombre</td>
                             @if( unidad.SilaboFases == null)
                             {
                                 <td></td>
                             }
                             else
                             {
-                                <td>@Html.Display(unidad.SilaboFases.Fases.Nombre)</td>
+                                <td>@unidad.SilaboFases.Fases.Nombre</td>
                             }
                         </tr>
                     }
@@ -297,7 +297,7 @@
                         </button>
                     </div>
                 </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered margin-top-1">
                     <thead>
                         <tr>
                             <th class="tituloRow">Unidades</th>
@@ -308,17 +308,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var unidad in Model.Asignaturas.Unidads)
+                        @for(int i = 0; i < ((List<Silabus.Models.SilaboFaseUnidades>)ViewBag.Unidades).Count ; i++)
                         {
                             <tr>
+                                <td><input type="number" id="NroUnidad" placeholder="0" value="@ViewBag.Unidades[i].NroUnidad"</td>
+                                <td><input type="number" id="NroSubunidad" placeholder="0" value="@ViewBag.Unidades[i].NroSubUnidad"</td>
+                                <td><input type="text" id="Unidad" placeholder="nombre Unidad"
+                                        value="@ViewBag.Unidades[i].Unidades.Nombre"></td>
+                                <td>@Html.DropDownList("@ViewBag.Unidades[i].Fases.value", (IEnumerable<SelectListItem>)@ViewBag.Unidades[i].Fases, "Seleccione una fase")</td>
                                 <td>
-                                    @Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().NroUnidad)
-                                </td>
-                                <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().SilaboFaseUnidades.FirstOrDefault().NroSubUnidad)</td>
-                                <td>@Html.EditorFor(m => m.Asignaturas.Unidads.Where(u => u.Equals(unidad)).FirstOrDefault().Nombre)</td>
-                                <td> @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.SilaboFases, "Id", "Fases.Nombre") as SelectList, "Seleccione Fases")</td>
-                                <td>
-                                    <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadSubir", "Silabos",new { accion = 1 })'" )'">
+                                    <button type="button" class="btn btn-default btn-sm" onclick="UnidadUp('@i')">
                                         <span class="glyphicon glyphicon-hand-up"></span>
                                     </button>
                                     <button type="button" class="btn btn-default btn-sm" onclick="UnidadDown()">
@@ -327,7 +326,6 @@
                                     <button type="button" class="btn btn-default btn-sm" onclick="UnidadTrash()">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>
-
                                 </td>
                             </tr>
                         }
@@ -573,7 +571,7 @@
 
 
 @section Scripts{
-    <script>
+<script>
         function cambiarFaseCompetencia(id, idAsignaturaCompetencia, idFase) {
 
             $.post("@Url.Action("CambiarFaseCompetencia", "Silabos")", { id: id, idAsignaturaCompetencia: idAsignaturaCompetencia, idFase: idFase } ,function(data){
@@ -592,14 +590,26 @@
                     idCompetencia: idCompetencia
                 },
                 success: function (data) {
-                    window.location.reload(true); 
+                    window.location.reload(true);
                 },
                 error: function () {
                     alert('error happened');
                 }
-            }); 
+            });
         }
-        
-    </script>
+
+        function UnidadDown() {
+            alert("bajar");
+        }
+
+        function UnidadUp(index) {
+            var unidades = '@(ViewBag.Unidades)';
+            @ViewBag.Id = $(this).attr("id")
+        }
+
+        function UnidadTrash() {
+            alert("UnidadTrash");
+        }
+</script>
 }
 

@@ -16,14 +16,14 @@ namespace Silabus.Models
         public String Semestre { get; set; }
         [Required]
         public int Estado { get; set; }
-        public DateTime? FechaModificacion { get; set; }
-        [Required]
-        public DateTime FechaCreacion { get; set; }
         [Required]
         [MaxLength(50)]
         public String UsuarioCreacion { get; set; }
+        [Required]
+        public DateTime FechaCreacion { get; set; }
         [MaxLength(50)]
         public String UsuarioModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
         public virtual ICollection<Fases> Fases { get; set; }
         public PlanFuncionamientos()
         {

@@ -44,14 +44,14 @@ namespace Silabus.Models
         [ForeignKey("IdDepartamento")]
         public virtual Departamentos Departamentos { get; set; }
         public int Estado { get; set; }
-        public DateTime? FechaModificacion { get; set; }
-        [Required]
-        public DateTime FechaCreacion { get; set; }
         [Required]
         [MaxLength(50)]
         public String UsuarioCreacion { get; set; }
+        [Required]
+        public DateTime FechaCreacion { get; set; }
         [MaxLength(50)]
         public String UsuarioModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
         public virtual ICollection<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
         public virtual ICollection<Unidades> Unidads { get; set; }
         public Asignaturas()

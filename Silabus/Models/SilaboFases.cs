@@ -24,10 +24,14 @@ namespace Silabus.Models
         [DisplayFormat(DataFormatString = "{0:dd/MMMM/yyyy}")]
         public DateTime ? FechaFin { get; set; }
         public int Estado { get; set; }
+        [Required]
+        [MaxLength(50)]
         public String UsuarioCreacion { get; set; }
-        public String UsuarioModificacion { get; set; }
+        [Required]
         public DateTime FechaCreacion { get; set; }
-        public DateTime ? FechaModificacion { get; set; }
+        [MaxLength(50)]
+        public String UsuarioModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
         public virtual ICollection<SilaboFasesSaberes> SilaboFasesSaberes { get; set; }
         public virtual ICollection<AsignaturaCompetencias> AsignaturaCompetencias { get; set; }
         public virtual ICollection<SilaboFaseUnidades> SilaboFaseUnidades  { get; set; }

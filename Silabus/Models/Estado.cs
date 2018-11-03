@@ -12,23 +12,19 @@ namespace Silabus.Models
 
         [Required]
         [MaxLength(10)]
-        public String descripcion { get; set; }
+        public String Descripcion { get; set; }
 
         [Required]
         public int estado { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public String usuarioCreacion { get; set; }
-
+        public String UsuarioCreacion { get; set; }
         [Required]
-        public DateTime fechaCreacion { get; set; }
-
+        public DateTime FechaCreacion { get; set; }
         [MaxLength(50)]
-        public String usuarioModificacion { get; set; }
-
-        public DateTime? fechaModificacion { get; set; }
-
+        public String UsuarioModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
 
     }
 }

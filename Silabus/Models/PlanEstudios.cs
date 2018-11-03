@@ -16,14 +16,14 @@ namespace Silabus.Models
         public virtual Escuelas Escuelas{ get; set; }
         [Required]
         public int Estado { get; set; }
-        public DateTime? FechaModificacion { get; set; }
-        [Required]
-        public DateTime FechaCreacion { get; set; }
         [Required]
         [MaxLength(50)]
         public String UsuarioCreacion { get; set; }
+        [Required]
+        public DateTime FechaCreacion { get; set; }
         [MaxLength(50)]
         public String UsuarioModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
         public PlanEstudios()
         {
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -19,10 +20,14 @@ namespace Silabus.Models
         public int ValorTeorico { get; set; }
         public int ValorPractico { get; set; }
         public String Estado { get; set; }
+        [Required]
+        [MaxLength(50)]
         public String UsuarioCreacion { get; set; }
-        public String UsuarioModificacion { get; set; }
+        [Required]
         public DateTime FechaCreacion { get; set; }
-        public DateTime FechaModificacion { get; set; }
+        [MaxLength(50)]
+        public String UsuarioModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
         public virtual ICollection<SilaboEvidencias> SilaboEvidencias { get; set; }
         public virtual ICollection<SilaboCriterios> SilaboCriterios { get; set; }
         public virtual ICollection<SilaboEstrategias> SilaboEstrategias { get; set; }
