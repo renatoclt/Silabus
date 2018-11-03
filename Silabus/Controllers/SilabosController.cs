@@ -13,7 +13,7 @@ namespace Silabus.Controllers
     {
         // GET: Silaboes
         private SilaboRepositorio _repo;
-
+        
         public SilabosController()
         {
             _repo = new SilaboRepositorio();
@@ -48,31 +48,62 @@ namespace Silabus.Controllers
 
         private void UnidadBag(Silabos silabo)
         {
-            ICollection<SilaboFases> silaboFases = new HashSet<SilaboFases>();
-            ICollection<SilaboFaseUnidades> silaboFaseUnidades = new HashSet<SilaboFaseUnidades>();
             if (Session["Unidades"] == null)
             {
-                silaboFases = silabo.SilaboFases;
-                silaboFases.ToList().ForEach(silaboFase =>
+                ICollection<SilaboFases> silaboFases = new HashSet<SilaboFases>();
+                ICollection<SilaboFaseUnidades> silaboFaseUnidades = new HashSet<SilaboFaseUnidades>();
+                if (Session["Unidades"] == null)
                 {
-                    silabo.SilaboFases.Where(sf => sf.Equals(silaboFase)).FirstOrDefault().SilaboFaseUnidades.ToList().ForEach(silaboFaseUnidad =>
+                    silaboFases = silabo.SilaboFases;
+                    silaboFases.ToList().ForEach(silaboFase =>
                     {
-                        silaboFaseUnidades.Add(silaboFaseUnidad);
-                    });
-                });
-                silabo.Asignaturas.Unidads.ToList().ForEach( unidad =>
-                {
-                    if(silaboFaseUnidades.Count == 0 || silaboFaseUnidades.Where(sfu => sfu.Unidades.Id.Equals(unidad.Id)).FirstOrDefault().Equals(null))
-                    {
-                        SilaboFaseUnidades silaboFaseUnidadesTem = new SilaboFaseUnidades
+                        silabo.SilaboFases.Where(sf => sf.Equals(silaboFase)).FirstOrDefault().SilaboFaseUnidades.ToList().ForEach(silaboFaseUnidad =>
                         {
-                            Unidades = unidad,
-                        };
-                        silaboFaseUnidades.Add(silaboFaseUnidadesTem);
-                    }
-                });
+                            silaboFaseUnidades.Add(silaboFaseUnidad);
+                        });
+                    });
+                    silabo.Asignaturas.Unidads.ToList().ForEach(unidad =>
+                    {
+                        if (silaboFaseUnidades.Where(sfu => sfu.Unidades.Equals(unidad)).FirstOrDefault() == null)
+                        {
+                            SilaboFaseUnidades silaboFaseUnidadesTem = new SilaboFaseUnidades
+                            {
+                                Unidades = unidad,
+                            };
+                            silaboFaseUnidades.Add(silaboFaseUnidadesTem);
+                        }
+                    });
+                }
+                ViewBag.Unidades = silaboFaseUnidades.ToList();
+                Session["Unidades"] = ViewBag.Unidades;
+                if (!silabo.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
+                {
+                    this.UnidadBagEdit(silabo);
+                }
             }
-            ViewBag.Unidades = silaboFaseUnidades.ToList();
+            else
+            {
+                this.UnidadBagEdit(silabo);
+            }
+            
+            
+        }
+        private void UnidadBagEdit(Silabos silabo)
+        {
+            List<SilaboFaseUnidades> silaboFaseUnidadesEdit = (List<SilaboFaseUnidades>)Session["Unidades"];
+            int nroUnidad = 1;
+            int nroSubUnidad = 0;
+            silaboFaseUnidadesEdit.ForEach(silaboFaseUnidad =>
+            {
+                silaboFaseUnidad.NroUnidad = silaboFaseUnidad.NroUnidad.Equals(Constantes.CERO) ? nroUnidad : silaboFaseUnidad.NroUnidad;
+                if (silaboFaseUnidad.NroSubUnidad.Equals(Constantes.CERO))
+                {
+                    nroSubUnidad++;
+                    silaboFaseUnidad.NroSubUnidad = nroSubUnidad;
+                    silaboFaseUnidad.Fases = new SelectList(silabo.PlanFuncionamientos.Fases, "Id", "Nombre", silaboFaseUnidad.IdSilaboFase);
+                }
+            });
+            ViewBag.Unidades = silaboFaseUnidadesEdit;
         }
 
         public ActionResult GetProduct(SelectListItem fd, string afd)
@@ -89,8 +120,25 @@ namespace Silabus.Controllers
         public ActionResult EditCancel(int id, int idDivision)
         {
             _repo.EditarDivisionCancel(idDivision);
-            Session["AsignaturasCompetencia"] = null;
+            this.LimpiarSession(idDivision);
             return RedirectToAction("Silabos", id);
+        }
+        
+        public void LimpiarSession(int idDivision)
+        {
+            switch (idDivision)
+            {
+                case Constantes.IDCOMPETENCIAS:
+                    {
+                        Session["AsignaturasCompetencia"] = null;
+                        break;
+                    }
+                case Constantes.IDUNIDADES:
+                    {
+                        Session["Unidades"] = null;
+                        break;
+                    }
+            }
         }
 
         public ActionResult GuardarSumilla(Silabos silabo)
@@ -135,6 +183,7 @@ namespace Silabus.Controllers
         {
             silabo = _repo.GuardarUnidades(silabo);
             _repo.EditarDivisionCancel(silabo.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Id);
+            Session["Unidades"] = null;
             return RedirectToAction("Silabos", silabo.Id);
         }
         public ActionResult GuardarEvaluacion(Silabos silabo)

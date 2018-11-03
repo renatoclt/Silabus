@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Silabus.Models
 {
@@ -22,6 +23,8 @@ namespace Silabus.Models
         public String UsuarioModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
         public DateTime ? FechaModificacion { get; set; }
+        [NotMapped]
+        public SelectList Fases { get; set; }
         public SilaboFaseUnidades()
         {
 

@@ -7,16 +7,19 @@ namespace Silabus.utils
 {
     public class Constantes
     {
-        public static int IDSABERCONCEPTUAL = 2;
-        public static int IDSABERPROCEDIMENTAL = 3;
-        public static int IDSABERACTITUDINAL = 4;
-        public static int IDSUMILLA = 2;
-        public static int IDCOMPETENCIAS = 3;
-        public static int IDUNIDADES = 4;
-        public static int IDEVALUACION = 5;
-        public static int EDITABLE = 1;
-        public static int ESTADOHABILITADO = 1;
-        public static int ESTADODESHABILITADO = 0;
+        public const int IDSABERCONCEPTUAL = 2;
+        public const int IDSABERPROCEDIMENTAL = 3;
+        public const int IDSABERACTITUDINAL = 4;
+        public const int IDSUMILLA = 2;
+        public const int IDCOMPETENCIAS = 3;
+        public const int IDUNIDADES = 4;
+        public const int IDEVALUACION = 5;
+        public const int EDITABLE = 1;
+        public const int ESTADOHABILITADO = 1;
+        public const int ESTADODESHABILITADO = 0;
+
+        public const int CERO = 0;
+        public const int UNO = 1;
 
     }
 }
