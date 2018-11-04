@@ -25,9 +25,13 @@ namespace Silabus.Models
         public String UsuarioCreacion { get; set; }
         [Required]
         public DateTime FechaCreacion { get; set; }
+<<<<<<< HEAD
         [MaxLength(50)]
         public String UsuarioModificacion { get; set; }
         public DateTime? FechaModificacion { get; set; }
+=======
+        public DateTime ? FechaModificacion { get; set; }
+>>>>>>> Anthony
         [NotMapped]
         public SelectList Fases { get; set; }
         public SilaboFaseUnidades()
