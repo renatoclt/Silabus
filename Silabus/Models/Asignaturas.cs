@@ -19,7 +19,9 @@ namespace Silabus.Models
         [MaxLength(50)]
         public String Codigo { get; set; }
         [Required]
-        public String Semestre { get; set; }
+        public int Semestre { get; set; }
+        [MaxLength(50)]
+        public String NombreSemestre { get; set; }
         [Required]
         public float HorasSemanalesTeoricas { get; set; }
         [Required]

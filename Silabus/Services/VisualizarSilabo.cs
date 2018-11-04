@@ -43,7 +43,7 @@ namespace Silabus.Services
                 var semestre = from se in db.Parametricas
                                where se.CodigoControl == (int)VariablesGlobales.CodControl_AnioSemestre && se.valor == semes  && se.Auxiliar01 == año 
                                select se.Auxiliar02.Value;
-                semes = Int32.Parse(semestre.First().ToString());
+                semes = Int32.Parse(semestre.First().ToString()); // se debe obtener mas adelante la dstinción de si es semestre par o impoar
 
                 var model = from sildoc in db.SilaboDocentes
                             join docente in db.Docentes on sildoc.IdDocente equals docente.Id
@@ -54,7 +54,7 @@ namespace Silabus.Services
                             join estado in db.Estados on silabus.IdEstado equals estado.Id
                             where docente.Estado == (int)VariablesGlobales.estadoHabilitado && docente.IdTipoDocentes == (int)VariablesGlobales.tipoDocente && (codigoDocente == "" || docente.Codigo.Contains(codigoDocente.ToUpper())) &&
                                   (docente.Nombres + " " + docente.ApellidoPaterno + " " + docente.ApellidoMaterno).ToUpper().Contains(nombreDocente.ToUpper()) &&
-                                  //silabus.estado == estadoHabilitado && 
+                                  silabus.EstadoAuditoria == (int)VariablesGlobales.estadoHabilitado && 
                                   curso.Estado == (int)VariablesGlobales.estadoHabilitado && (nombreCurso == "" || curso.Nombre.Contains(nombreCurso.ToUpper())) && (semes == 0 || curso.Semestre.Equals(semes)) &&
                                   planEst.Estado == (int)VariablesGlobales.estadoHabilitado &&
                                   escuela.Estado == (int)VariablesGlobales.estadoHabilitado && (escuelaProfesional == "" || escuela.Nombre.Contains(escuelaProfesional.ToUpper())) &&
@@ -67,9 +67,8 @@ namespace Silabus.Services
                                 nombreCurso = curso.Nombre,
                                 codigoDocente = docente.Id,
                                 nombreDocente = docente.Nombres + " " + docente.ApellidoPaterno + " " + docente.ApellidoMaterno,
-                                //TODO cambie el tipo de semestre a varchar
-                                //semestre = curso.Semestre,
-                                semestre = 0,
+                                semestre = curso.Semestre,
+                               
                                 codigoEstado = estado.Id,
                                 estado = estado.Descripcion,
                             };
