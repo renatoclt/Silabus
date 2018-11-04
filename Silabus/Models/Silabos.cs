@@ -25,10 +25,14 @@ namespace Silabus.Models
         public Estado Estado { get; set; }
         public int EstadoAuditoria { get; set; }
         public int AnioAcademico { get; set; }
-        public DateTime ? FechaModificacion { get; set; }
-        public DateTime FechaCreacion { get; set; }
+        [Required]
+        [MaxLength(50)]
         public String UsuarioCreacion { get; set; }
+        [Required]
+        public DateTime FechaCreacion { get; set; }
+        [MaxLength(50)]
         public String UsuarioModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
         public int ? SelectedSilaboFase { get; set; }
         public virtual ICollection<SilaboFases> SilaboFases { get; set; }
         public virtual ICollection<SilaboDocentes> SilaboDocentes { get; set; }

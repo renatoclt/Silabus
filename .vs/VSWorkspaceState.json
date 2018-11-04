@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Silabus"
+    "\\Silabus",
+    "\\Silabus\\Models"
   ],
-  "SelectedNode": "\\Silabus",
+  "SelectedNode": "\\SQLQuery2.sql",
   "PreviewInSolutionExplorer": false
 }
