@@ -22,7 +22,8 @@ namespace Silabus.Controllers
         {
             Silabos silabo = _repo.ObtenerSilabo(id);
             this.CompetenciaBag(silabo);
-            this.UnidadBag(silabo);
+            silabo = this.Unidad(silabo);
+            this.Evaluacion();
             return View(silabo);
         }
 
@@ -46,11 +47,12 @@ namespace Silabus.Controllers
             Session["AsignaturasCompetencia"] = ViewBag.AsignaturasCompetencia;
         }
 
-        private void UnidadBag(Silabos silabo)
+        private Silabos Unidad(Silabos silabo)
         {
             if (Session["Unidades"] == null)
             {
                 ICollection<SilaboFases> silaboFases = new HashSet<SilaboFases>();
+                SilaboFases SilaboFase = new SilaboFases();
                 ICollection<SilaboFaseUnidades> silaboFaseUnidades = new HashSet<SilaboFaseUnidades>();
                 if (Session["Unidades"] == null)
                 {
@@ -70,40 +72,46 @@ namespace Silabus.Controllers
                             {
                                 Unidades = unidad,
                             };
-                            silaboFaseUnidades.Add(silaboFaseUnidadesTem);
+                            SilaboFase.SilaboFaseUnidades.Add(silaboFaseUnidadesTem);
                         }
                     });
+                    silaboFases.Add(SilaboFase);
                 }
-                ViewBag.Unidades = silaboFaseUnidades.ToList();
-                Session["Unidades"] = ViewBag.Unidades;
-                if (!silabo.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Silabus.utils.Constantes.IDUNIDADES)).FirstOrDefault().Divisiones.Estado.Equals(Silabus.utils.Constantes.EDITABLE))
-                {
-                    this.UnidadBagEdit(silabo);
-                }
+                Session["Unidades"] = silaboFases.ToList();
+                return silabo;
             }
             else
             {
-                this.UnidadBagEdit(silabo);
+                return UnidadEdit(silabo);
             }
             
             
         }
-        private void UnidadBagEdit(Silabos silabo)
+        private Silabos UnidadEdit(Silabos silabo)
         {
-            List<SilaboFaseUnidades> silaboFaseUnidadesEdit = (List<SilaboFaseUnidades>)Session["Unidades"];
-            int nroUnidad = 1;
+            List<SilaboFases> silaboFases = (List<SilaboFases>)Session["Unidades"];
+            int nroUnidad = 0;
             int nroSubUnidad = 0;
-            silaboFaseUnidadesEdit.ForEach(silaboFaseUnidad =>
+            silaboFases.ForEach(silaboFase =>
             {
-                silaboFaseUnidad.NroUnidad = silaboFaseUnidad.NroUnidad.Equals(Constantes.CERO) ? nroUnidad : silaboFaseUnidad.NroUnidad;
-                if (silaboFaseUnidad.NroSubUnidad.Equals(Constantes.CERO))
+                if(silaboFase.SilaboFaseUnidades.Count > 0)
                 {
-                    nroSubUnidad++;
-                    silaboFaseUnidad.NroSubUnidad = nroSubUnidad;
-                    silaboFaseUnidad.Fases = new SelectList(silabo.PlanFuncionamientos.Fases, "Id", "Nombre", silaboFaseUnidad.IdSilaboFase);
+                    nroUnidad++;
+                    nroSubUnidad = 0;
+                    silaboFase.SilaboFaseUnidades.ToList().ForEach(silaboFaseUnidad =>
+                    {
+                        silaboFaseUnidad.NroUnidad = silaboFaseUnidad.NroUnidad.Equals(Constantes.CERO) ? nroUnidad : silaboFaseUnidad.NroUnidad;
+                        if (silaboFaseUnidad.NroSubUnidad.Equals(Constantes.CERO))
+                        {
+                            nroSubUnidad++;
+                            silaboFaseUnidad.NroSubUnidad = nroSubUnidad;
+                            silaboFaseUnidad.Fases = new SelectList(silabo.PlanFuncionamientos.Fases, "Id", "Nombre", silaboFaseUnidad.IdSilaboFase);
+                        }
+                    });
                 }
             });
-            ViewBag.Unidades = silaboFaseUnidadesEdit;
+            silabo.SilaboFases = silaboFases;
+            return silabo;
         }
 
         public ActionResult GetProduct(SelectListItem fd, string afd)
@@ -177,8 +185,6 @@ namespace Silabus.Controllers
             return RedirectToAction("Silabos", id);
         }
 
-
-
         public ActionResult GuardarUnidad(Silabos silabo)
         {
             silabo = _repo.GuardarUnidades(silabo);
@@ -195,14 +201,65 @@ namespace Silabus.Controllers
 
         public ActionResult CambiarFaseEvaluacion(Silabos silaboTem)
         {
-            Silabos silabo = _repo.ObtenerSilabo(silaboTem.Id);
+            Silabos silabo = _repo.GuardarSelectedSilaboFase(silaboTem.Id, silaboTem.SelectedSilaboFase);
             silabo.SelectedSilaboFase = silaboTem.SelectedSilaboFase;
+            return RedirectToAction("Silabos", silabo.Id);
+        }
+
+        public ActionResult UnidadUp(int id, int idSilaboFase, int idUnidad)
+        {
+            Silabos silabo = _repo.ObtenerSilabo(id);
+            silabo = this.UnidadEdit(silabo);
+            int nroSubUnidadTem = silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroSubUnidad;
+            int nroUnidadTem = silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroUnidad;
+            nroSubUnidadTem--;
+            silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroSubUnidad = nroSubUnidadTem;
+            silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroUnidad = nroUnidadTem;
+            return View("Silabos", silabo);
+        }
+        public ActionResult UnidadDown(int id, int idSilaboFase, int idUnidad)
+        {
+            Silabos silabo = _repo.ObtenerSilabo(id);
+            silabo = this.UnidadEdit(silabo);
+            int nroSubUnidadTem = silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroSubUnidad;
+            int nroUnidadTem = silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroUnidad;
+            nroSubUnidadTem++;
+            silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroSubUnidad = nroSubUnidadTem;
+            silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroUnidad = nroUnidadTem;
+            return View("Silabos", silabo);
+        }
+        public ActionResult UnidadTrash(int id, int idSilaboFase, int idUnidad)
+        {
+            Silabos silabo = _repo.ObtenerSilabo(id);
+            silabo = this.UnidadEdit(silabo);
+            silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Remove(
+                silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault());
             return View("Silabos", silabo);
         }
 
+        public ActionResult UnidadAdd(int id)
+        {
+            Silabos silabo = _repo.ObtenerSilabo(id);
+            silabo = this.UnidadEdit(silabo);
+            if(silabo.SilaboFases.Where(sf => sf.Id.Equals(Constantes.CERO)).FirstOrDefault() == null)
+            {
+                silabo.SilaboFases.Add(new SilaboFases());
+            }
+            silabo.SilaboFases.Where(sf => sf.Id.Equals(Constantes.CERO)).FirstOrDefault().SilaboFaseUnidades.Add(new SilaboFaseUnidades()
+            {
+                Unidades = new Unidades()
+            });
+            return View("Silabos", silabo);
+        }
 
+        private void Evaluacion()
+        {
+            ViewBag.Evidencias = new SelectList(_repo.ListarEvidencias(), "Id", "Nombre");
+            ViewBag.Estrategias = new SelectList(_repo.ListarEstrategias(), "Id", "Nombre"); 
+            ViewBag.Criterios = new SelectList(_repo.ListarCriterios(), "Id", "Nombre"); 
+            ViewBag.Saberes = new SelectList(_repo.ListarSaberes(), "Id", "Nombre"); 
 
-
+        }
 
     }
 }

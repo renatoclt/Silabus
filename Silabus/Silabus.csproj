@@ -271,6 +271,7 @@
     <Content Include="Views\VisualizarSilabo\Index.cshtml" />
     <Content Include="Views\Shared\_Filtros.cshtml" />
     <Content Include="Views\HabilitarSilabo\Index.cshtml" />
+    <Content Include="Views\Silabos\EditorTemplates\SilaboFases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

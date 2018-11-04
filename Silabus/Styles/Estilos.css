@@ -245,7 +245,15 @@ table th {
 }
 
 .padding-top-5 {
-    padding-top: 5em;
+    padding-top: 7em;
+}
+
+.padding-top-3 {
+    padding-top: 3em;
+}
+
+.padding-bottom-4{
+    padding-bottom: 4em;
 }
 
 textarea {
@@ -256,6 +264,11 @@ textarea {
 
 br{
     margin-top: 5em;
+}
+
+.width-100 {
+    width: 100%;
+    min-width: 100%;
 }
 
 /*#left {

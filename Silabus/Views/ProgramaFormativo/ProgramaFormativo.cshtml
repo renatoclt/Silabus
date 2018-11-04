@@ -165,10 +165,10 @@
                     <td>COMPETENCIA</td>
                     <td colspan="11">
                         @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().AsignaturaCompetencias)
-                    {
-                        @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().AsignaturaCompetencias.Where(ac => ac.Equals(element)).FirstOrDefault().Competencia.Descripcion)
+                        {
+                            @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().AsignaturaCompetencias.Where(ac => ac.Equals(element)).FirstOrDefault().Competencia.Descripcion)
                         <br />
-                }
+                        }
                     </td>
                 </tr>
                 <tr>
@@ -191,9 +191,9 @@
                         @foreach(var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFaseUnidades)
                          {
                             
-                            @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Equals(element)).FirstOrDefault().UnidadI);
+                            @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Equals(element)).FirstOrDefault().NroUnidad);
                             <span>-</span>
-                            @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Equals(element)).FirstOrDefault().SubUnidad);
+                            @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Equals(element)).FirstOrDefault().NroSubUnidad);
                             <span>-</span>
                             @Html.DisplayFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Equals(element)).FirstOrDefault().Unidades.Nombre);
                             <br />

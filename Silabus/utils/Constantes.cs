@@ -9,7 +9,7 @@ namespace Silabus.utils
     {
         public const int IDSABERCONCEPTUAL = 2;
         public const int IDSABERPROCEDIMENTAL = 3;
-        public const int IDSABERACTITUDINAL = 4;
+        public const int IDSABERACTITUDINAL = 1;
         public const int IDSUMILLA = 2;
         public const int IDCOMPETENCIAS = 3;
         public const int IDUNIDADES = 4;

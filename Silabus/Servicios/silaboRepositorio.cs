@@ -29,7 +29,7 @@ namespace Silabus.Servicios
                     .Include(s => s.Asignaturas.Unidads.Select(u => u.SilaboFaseUnidades))
                     .Include(s => s.SilaboDocentes.Select(sd => sd.Docentes.TipoDocentes))
                     .Include(s => s.SilaboFases.Select(sf => sf.Fases))
-                    //.Include(s => s.SilaboFases.Select(sf => sf.AsignaturaCompetencias.Select(ac => ac.Competencia)))
+                    .Include(s => s.SilaboFases.Select(sf => sf.AsignaturaCompetencias.Select(ac => ac.Competencia)))
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.Saberes)))
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFaseUnidades.Select(sfu => sfu.Unidades)))
                     .Include(s => s.SilaboFases.Select(sf => sf.SilaboFasesSaberes.Select(sfs => sfs.SilaboCriterios.Select(se => se.Criterios))))
@@ -107,6 +107,62 @@ namespace Silabus.Servicios
                 var silabo = db.Silabos.SingleOrDefault(s => s.Id == silaboSave.Id);
                 if (silabo != null)
                 {
+                    if(silaboSave.SilaboFases.Where(sf=> sf.Id.Equals(Constantes.CERO)).FirstOrDefault() != null)
+                    {
+                        silaboSave.SilaboFases.Where(sf => sf.Id.Equals(Constantes.CERO)).FirstOrDefault().SilaboFaseUnidades.ToList().ForEach( sfu =>
+                        {
+                            if(silabo.Asignaturas.Unidads.Where(u => u.Id.Equals(sfu.Unidades.Id)).FirstOrDefault() == null)
+                            {
+                                silabo.Asignaturas.Unidads.Add(new Unidades
+                                {
+                                    Nombre = sfu.Unidades.Nombre,
+                                    IdAsignatura = silabo.Asignaturas.Id,
+                                    UsuarioCreacion = "prueba",
+                                    FechaCreacion = DateTime.Now,
+                                    Estado = Constantes.ESTADOHABILITADO
+                                });
+                            }
+                        });
+                        if (silaboSave.SilaboFases.Where(sf => sf.Id.Equals(Constantes.CERO)).FirstOrDefault().SilaboFaseUnidades
+                            .Where(sfu => sfu.IdSilaboFase != Constantes.CERO).ToList().Count.Equals(Constantes.CERO))
+                        {
+                            silaboSave.SilaboFases.Remove(silaboSave.SilaboFases.Where(sf => sf.Id.Equals(Constantes.CERO)).FirstOrDefault());
+                        }
+                    }
+                    silaboSave.SilaboFases.ToList().ForEach(sft =>
+                    {
+                        sft.SilaboFaseUnidades.ToList().ForEach(sfut =>
+                        {
+                            if (sfut.Id.Equals(Constantes.CERO))
+                            {
+                                if (sft.Id.Equals(Constantes.CERO))
+                                {
+                                    sft.Id = sfut.IdSilaboFase;
+                                }
+                                silabo.SilaboFases.Where(sf => sf.Id.Equals(sft.Id)).FirstOrDefault().SilaboFaseUnidades.Add(new SilaboFaseUnidades
+                                {
+                                    NroUnidad = sfut.NroUnidad,
+                                    NroSubUnidad = sfut.NroSubUnidad,
+                                    IdSilaboUnidad = sfut.Unidades.Id,
+                                    IdSilaboFase = sfut.IdSilaboFase,
+                                    UsuarioCreacion = "prueba",
+                                    FechaCreacion = DateTime.Now,
+                                    Estado = Constantes.ESTADOHABILITADO
+                                });
+                            }
+                            else
+                            {
+                                if (!sft.Id.Equals(Constantes.CERO))
+                                {
+                                    SilaboFaseUnidades silaboFaseUnidades = silabo.SilaboFases.Where(sf => sf.Id.Equals(sft.Id)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(sfut.Id)).FirstOrDefault();
+                                    silaboFaseUnidades.NroUnidad = sfut.NroUnidad;
+                                    silaboFaseUnidades.NroSubUnidad = sfut.NroSubUnidad;
+                                    silaboFaseUnidades.IdSilaboFase = sfut.IdSilaboFase;
+                                    silaboFaseUnidades.Unidades.Nombre = sfut.Unidades.Nombre;
+                                }
+                            }
+                        });
+                    });
                     db.SaveChanges();
                 }
                 return ObtenerSilabo(silabo.Id);
@@ -251,5 +307,56 @@ namespace Silabus.Servicios
                 }
             }
         }
+
+        internal Silabos GuardarSelectedSilaboFase(int id, int ? idSelectedSilaboFase)
+        {
+            using (var db = new SilaboContext())
+            {
+                var silabo = db.Silabos.SingleOrDefault(s => s.Id.Equals(id));
+                if (silabo != null)
+                {
+                    silabo.SelectedSilaboFase = idSelectedSilaboFase;
+                    db.SaveChanges();
+                }
+                return silabo;
+            }
+        }
+
+        internal List<Evidencias> ListarEvidencias()
+        {
+            using (var db = new SilaboContext())
+            {
+                var evidencias = db.Evidencias.Where(e => e.Estado.Equals(Constantes.ESTADOHABILITADO));
+                return evidencias.ToList();
+            }
+        }
+
+        internal List<Criterios> ListarCriterios()
+        {
+            using (var db = new SilaboContext())
+            {
+                var criterios = db.Criterios.Where(e => e.Estado.Equals(Constantes.ESTADOHABILITADO));
+                return criterios.ToList();
+            }
+        }
+
+        internal List<Estrategias> ListarEstrategias()
+        {
+            using (var db = new SilaboContext())
+            {
+                var estrategias = db.Estrategias.Where(e => e.Estado.Equals(Constantes.ESTADOHABILITADO));
+                return estrategias.ToList();
+            }
+        }
+
+        internal List<Saberes> ListarSaberes()
+        {
+            using (var db = new SilaboContext())
+            {
+                var saberes = db.Saberes.Where(e => e.Estado.Equals(Constantes.ESTADOHABILITADO));
+                return saberes.ToList();
+            }
+        }
+
     }
 }
