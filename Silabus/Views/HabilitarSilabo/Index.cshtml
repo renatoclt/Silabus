@@ -26,12 +26,14 @@
     <tr>
         <td>@item.nombreDocente     </td>
         <td>@item.nombreCurso       </td>
-        <td>@Html.DropDownList("ListarEstado", (List<SelectListItem>)ViewBag.ListarEstado, new { @disabled = "disabled", @id = item.codigoEstado }) </td>
+        @*<td>@Html.DropDownList("ListarEstado", (List<SelectListItem>)ViewBag.ListarEstado, new { @disabled = "disabled", @id = item.codigoEstado }) </td>*@
+        <td>@Html.DropDownList("ListarEstado", item.ListaEstado, new { disabled = "disabled", id = "ListarEstado" }) </td>
         <td>
-            <input type="button" class="btn btn-default" id="Editar" value="Editar" onclick="mostrar()">
-            <input type="button" class="btn btn-default" id="Guardar" value="Guardar" onclick="ocultar(item.id)" style="display:none" />
-            <input type="button" class="btn btn-default" id="Cancelar" value="Cancelar" onclick="ocultar()" style="display:none">
+            <input type="button" class="btn btn-default" id="Editar" value="Editar" onclick="editar()">
+            <input type="button" class="btn btn-default" id="Guardar" value="Guardar" onclick="guardar(item)" style="display:none" />
+            <input type="button" class="btn btn-default" id="Cancelar" value="Cancelar" onclick="cancelar()" style="display:none">
         </td>
+        
     </tr>
         }
     }
@@ -40,18 +42,27 @@
 </table>
 
 <script type="text/javascript">
-    function mostrar() {
+    function editar() {
         document.getElementById('Guardar').style.display = 'inline';
         document.getElementById('Cancelar').style.display = 'inline';
         document.getElementById('Editar').style.display = 'none';
+        document.getElementById('ListarEstado').disabled = false;
     }
 
-    function ocultar(id) {
-        alert(fila);
+    function cancelar() {
+        //alert(fila);
+        document.getElementById('Guardar').style.display = 'none';
+        document.getElementById('Cancelar').style.display = 'none';
+        document.getElementById('Editar').style.display = 'block';
+        document.getElementById('ListarEstado').disabled = true;
+
+    }
+    function guardar(item) {
+        alert();
         document.getElementById('Guardar').style.display = 'none';
         document.getElementById('Cancelar').style.display = 'none';
         document.getElementById('Editar').style.display = 'block';
 
-        document.getElementById(id);
+
     }
 </script>

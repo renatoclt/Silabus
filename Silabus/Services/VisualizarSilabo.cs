@@ -79,6 +79,7 @@ namespace Silabus.Services
                 for (int i = 0; i < model.Count(); i++)
                 {
                     visualizarSilabos.ToArray()[i].anioSemestre = ConversionSemestre(model.ToArray()[i].semestre);
+                    visualizarSilabos.ToArray()[i].ListaEstado = ListarEstado(visualizarSilabos.ToArray()[i].codigoEstado);
                 }
 
                 return visualizarSilabos.ToList();
@@ -156,25 +157,37 @@ namespace Silabus.Services
             }
         }
 
-        public List<SelectListItem> ListarEstado()
+        public List<SelectListItem> ListarEstado(int codigoEstado)
         {
             using (var db = new SilaboContext())
             {
 
-                ListaEstado = new List<SelectListItem>();
+                List<SelectListItem> ListaEstados = new List<SelectListItem>();
                 var Estados = from estado in db.Estados
                               where estado.estado == (int)VariablesGlobales.estadoHabilitado
                               select estado;
 
                 foreach (var estado in Estados)
                 {
-                    ListaEstado.Add(new SelectListItem()
+                    if (codigoEstado == estado.Id)
                     {
-                        Value = estado.Id.ToString(),
-                        Text  = estado.Descripcion
-                    });
+                        ListaEstados.Add(new SelectListItem()
+                        {
+                            Value = estado.Id.ToString(),
+                            Text = estado.Descripcion,
+                            Selected = true
+                        });
+                    }
+                    else {
+                        ListaEstados.Add(new SelectListItem()
+                        {
+                            Value     = estado.Id.ToString(),
+                            Text     = estado.Descripcion,
+                            Selected = false
+                        });
+                    }
                 }
-                return ListaEstado;
+                return ListaEstados;
             }
         }
 
