@@ -169,7 +169,7 @@
                                     if (asignaturaCompetencia.IdCompetencia.Equals(element.IdCompetencia) && asignaturaCompetencia.IdSilaboFase != null)
                                     {
                                         @Html.DisplayFor(m => m.Asignaturas.AsignaturaCompetencias.Where(ac => ac.Id.Equals(asignaturaCompetencia.Id))
-                                                                  .FirstOrDefault().SilaboFases.Fases.Nombre)
+                                                                       .FirstOrDefault().SilaboFases.Fases.Nombre)
                                         <br />
                                     }
 
@@ -213,7 +213,7 @@
                             <tr>
                                 <td>
                                     @Html.DisplayFor(m => m.Asignaturas.AsignaturaCompetencias.Where(ac => ac.Competencia.Id.Equals(element.IdCompetencia))
-                                                            .FirstOrDefault().Competencia.Descripcion)
+                                                                 .FirstOrDefault().Competencia.Descripcion)
                                 </td>
                                 <td>
                                     @foreach (var asignaturaCompetencia in (List<Silabus.Models.AsignaturaCompetencias>)ViewBag.AsignaturasCompetencia)
@@ -314,45 +314,50 @@
                     <tbody>
                         @for (var i = 0; i < Model.SilaboFases.Count; i++)
                         {
-                             @*@Html.TextBoxFor(model => model.SilaboFases.ElementAt(i).Id,
-                                       new { @id = i,  @Name = string.Format("SilaboFases[{0}].Id", i) })*@ 
+                            @Html.HiddenFor(model => model.SilaboFases.ElementAt(i).Id,
+                                           new { @id = i, @Name = string.Format("SilaboFases[{0}].Id", i) })
                             for (var j = 0; j < Model.SilaboFases.ElementAt(i).SilaboFaseUnidades.Count; j++)
                             {
                                 <tr>
-                                    <td>
-                                       @Html.TextBoxFor(model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).Id,
-                                       new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].Id", i, j) })
-                                    </td>
-                                    <td>@Html.TextBoxFor(model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).NroUnidad,
-                                       new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].NroUnidad", i, j) })</td>
-                                    <td>@Html.TextBoxFor(model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).NroSubUnidad,
-                                       new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].NroSubUnidad", i, j) })</td>
-                                    <td>@Html.TextBoxFor(model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).Unidades.Nombre,
-                                       new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].Unidades.Nombre", i, j) })</td>
-                                    <td>
-                                        @Html.DropDownListFor(
-                                                 model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).IdSilaboFase,
-                                                 new SelectList(Model.PlanFuncionamientos.Fases, "Id", "Nombre", Model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).IdSilaboFase) as SelectList, "Seleccione una fase",
-                                                 new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].IdSilaboFase", i, j) })
-                                    </td>
+                                    @Html.HiddenFor(model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).Id,
+                                         new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].Id", i, j) })
 
                                     <td>
-                                        <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadUp",
+                                        @Html.TextBoxFor(model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).NroUnidad,
+                                            new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].NroUnidad", i, j) })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).NroSubUnidad,
+                                        new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].NroSubUnidad", i, j) })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).Unidades.Nombre,
+                                    new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].Unidades.Nombre", i, j) })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(
+                                          model => model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).IdSilaboFase,
+                                          new SelectList(Model.PlanFuncionamientos.Fases, "Id", "Nombre", Model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).IdSilaboFase) as SelectList, "Seleccione una fase",
+                                          new { @Name = string.Format("SilaboFases[{0}].SilaboFaseUnidades[{1}].IdSilaboFase", i, j) })
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadUp",
                                     new { id = Model.Id , idSilaboFase = Model.SilaboFases.ElementAt(i).Id,  idUnidad = Model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).Id })'">
-                                            <span class="glyphicon glyphicon-hand-up"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadDown",
+                                <span class="glyphicon glyphicon-hand-up"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadDown",
                                     new { id = Model.Id , idSilaboFase = Model.SilaboFases.ElementAt(i).Id,  idUnidad = Model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).Id })'">
-                                            <span class="glyphicon glyphicon-hand-down"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadTrash",
+                                <span class="glyphicon glyphicon-hand-down"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("UnidadTrash",
                                    new { id = Model.Id , idSilaboFase = Model.SilaboFases.ElementAt(i).Id,  idUnidad = Model.SilaboFases.ElementAt(i).SilaboFaseUnidades.ElementAt(j).Id })'">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            }
-                        }
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            }
                     </tbody>
                 </table>
                 <div class="col-md-offset-10 margin-top-1">
@@ -380,7 +385,7 @@
             {
                 <div class="col-md-offset-5">
                     @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.PlanFuncionamientos.Fases, "Id", "Nombre", Model.SelectedSilaboFase) as SelectList, "Seleccione Fases",
-                                            new { @onchange = "this.form.submit()", @Class = "form-control" })
+                                                                                    new { @onchange = "this.form.submit()", @Class = "form-control" })
                     @Html.HiddenFor(m => m.Id)
                 </div>
             }
@@ -390,7 +395,7 @@
             <div class="form-group margin-top-1 col-md-12">
                 <label class="control-label col-md-1">Titulo</label>
                 <div class="col-md-10 width-100">
-                    @Html.TextBoxFor(model => model.SilaboFases.Where(sf => sf.Fases.Id == model.SelectedSilaboFase).FirstOrDefault().Titulo, new { @class = "form-control col-md-10 width-100"})
+                    @Html.TextBoxFor(model => model.SilaboFases.Where(sf => sf.Fases.Id == model.SelectedSilaboFase).FirstOrDefault().Titulo, new { @class = "form-control col-md-10 width-100" })
                 </div>
             </div>
             <div class="form-group padding-top-3 col-md-12">
@@ -408,7 +413,7 @@
             <div class="form-group padding-top-3 col-md-12">
                 <label class="control-label col-md-2">Saber Actitudinal</label>
                 <div class="col-md-10 width-100">
-                    @Html.TextBoxFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERACTITUDINAL)).FirstOrDefault().Descripcion, new { @class = "form-control col-md-10 width-100"})
+                    @Html.TextBoxFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERACTITUDINAL)).FirstOrDefault().Descripcion, new { @class = "form-control col-md-10 width-100" })
                 </div>
             </div>
 
@@ -504,126 +509,143 @@
                 </div>
             </div>
             <div>
-            @using (Html.BeginForm("CambiarFaseEvaluacion", "Silabos", FormMethod.Post))
-            {
                 <div class="col-md-offset-5">
                     @Html.DropDownListFor(model => model.SelectedSilaboFase, new SelectList(Model.PlanFuncionamientos.Fases, "Id", "Nombre", Model.SelectedSilaboFase) as SelectList, "Seleccione Fases",
-                                            new { @onchange = "this.form.submit()", @Class = "form-control" })
+                        new { onchange = "CambiarFaseEvaluacionEdit(" + Model.Id + ", this.value )", @Class = "form-control" })
                     @Html.HiddenFor(m => m.Id)
                 </div>
-            }
             </div>
-            <div class="form-group margin-top-1 col-md-12">
-                <label class="control-label col-md-2">Titulo</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id == model.SelectedSilaboFase).FirstOrDefault().Titulo, new { htmlAttributes = new { @class = "form-control", style = "min-width:100%" } })
-                </div>
-            </div>
-            <div class="form-group padding-top-3 col-md-12">
-                <label class="control-label col-md-2">Saber Conceptual</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERCONCEPTUAL)).FirstOrDefault().Descripcion, new { htmlAttributes = new { @class = "form-control", style = "min-width:100%" } })
-                </div>
-            </div>
-            <div class="form-group padding-top-3 col-md-12">
-                <label class="control-label col-md-2">Saber Procedimental</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERPROCEDIMENTAL)).FirstOrDefault().Descripcion, new { htmlAttributes = new { @class = "form-control", style = "min-width:100%" } })
-                </div>
-            </div>
-            <div class="form-group padding-top-3 col-md-12">
-                <label class="control-label col-md-2">Saber Actitudinal</label>
-                <div class="col-md-10">
-                @Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.IdSaberes.Equals(Silabus.utils.Constantes.IDSABERACTITUDINAL)).FirstOrDefault().Descripcion, new { htmlAttributes = new { @class = "form-control", style = "min-width:100%" } })
-                </div>
-            </div>
+            for (int i = 0; i < Model.SilaboFases.Count; i++)
+            {
+                @Html.HiddenFor(model => model.SelectedSilaboFase, htmlAttributes: new { @id = "idFaseSelected" })
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(model => model.SilaboFases.ElementAt(i).Id,
+                                          new { @Name = string.Format("SilaboFases[{0}].Id", i) })
+                if (Model.SilaboFases.ElementAt(i).Id.Equals(Model.SelectedSilaboFase))
+                {
+                    @i 
+                    @Model.SelectedSilaboFase
+                    <div class="form-group margin-top-1 col-md-12">
+                        <div>
+                            <label class="control-label col-md-2">Titulo</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SilaboFases.ElementAt(i).Titulo,
+                                                              new
+                                                              {
+                                                                  htmlAttributes = new
+                                                                  {
+                                                                      @class = "form-control",
+                                                                      style = "min-width:100%",
+                                                                      Name = string.Format("SilaboFases[{0}].Titulo", i)
+                                                                  },
+                                                              })
+                        </div>
+                    </div>
 
-            <div class="form-group padding-top-3 col-md-12">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Estrategia</th>
-                            <th>Saber</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
-                        {
-                            foreach (var estrategias in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias)
-                            {
+                    for (int j = 0; j < Model.SilaboFases.ElementAt(i).SilaboFasesSaberes.Count; j++)
+                    {
+                        @Html.HiddenFor(model => model.SilaboFases.ElementAt(i).SilaboFasesSaberes.ElementAt(j).Saberes.Id,
+                                          new { @Name = string.Format("SilaboFases[{0}].SilaboFasesSaberes[{1}].Id", i, j) })
+                        <div class="form-group padding-top-3 col-md-12">
+                            <div>
+                                @Html.DisplayFor(model => model.SilaboFases.ElementAt(i).SilaboFasesSaberes.ElementAt(j).Saberes.Nombre, new { htmlAttributes = new { @class = "col-md-2 form-control", style = "min-width:100%" } })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.SilaboFases.ElementAt(i).SilaboFasesSaberes.ElementAt(j).Descripcion, new { htmlAttributes = new { @class = "col-md-12 form-control", style = "min-width:100%", Name = string.Format("SilaboFases[{0}].SilaboFasesSaberes[{1}].Descripcion", i, j) } })
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group padding-top-3 col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Estrategias)</td>
-                                    <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Saberes)</td>
+                                    <th>Estrategia</th>
+                                    <th>Saber</th>
                                 </tr>
-                            }
-                        }
+                            </thead>
+                            <tbody>
+                                @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
+                                {
+                                    foreach (var estrategias in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEstrategias)
+                                    {
+                                        <tr>
+                                            <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Estrategias)</td>
+                                            <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Saberes)</td>
+                                        </tr>
+                                    }
+                                }
 
-                    </tbody>
-                </table>
-                <div class="col-md-offset-10 margin-top-1">
-                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("EstrategiaAdd", new { id = Model.Id })'">
-                            Agregar Estrategia  <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </div>
-                <div class="form-group padding-top-3 col-md-12">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Evidencias</th>
-                                <th>Saber</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
-                            {
-                                foreach (var evidencias in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias)
-                                {
-                            <tr>
-                                <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Evidencias)</td>
-                                <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Saberes)</td>
-                            </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-                    <div class="col-md-offset-10 margin-top-1">
-                        <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("EvidenciaAdd", new { id = Model.Id })'">
-                            Agregar Evidencia  <span class="glyphicon glyphicon-plus"></span>
-                        </button>
+                            </tbody>
+                        </table>
+                        <div class="col-md-offset-10 margin-top-1">
+                            <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("EstrategiaAdd", new { id = Model.Id })'">
+                                Agregar Estrategia  <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </div>
+                        <div class="form-group padding-top-3 col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Evidencias</th>
+                                        <th>Saber</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
+                                    {
+                                        foreach (var evidencias in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboEvidencias)
+                                        {
+                                            <tr>
+                                                <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Evidencias)</td>
+                                                <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Saberes)</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="col-md-offset-10 margin-top-1">
+                                <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("EvidenciaAdd", new { id = Model.Id })'">
+                                    Agregar Evidencia  <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group padding-top-3 col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Criterios de evaluación</th>
+                                        <th>Saber</th>
+                                        <th>Puntaje Teoria</th>
+                                        <th>Puntaje Practica</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
+                                    {
+                                        foreach (var criterios in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios)
+                                        {
+                                            <tr>
+                                                <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Criterios)</td>
+                                                <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Saberes)</td>
+                                                <td>@Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorTeorico)</td>
+                                                <td>@Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorPractico)</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="col-md-offset-10 margin-top-1">
+                                <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("CriterioAdd", new { id = Model.Id })'">
+                                    Agregar Criterio  <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group padding-top-3 col-md-12">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Criterios de evaluación</th>
-                                <th>Saber</th>
-                                <th>Puntaje Teoria</th>
-                                <th>Puntaje Practica</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var element in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes)
-                            {
-                                foreach (var criterios in Model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().SilaboCriterios)
-                                {
-                            <tr>
-                                <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Criterios)</td>
-                                <td>@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Saberes)</td>
-                                <td>@Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorTeorico)</td>
-                                <td>@Html.EditorFor(model => model.SilaboFases.Where(sf => sf.Fases.Id.Equals(Model.SelectedSilaboFase)).FirstOrDefault().SilaboFasesSaberes.Where(sfs => sfs.Id.Equals(element.Id)).FirstOrDefault().ValorPractico)</td>
-                            </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-                    <div class="col-md-offset-10 margin-top-1">
-                        <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("EvidenciaAdd", new { id = Model.Id })'">
-                            Agregar Criterio  <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+                }
+            }
+
         }
     }
 </div>
@@ -661,6 +683,11 @@
                 error: function () {
                     alert('error happened');
                 }
+            });
+        }
+        function CambiarFaseEvaluacionEdit(id, idFase) {
+            $.post("@Url.Action("CambiarFaseEvaluacionEdit", "Silabos")", { id: id, idFase: idFase }, function (data) {
+                location.reload();
             });
         }
     </script>

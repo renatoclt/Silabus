@@ -23,7 +23,7 @@ namespace Silabus.Controllers
             Silabos silabo = _repo.ObtenerSilabo(id);
             this.CompetenciaBag(silabo);
             silabo = this.Unidad(silabo);
-            this.Evaluacion();
+            silabo = this.Evaluacion(silabo);
             return View(silabo);
         }
 
@@ -146,6 +146,11 @@ namespace Silabus.Controllers
                         Session["Unidades"] = null;
                         break;
                     }
+                case Constantes.IDEVALUACION:
+                    {
+                        Session["Evaluacion"] = null;
+                        break;
+                    }
             }
         }
 
@@ -196,14 +201,29 @@ namespace Silabus.Controllers
         {
             silabo = _repo.GuardarEvaluacion(silabo);
             _repo.EditarDivisionCancel(silabo.SilaboDivisiones.Where(sd => sd.Divisiones.Id.Equals(Constantes.IDEVALUACION)).FirstOrDefault().Divisiones.Id);
-            return RedirectToAction("Silabos", silabo.Id);
+            Session["Evaluacion"] = null;
+            silabo= this.Unidad(silabo);
+            this.Evaluacion(silabo);
+            return View("Silabos", silabo);
         }
 
+        [HttpPost]
         public ActionResult CambiarFaseEvaluacion(Silabos silaboTem)
         {
             Silabos silabo = _repo.GuardarSelectedSilaboFase(silaboTem.Id, silaboTem.SelectedSilaboFase);
-            silabo.SelectedSilaboFase = silaboTem.SelectedSilaboFase;
-            return RedirectToAction("Silabos", silabo.Id);
+            this.CompetenciaBag(silabo);
+            silabo = this.Unidad(silabo);
+            silabo = this.Evaluacion(silabo);
+            return View("Silabos", silabo);
+        }
+
+        public ActionResult CambiarFaseEvaluacionEdit(int id, int idFase)
+        {
+            Silabos silabo = _repo.GuardarSelectedSilaboFase(id, idFase);
+            this.CompetenciaBag(silabo);
+            silabo = this.Unidad(silabo);
+            silabo = this.Evaluacion(silabo);
+            return View("Silabos", silabo);
         }
 
         public ActionResult UnidadUp(int id, int idSilaboFase, int idUnidad)
@@ -215,6 +235,7 @@ namespace Silabus.Controllers
             nroSubUnidadTem--;
             silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroSubUnidad = nroSubUnidadTem;
             silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroUnidad = nroUnidadTem;
+            this.Evaluacion(silabo);
             return View("Silabos", silabo);
         }
         public ActionResult UnidadDown(int id, int idSilaboFase, int idUnidad)
@@ -226,6 +247,7 @@ namespace Silabus.Controllers
             nroSubUnidadTem++;
             silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroSubUnidad = nroSubUnidadTem;
             silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault().NroUnidad = nroUnidadTem;
+            this.Evaluacion(silabo);
             return View("Silabos", silabo);
         }
         public ActionResult UnidadTrash(int id, int idSilaboFase, int idUnidad)
@@ -234,6 +256,7 @@ namespace Silabus.Controllers
             silabo = this.UnidadEdit(silabo);
             silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Remove(
                 silabo.SilaboFases.Where(sf => sf.Id.Equals(idSilaboFase)).FirstOrDefault().SilaboFaseUnidades.Where(sfu => sfu.Id.Equals(idUnidad)).FirstOrDefault());
+            this.Evaluacion(silabo);
             return View("Silabos", silabo);
         }
 
@@ -252,13 +275,66 @@ namespace Silabus.Controllers
             return View("Silabos", silabo);
         }
 
-        private void Evaluacion()
+        public ActionResult EstrategiaAdd(int id )
         {
+            Silabos silabo = _repo.ObtenerSilabo(id);
+            silabo = this.Evaluacion(silabo);
+            if (silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silabo.SelectedSilaboFase)).SilaboFasesSaberes.FirstOrDefault(sfs => sfs.Id.Equals(Constantes.CERO))== null)
+            {
+                silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silabo.SelectedSilaboFase)).SilaboFasesSaberes.Add(new SilaboFasesSaberes
+                {
+                    Id = Constantes.CERO
+                });
+            }
+            silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silabo.SelectedSilaboFase)).SilaboFasesSaberes.FirstOrDefault(sfs => sfs.Id.Equals(Constantes.CERO)).SilaboEstrategias.Add(new SilaboEstrategias());
+            return View("Silabos", silabo);
+        }
+
+        public ActionResult EvidenciaAdd(int id)
+        {
+            Silabos silabo = _repo.ObtenerSilabo(id);
+            silabo = this.Evaluacion(silabo);
+            if (silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silabo.SelectedSilaboFase)).SilaboFasesSaberes.FirstOrDefault(sfs => sfs.Id.Equals(Constantes.CERO)) == null)
+            {
+                silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silabo.SelectedSilaboFase)).SilaboFasesSaberes.Add(new SilaboFasesSaberes
+                {
+                    Id = Constantes.CERO
+                });
+            }
+            silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silabo.SelectedSilaboFase)).SilaboFasesSaberes.FirstOrDefault(sfs => sfs.Id.Equals(Constantes.CERO)).SilaboEvidencias.Add(new SilaboEvidencias());
+            return View("Silabos", silabo);
+        }
+
+        public ActionResult CriterioAdd(int id)
+        {
+            Silabos silabo = _repo.ObtenerSilabo(id);
+            silabo = this.Evaluacion(silabo);
+            if (silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silabo.SelectedSilaboFase)).SilaboFasesSaberes.FirstOrDefault(sfs => sfs.Id.Equals(Constantes.CERO)) == null)
+            {
+                silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silabo.SelectedSilaboFase)).SilaboFasesSaberes.Add(new SilaboFasesSaberes
+                {
+                    Id = Constantes.CERO
+                });
+            }
+            silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silabo.SelectedSilaboFase)).SilaboFasesSaberes.FirstOrDefault(sfs => sfs.Id.Equals(Constantes.CERO)).SilaboCriterios.Add(new SilaboCriterios());
+            return View("Silabos", silabo);
+        }
+
+        private Silabos Evaluacion(Silabos silabos)
+        {
+            if(Session["Evaluacion"] == null)
+            {
+                Session["Evaluacion"] = silabos.SilaboFases;
+            }
+            else
+            {
+                silabos.SilaboFases = (ICollection<SilaboFases>)Session["Evaluacion"];
+            }
             ViewBag.Evidencias = new SelectList(_repo.ListarEvidencias(), "Id", "Nombre");
             ViewBag.Estrategias = new SelectList(_repo.ListarEstrategias(), "Id", "Nombre"); 
             ViewBag.Criterios = new SelectList(_repo.ListarCriterios(), "Id", "Nombre"); 
-            ViewBag.Saberes = new SelectList(_repo.ListarSaberes(), "Id", "Nombre"); 
-
+            ViewBag.Saberes = new SelectList(_repo.ListarSaberes(), "Id", "Nombre");
+            return silabos;
         }
 
     }

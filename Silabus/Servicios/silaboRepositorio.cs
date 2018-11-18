@@ -107,22 +107,22 @@ namespace Silabus.Servicios
                 var silabo = db.Silabos.SingleOrDefault(s => s.Id == silaboSave.Id);
                 if (silabo != null)
                 {
-                    if(silaboSave.SilaboFases.Where(sf=> sf.Id.Equals(Constantes.CERO)).FirstOrDefault() != null)
+                    if (silaboSave.SilaboFases.Where(sf => sf.Id.Equals(Constantes.CERO)).FirstOrDefault() != null)
                     {
-                        silaboSave.SilaboFases.Where(sf => sf.Id.Equals(Constantes.CERO)).FirstOrDefault().SilaboFaseUnidades.ToList().ForEach( sfu =>
-                        {
-                            if(silabo.Asignaturas.Unidads.Where(u => u.Id.Equals(sfu.Unidades.Id)).FirstOrDefault() == null)
-                            {
-                                silabo.Asignaturas.Unidads.Add(new Unidades
-                                {
-                                    Nombre = sfu.Unidades.Nombre,
-                                    IdAsignatura = silabo.Asignaturas.Id,
-                                    UsuarioCreacion = "prueba",
-                                    FechaCreacion = DateTime.Now,
-                                    Estado = Constantes.ESTADOHABILITADO
-                                });
-                            }
-                        });
+                        silaboSave.SilaboFases.Where(sf => sf.Id.Equals(Constantes.CERO)).FirstOrDefault().SilaboFaseUnidades.ToList().ForEach(sfu =>
+                       {
+                           if (silabo.Asignaturas.Unidads.Where(u => u.Id.Equals(sfu.Unidades.Id)).FirstOrDefault() == null)
+                           {
+                               silabo.Asignaturas.Unidads.Add(new Unidades
+                               {
+                                   Nombre = sfu.Unidades.Nombre,
+                                   IdAsignatura = silabo.Asignaturas.Id,
+                                   UsuarioCreacion = "prueba",
+                                   FechaCreacion = DateTime.Now,
+                                   Estado = Constantes.ESTADOHABILITADO
+                               });
+                           }
+                       });
                         if (silaboSave.SilaboFases.Where(sf => sf.Id.Equals(Constantes.CERO)).FirstOrDefault().SilaboFaseUnidades
                             .Where(sfu => sfu.IdSilaboFase != Constantes.CERO).ToList().Count.Equals(Constantes.CERO))
                         {
@@ -227,7 +227,7 @@ namespace Silabus.Servicios
                                        ac.IdCompetencia.Equals(asiCom.IdCompetencia) &&
                                        ac.IdSilaboFase.Equals(null) &&
                                        ac.Estado.Equals(Constantes.ESTADOHABILITADO)).ToList().Count;
-                                    if(count > 1)
+                                    if (count > 1)
                                         silabo.Asignaturas.AsignaturaCompetencias.Where(ac => ac.Id.Equals(asiCom.Id)).FirstOrDefault().Estado = Constantes.ESTADODESHABILITADO;
                                     else
                                         silabo.Asignaturas.AsignaturaCompetencias.Where(ac => ac.Id.Equals(asiCom.Id)).FirstOrDefault().IdSilaboFase = null;
@@ -255,6 +255,19 @@ namespace Silabus.Servicios
                 var silabo = db.Silabos.SingleOrDefault(s => s.Id == silaboSave.Id);
                 if (silabo != null)
                 {
+                    silaboSave.SilaboFases.ToList().ForEach(silaboFase =>
+                    {
+                        if (silaboFase.Id != Constantes.CERO)
+                        {
+                            silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silaboFase.Id)).Titulo = silaboFase.Titulo;
+                            silaboFase.SilaboFasesSaberes.ToList().ForEach(silaboFaseSaber =>
+                            {
+                                if (silaboFaseSaber.Id != Constantes.CERO)
+                                    silabo.SilaboFases.FirstOrDefault(sf => sf.Id.Equals(silaboFase.Id)).SilaboFasesSaberes.FirstOrDefault(sfs => sfs.Id.Equals(silaboFaseSaber.Id)).Descripcion = silaboFaseSaber.Descripcion;
+                            });
+
+                        }
+                    });
                     db.SaveChanges();
                 }
                 return ObtenerSilabo(silabo.Id);
@@ -308,7 +321,7 @@ namespace Silabus.Servicios
             }
         }
 
-        internal Silabos GuardarSelectedSilaboFase(int id, int ? idSelectedSilaboFase)
+        internal Silabos GuardarSelectedSilaboFase(int id, int? idSelectedSilaboFase)
         {
             using (var db = new SilaboContext())
             {
@@ -318,7 +331,7 @@ namespace Silabus.Servicios
                     silabo.SelectedSilaboFase = idSelectedSilaboFase;
                     db.SaveChanges();
                 }
-                return silabo;
+                return this.ObtenerSilabo(id);
             }
         }
 
