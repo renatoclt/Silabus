@@ -10,6 +10,21 @@
 <h2 style="text-align:center">HABILITAR SÍLABUS</h2>
 
 @Html.Partial("_Filtros")
+@{ int DlEstado = 0;
+    int BtEditar = 0;
+    int BtGuardar = 0;
+    int BtCancelar = 0;
+    const string DlEstadoDesc = "DlEst";
+    const string BtEditarDesc = "BtEdt";
+    const string BtGuardarDesc = "BtGdr";
+    const string BtCancelarDesc = "BtCnl";
+    string IdDlEst = "";
+    string IdBtGdr = "";
+    string IdBtEdt = "";
+    string IdBtCnl = "";
+    }
+
+
 
 <table class="table">
     <tr>
@@ -18,23 +33,33 @@
         <th> ESTADO   </th>
         <th> ACCIONES   </th>
     </tr>
+
     @if (Model.Count() != 0)
     {
         foreach (var item in Model)
         {
+            DlEstado += 1;
+            BtEditar += 1;
+            BtGuardar += 1;
+            BtCancelar += 1;
+            IdDlEst = DlEstadoDesc + DlEstado.ToString();
+            IdBtGdr = BtGuardarDesc + BtGuardar.ToString();
+            IdBtEdt = BtEditarDesc + BtEditar.ToString();
+            IdBtCnl = BtCancelarDesc + BtCancelar.ToString();
+            <tr>
+                <td>@item.nombreDocente     </td>
+                <td>@item.nombreCurso       </td>
+                <td>@Html.DropDownList("ListarEstado", item.ListaEstado, new { disabled = "disabled", id = IdDlEst })
+                <td>
+                    <input type="button" class="btn btn-default" id=@IdBtEdt value="Editar" onclick="editar('@IdBtEdt','@IdBtGdr','@IdBtCnl','@IdDlEst')">
+                    <!--<input type="button" class="btn btn-default" id="Guardar" value="Guardar" onclick="guardar(@item.codigoEscuela,@item.codigoDocente,@item.codigoCurso,@item.semestre,@IdDlEst)" style="display:none" />-->
+                    <input type="button" class="btn btn-default" id=@IdBtGdr value="Guardar" onclick="guardar(@item.idSilabo,'@IdBtEdt','@IdBtGdr','@IdBtCnl','@IdDlEst')" style="display:none" />
 
-    <tr>
-        <td>@item.nombreDocente     </td>
-        <td>@item.nombreCurso       </td>
-        @*<td>@Html.DropDownList("ListarEstado", (List<SelectListItem>)ViewBag.ListarEstado, new { @disabled = "disabled", @id = item.codigoEstado }) </td>*@
-        <td>@Html.DropDownList("ListarEstado", item.ListaEstado, new { disabled = "disabled", id = "ListarEstado" }) </td>
-        <td>
-            <input type="button" class="btn btn-default" id="Editar" value="Editar" onclick="editar()">
-            <input type="button" class="btn btn-default" id="Guardar" value="Guardar" onclick="guardar(item)" style="display:none" />
-            <input type="button" class="btn btn-default" id="Cancelar" value="Cancelar" onclick="cancelar()" style="display:none">
-        </td>
-        
-    </tr>
+                    <input type="button" class="btn btn-default" id=@IdBtCnl value="Cancelar" onclick="cancelar('@IdBtEdt','@IdBtGdr','@IdBtCnl','@IdDlEst')" style="display:none">
+                </td>
+
+
+            </tr>
         }
     }
 
@@ -42,27 +67,54 @@
 </table>
 
 <script type="text/javascript">
-    function editar() {
-        document.getElementById('Guardar').style.display = 'inline';
-        document.getElementById('Cancelar').style.display = 'inline';
-        document.getElementById('Editar').style.display = 'none';
-        document.getElementById('ListarEstado').disabled = false;
-    }
+    function editar(idEditar, idGuardar, idCancelar, idListarEstado) {
+        debugger;
+        document.getElementById(idGuardar).style.display = 'inline';
+        document.getElementById(idCancelar).style.display = 'inline';
+        document.getElementById(idEditar).style.display = 'none';
+        document.getElementById(idListarEstado).disabled = false;
+}
 
-    function cancelar() {
-        //alert(fila);
-        document.getElementById('Guardar').style.display = 'none';
-        document.getElementById('Cancelar').style.display = 'none';
-        document.getElementById('Editar').style.display = 'block';
-        document.getElementById('ListarEstado').disabled = true;
+    function cancelar(idEditar, idGuardar, idCancelar, idListarEstado) {
+        debugger;
+        document.getElementById(idGuardar).style.display = 'none';
+        document.getElementById(idCancelar).style.display = 'none';
+        document.getElementById(idEditar).style.display = 'block';
+        document.getElementById(idListarEstado).disabled = true;
 
-    }
-    function guardar(item) {
-        alert();
-        document.getElementById('Guardar').style.display = 'none';
-        document.getElementById('Cancelar').style.display = 'none';
-        document.getElementById('Editar').style.display = 'block';
+}
+
+//function guardar(codigoEscuela, codigoDocente, codigoCurso, semestre, idListarEstado) {
+    function guardar(idSilabo, idEditar, idGuardar, idCancelar, idListarEstado) {
+    var codigoEstado = parseInt(document.getElementById(idListarEstado).value);
+    var link = '@Url.Action("ActualizarEstado", "HabilitarSilabo")';
+    debugger;
+    $.ajax({
+        url: '/HabilitarSilabo/ActualizarEstado/',
+        type: 'POST',
+        //contentType: "application/json; charset=utf-8",
+        dataType: "JSON",
+        data: {
+            idSilabo: idSilabo,
+            codigoEstado: codigoEstado
+        }, // An object with the key 'submit' and value 'true;
+        success: function (result) {
+            //if (result.status == "Success") {
+            //    alert("Done");
+            //} else {
+                alert(result.responseText);
+            //}
+        },
+        error: function (Error) {
+            console.log(Error);
+            alert("Ha ocurrido un error!!!");
+        }
+    });
+    document.getElementById(idGuardar).style.display = 'none';
+    document.getElementById(idCancelar).style.display = 'none';
+    document.getElementById(idEditar).style.display = 'block';
+    document.getElementById(idListarEstado).disabled = true;
+}
 
 
-    }
 </script>

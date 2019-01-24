@@ -7,14 +7,21 @@ using System.Web.Mvc;
 
 namespace Silabus.Services
 {
-    enum VariablesGlobales 
+    enum VariablesGlobales
     {
         CodControl_AnioSemestre = 1,
         estadoHabilitado = 1,
-        tipoDocente = 3
+        tipoDocente = 3,
+
+    }
+    public static class VariablesGlobalesString
+    {
+        public const string Modo_Habilitar = "HAB";
+        public const string Modo_Visualizar = "VIS";
     }
     public class VisualizarSilabo
     {
+        public int idSilabo;
         public string escuelaProfesional;
         public int codigoEscuela;
         public int codigoDocente;
@@ -32,16 +39,17 @@ namespace Silabus.Services
                                                    string codigoDocente,
                                                    string nombreDocente,
                                                    string nombreCurso,
-                                                   string añoSemestre)
+                                                   string añoSemestre,
+                                                   string Modo)
         {
-            
+
             using (var db = new SilaboContext())
             {
-                
+
                 int año = DateTime.Now.Year;
                 int semes = Int32.Parse(añoSemestre);
                 var semestre = from se in db.Parametricas
-                               where se.CodigoControl == (int)VariablesGlobales.CodControl_AnioSemestre && se.valor == semes  && se.Auxiliar01 == año 
+                               where se.CodigoControl == (int)VariablesGlobales.CodControl_AnioSemestre && se.valor == semes && se.Auxiliar01 == año
                                select se.Auxiliar02.Value;
                 semes = Int32.Parse(semestre.First().ToString()); // se debe obtener mas adelante la dstinción de si es semestre par o impoar
 
@@ -54,7 +62,7 @@ namespace Silabus.Services
                             join estado in db.Estados on silabus.IdEstado equals estado.Id
                             where docente.Estado == (int)VariablesGlobales.estadoHabilitado && docente.IdTipoDocentes == (int)VariablesGlobales.tipoDocente && (codigoDocente == "" || docente.Codigo.Contains(codigoDocente.ToUpper())) &&
                                   (docente.Nombres + " " + docente.ApellidoPaterno + " " + docente.ApellidoMaterno).ToUpper().Contains(nombreDocente.ToUpper()) &&
-                                  silabus.EstadoAuditoria == (int)VariablesGlobales.estadoHabilitado && 
+                                  silabus.EstadoAuditoria == (int)VariablesGlobales.estadoHabilitado &&
                                   curso.Estado == (int)VariablesGlobales.estadoHabilitado && (nombreCurso == "" || curso.Nombre.Contains(nombreCurso.ToUpper())) && (semes == 0 || curso.Semestre.Equals(semes)) &&
                                   planEst.Estado == (int)VariablesGlobales.estadoHabilitado &&
                                   escuela.Estado == (int)VariablesGlobales.estadoHabilitado && (escuelaProfesional == "" || escuela.Nombre.Contains(escuelaProfesional.ToUpper())) &&
@@ -68,7 +76,7 @@ namespace Silabus.Services
                                 codigoDocente = docente.Id,
                                 nombreDocente = docente.Nombres + " " + docente.ApellidoPaterno + " " + docente.ApellidoMaterno,
                                 semestre = curso.Semestre,
-                               
+                                idSilabo = silabus.Id,
                                 codigoEstado = estado.Id,
                                 estado = estado.Descripcion,
                             };
@@ -79,7 +87,11 @@ namespace Silabus.Services
                 for (int i = 0; i < model.Count(); i++)
                 {
                     visualizarSilabos.ToArray()[i].anioSemestre = ConversionSemestre(model.ToArray()[i].semestre);
-                    visualizarSilabos.ToArray()[i].ListaEstado = ListarEstado(visualizarSilabos.ToArray()[i].codigoEstado);
+                    if (Modo == VariablesGlobalesString.Modo_Habilitar)
+                    {
+                        visualizarSilabos.ToArray()[i].ListaEstado = ListarEstado(visualizarSilabos.ToArray()[i].codigoEstado);
+                    }
+
                 }
 
                 return visualizarSilabos.ToList();
@@ -178,11 +190,12 @@ namespace Silabus.Services
                             Selected = true
                         });
                     }
-                    else {
+                    else
+                    {
                         ListaEstados.Add(new SelectListItem()
                         {
-                            Value     = estado.Id.ToString(),
-                            Text     = estado.Descripcion,
+                            Value = estado.Id.ToString(),
+                            Text = estado.Descripcion,
                             Selected = false
                         });
                     }
@@ -190,6 +203,24 @@ namespace Silabus.Services
                 return ListaEstados;
             }
         }
+        public int ActualizarEstado(int idSilabo, int codigoEstado)
+        {
+            int exitoso = 0;
+            using (var db = new SilaboContext())
+            {
+                var model = from silabus in db.Silabos
+                            where silabus.Id.Equals(idSilabo)
+                            select silabus;
 
+
+                foreach (var silabo in model)
+                {
+                    silabo.IdEstado = codigoEstado;
+                }
+                return exitoso = db.SaveChanges();
+
+            }
+
+        }
     }
 }

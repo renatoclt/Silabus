@@ -431,3 +431,5 @@ F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v4\Silabus\Silabus\obj\Debug\Silabus
 F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v4\Silabus\Silabus\obj\Debug\Silabus.csproj.CopyComplete
 F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v4\Silabus\Silabus\obj\Debug\Silabus.dll
 F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v4\Silabus\Silabus\obj\Debug\Silabus.pdb
+F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v4\Silabus\Silabus\bin\Vse.Web.Serialization.dll
+F:\Trabajo\UCSM\Proyectos\GSilabus\GSilabus_v4\Silabus\Silabus\bin\Vse.Web.Serialization.pdb

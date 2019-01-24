@@ -31,7 +31,7 @@ namespace Silabus.Controllers
         public ActionResult Index(string FilEscuelaProfesional, string FilCodigoDocentes, string FilDocentes, string FilCurso, string ListaAnioSemestre)
         {
             ViewBag.ListaAnioSemestre = VisualizarSilabo.ListarAnioSemestre(DateTime.Now.Year);
-            var model = VisualizarSilabo.ObtenerInformacion(FilEscuelaProfesional, FilCodigoDocentes, FilDocentes, FilCurso, ListaAnioSemestre);
+            var model = VisualizarSilabo.ObtenerInformacion(FilEscuelaProfesional, FilCodigoDocentes, FilDocentes, FilCurso, ListaAnioSemestre,"VIS");
 
             /*VisualizarSilabo visualizarSilabo = new VisualizarSilabo();
             visualizarSilabo.VisualizarInformacion(escuelaProfesional, codigoDocentes, nombreDocentes, nombreCurso, añoSemestre);
