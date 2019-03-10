@@ -3,9 +3,7 @@
 @{
     ViewBag.Title = "HABILITAR SÍLABUS";
     Layout = "~/Views/Shared/_LayoutSilabo.cshtml";
-
 }
-
 <h2 style="text-align:center">FACULTAD DEL JEFE DE DEPARTAMENTO</h2>
 <h2 style="text-align:center">HABILITAR SÍLABUS</h2>
 
@@ -24,8 +22,6 @@
     string IdBtCnl = "";
     }
 
-
-
 <table class="table">
     <tr>
         <th> DOCENTES  </th>
@@ -33,7 +29,6 @@
         <th> ESTADO   </th>
         <th> ACCIONES   </th>
     </tr>
-
     @if (Model.Count() != 0)
     {
         foreach (var item in Model)
@@ -52,39 +47,34 @@
                 <td>@Html.DropDownList("ListarEstado", item.ListaEstado, new { disabled = "disabled", id = IdDlEst })
                 <td>
                     <input type="button" class="btn btn-default" id=@IdBtEdt value="Editar" onclick="editar('@IdBtEdt','@IdBtGdr','@IdBtCnl','@IdDlEst')">
-                    <!--<input type="button" class="btn btn-default" id="Guardar" value="Guardar" onclick="guardar(@item.codigoEscuela,@item.codigoDocente,@item.codigoCurso,@item.semestre,@IdDlEst)" style="display:none" />-->
-                    <input type="button" class="btn btn-default" id=@IdBtGdr value="Guardar" onclick="guardar(@item.idSilabo,'@IdBtEdt','@IdBtGdr','@IdBtCnl','@IdDlEst')" style="display:none" />
-
+                    <input type="button" class="btn btn-success" id=@IdBtGdr value="Guardar" onclick="guardar(@item.idSilabo,'@IdBtEdt','@IdBtGdr','@IdBtCnl','@IdDlEst')" style="display:none" />
                     <input type="button" class="btn btn-default" id=@IdBtCnl value="Cancelar" onclick="cancelar('@IdBtEdt','@IdBtGdr','@IdBtCnl','@IdDlEst')" style="display:none">
                 </td>
-
-
             </tr>
         }
     }
-
-
 </table>
 
 <script type="text/javascript">
     function editar(idEditar, idGuardar, idCancelar, idListarEstado) {
-        debugger;
-        document.getElementById(idGuardar).style.display = 'inline';
-        document.getElementById(idCancelar).style.display = 'inline';
-        document.getElementById(idEditar).style.display = 'none';
-        document.getElementById(idListarEstado).disabled = false;
+        //debugger;
+        var codigoEstado = parseInt(document.getElementById(idListarEstado).value);
+        if (codigoEstado != @Silabus.utils.Constantes.ESTADOSILABOCERRADO) {
+            document.getElementById(idGuardar).style.display = 'inline';
+            document.getElementById(idCancelar).style.display = 'inline';
+            document.getElementById(idEditar).style.display = 'none';
+            document.getElementById(idListarEstado).disabled = false;
+        } else {
+            alert("el Silabo se encuentra cerrado");
+        }       
 }
-
     function cancelar(idEditar, idGuardar, idCancelar, idListarEstado) {
-        debugger;
+        //debugger;
         document.getElementById(idGuardar).style.display = 'none';
         document.getElementById(idCancelar).style.display = 'none';
         document.getElementById(idEditar).style.display = 'block';
         document.getElementById(idListarEstado).disabled = true;
-
 }
-
-//function guardar(codigoEscuela, codigoDocente, codigoCurso, semestre, idListarEstado) {
     function guardar(idSilabo, idEditar, idGuardar, idCancelar, idListarEstado) {
     var codigoEstado = parseInt(document.getElementById(idListarEstado).value);
     var link = '@Url.Action("ActualizarEstado", "HabilitarSilabo")';
@@ -115,6 +105,5 @@
     document.getElementById(idEditar).style.display = 'block';
     document.getElementById(idListarEstado).disabled = true;
 }
-
 
 </script>

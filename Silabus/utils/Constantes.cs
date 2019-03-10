@@ -20,6 +20,6 @@ namespace Silabus.utils
 
         public const int CERO = 0;
         public const int UNO = 1;
-
+        public const int ESTADOSILABOCERRADO = 5;
     }
 }

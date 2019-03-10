@@ -149,12 +149,21 @@ namespace Silabus.Services
         public List<SelectListItem> ListarAnioSemestre(int anio)
         {
             int CodControl = 1;
+            int Mes = DateTime.Now.Month;
+            int Semestre = 0;
+            if (Mes < 5){
+                Semestre = 1;
+            }
+            else {
+                Semestre = 2;
+            }
+
             using (var db = new SilaboContext())
             {
 
                 ListaAnioSemestre = new List<SelectListItem>();
                 var Valores = from lista in db.Parametricas
-                              where lista.Auxiliar01 == anio && lista.CodigoControl == CodControl
+                              where lista.Auxiliar01 == anio && lista.CodigoControl == CodControl && lista.Auxiliar02 == Semestre
                               select lista;
 
                 foreach (var item in Valores)

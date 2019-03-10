@@ -9,5 +9,6 @@ namespace Silabus.Environments
     {
         public const int activo = 1;
         public const int inactivo = 0;
+        
     }
 }
